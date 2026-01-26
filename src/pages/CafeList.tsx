@@ -3,6 +3,7 @@ import { Search, MapPin, Grid, Map as MapIcon, Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCafes } from '@/hooks/useCafes';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { CafeCard } from '@/components/cafe/CafeCard';
 import { CafeMap } from '@/components/cafe/CafeMap';
 import { Input } from '@/components/ui/input';
@@ -14,12 +15,13 @@ export default function CafeList() {
   const navigate = useNavigate();
   const { isAdmin, isStoreManager } = useAuth();
   const { data: cafes, isLoading } = useCafes();
-  
+  const { t } = useLanguage();
+
   const [search, setSearch] = useState('');
   const [view, setView] = useState<'split' | 'grid' | 'map'>('split');
   const [hoveredCafeId, setHoveredCafeId] = useState<string | null>(null);
 
-  const filteredCafes = cafes?.filter(cafe => 
+  const filteredCafes = cafes?.filter(cafe =>
     cafe.name.toLowerCase().includes(search.toLowerCase()) ||
     cafe.address.toLowerCase().includes(search.toLowerCase())
   ) || [];
@@ -41,16 +43,16 @@ export default function CafeList() {
       {/* Header */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Daftar Kafe</h1>
+          <h1 className="text-3xl font-bold text-foreground">{t('cafelist.title')}</h1>
           <p className="mt-1 text-muted-foreground">
-            {filteredCafes.length} kafe ditemukan
+            {t('cafelist.found', { count: filteredCafes.length })}
           </p>
         </div>
 
         {canAddCafe && (
           <Button onClick={() => navigate('/cafes/new')} className="gap-2">
             <Plus className="h-4 w-4" />
-            Tambah Kafe
+            {t('cafelist.addnew')}
           </Button>
         )}
       </div>
@@ -60,22 +62,22 @@ export default function CafeList() {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
-            placeholder="Cari kafe atau lokasi..."
+            placeholder={t('cafelist.search.placeholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-10"
           />
         </div>
 
-        <ToggleGroup 
-          type="single" 
-          value={view} 
+        <ToggleGroup
+          type="single"
+          value={view}
           onValueChange={(v) => v && setView(v as typeof view)}
           className="border rounded-lg"
         >
           <ToggleGroupItem value="split" aria-label="Split view">
             <Grid className="mr-2 h-4 w-4" />
-            Split
+            {t('cafelist.view.split')}
           </ToggleGroupItem>
           <ToggleGroupItem value="grid" aria-label="Grid view">
             <Grid className="h-4 w-4" />
@@ -109,8 +111,8 @@ export default function CafeList() {
             `}>
               {filteredCafes.length > 0 ? (
                 filteredCafes.map(cafe => (
-                  <CafeCard 
-                    key={cafe.id} 
+                  <CafeCard
+                    key={cafe.id}
                     cafe={cafe}
                     onHover={setHoveredCafeId}
                   />
@@ -119,10 +121,10 @@ export default function CafeList() {
                 <div className="col-span-full py-12 text-center">
                   <MapPin className="mx-auto h-12 w-12 text-muted-foreground/50" />
                   <p className="mt-4 text-lg font-medium text-muted-foreground">
-                    Tidak ada kafe ditemukan
+                    {t('cafelist.notfound.title')}
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Coba ubah kata kunci pencarian
+                    {t('cafelist.notfound.desc')}
                   </p>
                 </div>
               )}
@@ -135,7 +137,7 @@ export default function CafeList() {
               ${view === 'split' ? 'lg:col-span-2 sticky top-0 h-[calc(100vh-280px)]' : 'h-full'}
               rounded-lg overflow-hidden border
             `}>
-              <CafeMap 
+              <CafeMap
                 markers={mapMarkers}
                 selectedId={hoveredCafeId}
                 onMarkerClick={(id) => navigate(`/cafes/${id}`)}

@@ -5,12 +5,13 @@ import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect } from 'react';
 
 export default function Settings() {
   const { profile, role } = useAuth();
+  const { language, setLanguage, t } = useLanguage();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [language, setLanguage] = useState('id');
 
   useEffect(() => {
     const isDark = document.documentElement.classList.contains('dark');
@@ -20,7 +21,7 @@ export default function Settings() {
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    
+
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
@@ -31,8 +32,8 @@ export default function Settings() {
   return (
     <div className="max-w-2xl animate-fade-in space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Pengaturan</h1>
-        <p className="mt-1 text-muted-foreground">Kelola preferensi aplikasi Anda</p>
+        <h1 className="text-3xl font-bold text-foreground">{t('settings.title')}</h1>
+        <p className="mt-1 text-muted-foreground">{t('settings.subtitle')}</p>
       </div>
 
       {/* Appearance */}
@@ -40,16 +41,16 @@ export default function Settings() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             {theme === 'dark' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-            Tampilan
+            {t('settings.appearance')}
           </CardTitle>
-          <CardDescription>Sesuaikan tampilan aplikasi</CardDescription>
+          <CardDescription>{t('settings.appearance.desc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
             <div>
-              <Label htmlFor="dark-mode">Mode Gelap</Label>
+              <Label htmlFor="dark-mode">{t('settings.darkmode')}</Label>
               <p className="text-sm text-muted-foreground">
-                Aktifkan mode gelap untuk tampilan yang lebih nyaman di malam hari
+                {t('settings.darkmode.desc')}
               </p>
             </div>
             <Switch
@@ -66,16 +67,16 @@ export default function Settings() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Languages className="h-5 w-5" />
-            Bahasa
+            {t('settings.language')}
           </CardTitle>
-          <CardDescription>Pilih bahasa aplikasi</CardDescription>
+          <CardDescription>{t('settings.language.desc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
             <div>
-              <Label>Bahasa Aplikasi</Label>
+              <Label>{t('settings.language.label')}</Label>
               <p className="text-sm text-muted-foreground">
-                Pilih bahasa yang akan digunakan
+                {t('settings.language.label.desc')}
               </p>
             </div>
             <Select value={language} onValueChange={setLanguage}>
@@ -94,17 +95,17 @@ export default function Settings() {
       {/* Account Info */}
       <Card className="border-0 shadow-card">
         <CardHeader>
-          <CardTitle>Informasi Akun</CardTitle>
-          <CardDescription>Detail akun Anda</CardDescription>
+          <CardTitle>{t('settings.account')}</CardTitle>
+          <CardDescription>{t('settings.account.desc')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label className="text-muted-foreground">Nama</Label>
+            <Label className="text-muted-foreground">{t('settings.account.name')}</Label>
             <p className="font-medium">{profile?.full_name || '-'}</p>
           </div>
           <Separator />
           <div>
-            <Label className="text-muted-foreground">Role</Label>
+            <Label className="text-muted-foreground">{t('settings.account.role')}</Label>
             <p className="font-medium capitalize">{role.replace('_', ' ')}</p>
           </div>
         </CardContent>

@@ -1,21 +1,23 @@
 import { Coffee, Star, MessageSquare, TrendingUp } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useDashboardStats } from '@/hooks/useCafes';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Dashboard() {
   const { profile, role, isAdmin } = useAuth();
   const { data: stats, isLoading } = useDashboardStats();
+  const { t } = useLanguage();
 
-  const StatCard = ({ 
-    title, 
-    value, 
-    icon: Icon, 
-    description 
-  }: { 
-    title: string; 
-    value: string | number; 
+  const StatCard = ({
+    title,
+    value,
+    icon: Icon,
+    description
+  }: {
+    title: string;
+    value: string | number;
     icon: React.ElementType;
     description?: string;
   }) => (
@@ -44,40 +46,40 @@ export default function Dashboard() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-foreground">
-          Selamat Datang, {profile?.full_name?.split(' ')[0] || 'User'}! 👋
+          {t('dashboard.welcome', { name: profile?.full_name?.split(' ')[0] || 'User' })}
         </h1>
         <p className="mt-2 text-muted-foreground">
-          {isAdmin 
-            ? 'Kelola semua kafe dan pantau performa bisnis' 
-            : 'Lihat statistik dan performa kafe Anda'}
+          {isAdmin
+            ? t('dashboard.subtitle.admin')
+            : t('dashboard.subtitle.user')}
         </p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <StatCard 
-          title="Total Kafe" 
-          value={stats?.totalCafes || 0} 
+        <StatCard
+          title={t('dashboard.stats.total')}
+          value={stats?.totalCafes || 0}
           icon={Coffee}
-          description="Kafe terdaftar"
+          description={t('dashboard.stats.total.desc')}
         />
-        <StatCard 
-          title="Total Ulasan" 
-          value={stats?.totalReviews || 0} 
+        <StatCard
+          title={t('dashboard.stats.reviews')}
+          value={stats?.totalReviews || 0}
           icon={MessageSquare}
-          description="Ulasan dari pelanggan"
+          description={t('dashboard.stats.reviews.desc')}
         />
-        <StatCard 
-          title="Rating Rata-rata" 
-          value={stats?.avgRating || '0.0'} 
+        <StatCard
+          title={t('dashboard.stats.rating')}
+          value={stats?.avgRating || '0.0'}
           icon={Star}
-          description="Dari semua kafe"
+          description={t('dashboard.stats.rating.desc')}
         />
-        <StatCard 
-          title="Trending" 
-          value={stats?.topCafes?.length || 0} 
+        <StatCard
+          title={t('dashboard.stats.trending')}
+          value={stats?.topCafes?.length || 0}
           icon={TrendingUp}
-          description="Kafe populer"
+          description={t('dashboard.stats.trending.desc')}
         />
       </div>
 
@@ -87,9 +89,9 @@ export default function Dashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-primary" />
-              Kafe Terpopuler
+              {t('dashboard.top.cafes')}
             </CardTitle>
-            <CardDescription>Berdasarkan jumlah ulasan</CardDescription>
+            <CardDescription>{t('dashboard.top.cafes.desc')}</CardDescription>
           </CardHeader>
           <CardContent>
             {isLoading ? (
@@ -123,7 +125,7 @@ export default function Dashboard() {
               </div>
             ) : (
               <p className="py-8 text-center text-muted-foreground">
-                Belum ada data kafe
+                {t('dashboard.no.data')}
               </p>
             )}
           </CardContent>
@@ -133,9 +135,9 @@ export default function Dashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Star className="h-5 w-5 text-primary" />
-              Rating Tertinggi
+              {t('dashboard.top.rating')}
             </CardTitle>
-            <CardDescription>Kafe dengan rating terbaik</CardDescription>
+            <CardDescription>{t('dashboard.top.rating.desc')}</CardDescription>
           </CardHeader>
           <CardContent>
             {isLoading ? (
@@ -168,7 +170,7 @@ export default function Dashboard() {
               </div>
             ) : (
               <p className="py-8 text-center text-muted-foreground">
-                Belum ada data kafe
+                {t('dashboard.no.data')}
               </p>
             )}
           </CardContent>

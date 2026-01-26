@@ -16,8 +16,8 @@
     --popover: 30 15% 97%;
     --popover-foreground: 20 30% 10%;
 
-    /* Coffee Brown Primary */
-    --primary: 25 35% 35%;
+    /* Coffee Brown Primary - Updated to #211712 */
+    --primary: 20 30% 10%;
     --primary-foreground: 30 20% 98%;
 
     /* Latte Beige Secondary */
@@ -36,23 +36,23 @@
 
     --border: 30 20% 88%;
     --input: 30 20% 88%;
-    --ring: 25 35% 35%;
+    --ring: 20 30% 10%;
 
     --radius: 0.75rem;
 
-    /* Sidebar - Coffee themed */
-    --sidebar-background: 25 35% 35%;
-    --sidebar-foreground: 30 20% 95%;
-    --sidebar-primary: 30 40% 88%;
-    --sidebar-primary-foreground: 20 30% 15%;
-    --sidebar-accent: 25 30% 28%;
-    --sidebar-accent-foreground: 30 20% 95%;
-    --sidebar-border: 25 30% 28%;
-    --sidebar-ring: 30 40% 88%;
+    /* Sidebar - White background with dark text */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 20 30% 10%;
+    --sidebar-primary: 20 30% 10%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 20 10% 95%;
+    --sidebar-accent-foreground: 20 30% 10%;
+    --sidebar-border: 30 20% 88%;
+    --sidebar-ring: 20 30% 10%;
 
     /* Custom Cafein Colors */
-    --coffee: 25 35% 35%;
-    --coffee-dark: 20 40% 18%;
+    --coffee: 20 30% 10%;
+    --coffee-dark: 20 40% 5%;
     --latte: 30 40% 88%;
     --espresso: 20 30% 10%;
     --cream: 30 20% 98%;

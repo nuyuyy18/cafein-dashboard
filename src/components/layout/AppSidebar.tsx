@@ -1,6 +1,7 @@
 import { Coffee, LayoutDashboard, MapPin, Settings, LogOut, User } from 'lucide-react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Sidebar,
   SidebarContent,
@@ -19,29 +20,25 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
-const menuItems = [
-  { title: 'Dashboard', url: '/dashboard', icon: LayoutDashboard },
-  { title: 'Daftar Kafe', url: '/cafes', icon: MapPin },
-  { title: 'Pengaturan', url: '/settings', icon: Settings },
-];
-
-const roleLabels = {
-  admin: 'Admin',
-  store_manager: 'Store Manager',
-  user: 'User',
-};
-
-const roleColors = {
-  admin: 'bg-destructive text-destructive-foreground',
-  store_manager: 'bg-primary text-primary-foreground',
-  user: 'bg-muted text-muted-foreground',
-};
-
 export function AppSidebar() {
   const { state } = useSidebar();
   const location = useLocation();
   const { profile, role, signOut } = useAuth();
+  const { t } = useLanguage();
   const collapsed = state === 'collapsed';
+
+  const menuItems = [
+    { title: t('sidebar.dashboard'), url: '/dashboard', icon: LayoutDashboard },
+    { title: t('sidebar.cafelist'), url: '/cafes', icon: MapPin },
+    { title: t('sidebar.settings'), url: '/settings', icon: Settings },
+  ];
+
+  const roleLabels = {
+    admin: t('sidebar.role.admin'),
+    store_manager: t('sidebar.role.store_manager'),
+    user: t('sidebar.role.user'),
+  };
+
 
   const getInitials = (name: string | null) => {
     if (!name) return 'U';
@@ -57,14 +54,9 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" className="border-r-0">
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-            <Coffee className="h-6 w-6" />
-          </div>
+          <img src="/logo.jpg" alt="CafeIn Logo" className="h-10 w-10 object-contain" />
           {!collapsed && (
-            <div className="flex flex-col">
-              <span className="text-lg font-bold text-sidebar-foreground">Cafein</span>
-              <span className="text-xs text-sidebar-foreground/70">Cafe Management</span>
-            </div>
+            <span className="text-lg font-bold text-sidebar-foreground">{t('app.title')}</span>
           )}
         </div>
       </SidebarHeader>
@@ -76,9 +68,9 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => {
-                const isActive = location.pathname === item.url || 
+                const isActive = location.pathname === item.url ||
                   (item.url !== '/dashboard' && location.pathname.startsWith(item.url));
-                
+
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
@@ -101,7 +93,7 @@ export function AppSidebar() {
 
       <SidebarFooter className="p-4">
         <Separator className="mb-4 bg-sidebar-border" />
-        
+
         <div className="flex items-center gap-3">
           <Avatar className="h-10 w-10 border-2 border-sidebar-accent">
             <AvatarImage src={profile?.avatar_url || undefined} />
@@ -109,15 +101,15 @@ export function AppSidebar() {
               {getInitials(profile?.full_name)}
             </AvatarFallback>
           </Avatar>
-          
+
           {!collapsed && (
             <div className="flex flex-1 flex-col overflow-hidden">
               <span className="truncate text-sm font-medium text-sidebar-foreground">
                 {profile?.full_name || 'User'}
               </span>
-              <Badge 
-                variant="secondary" 
-                className={`mt-1 w-fit text-xs ${roleColors[role]}`}
+              <Badge
+                variant="secondary"
+                className="mt-1 w-fit text-xs"
               >
                 {roleLabels[role]}
               </Badge>
@@ -132,7 +124,7 @@ export function AppSidebar() {
             onClick={signOut}
           >
             <LogOut className="h-5 w-5" />
-            <span>Keluar</span>
+            <span>{t('sidebar.logout')}</span>
           </Button>
         )}
       </SidebarFooter>

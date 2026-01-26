@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Coffee, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,17 +14,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 
 const loginSchema = z.object({
-  email: z.string().email('Email tidak valid'),
-  password: z.string().min(6, 'Password minimal 6 karakter'),
+  email: z.string().email(),
+  password: z.string().min(6),
 });
 
 const signupSchema = z.object({
-  fullName: z.string().min(2, 'Nama minimal 2 karakter'),
-  email: z.string().email('Email tidak valid'),
-  password: z.string().min(6, 'Password minimal 6 karakter'),
+  fullName: z.string().min(2),
+  email: z.string().email(),
+  password: z.string().min(6),
   confirmPassword: z.string(),
 }).refine((data) => data.password === data.confirmPassword, {
-  message: 'Password tidak cocok',
+  message: 'Passwords do not match',
   path: ['confirmPassword'],
 });
 
@@ -34,6 +35,7 @@ export default function Login() {
   const navigate = useNavigate();
   const { signIn, signUp } = useAuth();
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -55,11 +57,11 @@ export default function Login() {
     if (error) {
       toast({
         variant: 'destructive',
-        title: 'Login Gagal',
-        description: 'Email atau password salah',
+        title: t('toast.login.failed'),
+        description: t('toast.login.failed.desc'),
       });
     } else {
-      toast({ title: 'Berhasil masuk!' });
+      toast({ title: t('toast.login.success') });
       navigate('/dashboard');
     }
   };
@@ -72,13 +74,13 @@ export default function Login() {
     if (error) {
       toast({
         variant: 'destructive',
-        title: 'Registrasi Gagal',
+        title: t('toast.signup.failed'),
         description: error.message,
       });
     } else {
-      toast({ 
-        title: 'Registrasi Berhasil!',
-        description: 'Silakan login dengan akun baru Anda',
+      toast({
+        title: t('toast.signup.success'),
+        description: t('toast.signup.success.desc'),
       });
     }
   };
@@ -88,26 +90,23 @@ export default function Login() {
       <div className="w-full max-w-md animate-fade-in">
         {/* Logo */}
         <div className="mb-8 flex flex-col items-center">
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-card">
-            <Coffee className="h-8 w-8" />
-          </div>
-          <h1 className="text-3xl font-bold text-foreground">Cafein</h1>
-          <p className="mt-1 text-muted-foreground">Cafe Management Dashboard</p>
+          <img src="/logo.jpg" alt="CafeIn Logo" className="mb-4 h-16 w-16 object-contain" />
+          <h1 className="text-3xl font-bold text-foreground">{t('app.title')}</h1>
         </div>
 
         <Card className="border-0 shadow-card">
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login">Masuk</TabsTrigger>
-              <TabsTrigger value="signup">Daftar</TabsTrigger>
+              <TabsTrigger value="login">{t('login.tab.signin')}</TabsTrigger>
+              <TabsTrigger value="signup">{t('login.tab.signup')}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="login">
               <Form {...loginForm}>
                 <form onSubmit={loginForm.handleSubmit(onLogin)}>
                   <CardHeader>
-                    <CardTitle>Selamat Datang</CardTitle>
-                    <CardDescription>Masuk ke akun Anda untuk melanjutkan</CardDescription>
+                    <CardTitle>{t('login.welcome')}</CardTitle>
+                    <CardDescription>{t('login.subtitle')}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <FormField
@@ -115,12 +114,12 @@ export default function Login() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel>{t('login.email')}</FormLabel>
                           <FormControl>
-                            <Input 
-                              type="email" 
-                              placeholder="nama@email.com" 
-                              {...field} 
+                            <Input
+                              type="email"
+                              placeholder={t('login.email.placeholder')}
+                              {...field}
                             />
                           </FormControl>
                           <FormMessage />
@@ -132,13 +131,13 @@ export default function Login() {
                       name="password"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password</FormLabel>
+                          <FormLabel>{t('login.password')}</FormLabel>
                           <FormControl>
                             <div className="relative">
-                              <Input 
-                                type={showPassword ? 'text' : 'password'} 
-                                placeholder="••••••••" 
-                                {...field} 
+                              <Input
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder={t('login.password.placeholder')}
+                                {...field}
                               />
                               <Button
                                 type="button"
@@ -158,7 +157,7 @@ export default function Login() {
                   </CardContent>
                   <CardFooter>
                     <Button type="submit" className="w-full" disabled={isLoading}>
-                      {isLoading ? 'Memproses...' : 'Masuk'}
+                      {isLoading ? t('login.processing') : t('login.button')}
                     </Button>
                   </CardFooter>
                 </form>
@@ -169,8 +168,8 @@ export default function Login() {
               <Form {...signupForm}>
                 <form onSubmit={signupForm.handleSubmit(onSignup)}>
                   <CardHeader>
-                    <CardTitle>Buat Akun</CardTitle>
-                    <CardDescription>Daftar untuk mulai menggunakan Cafein</CardDescription>
+                    <CardTitle>{t('signup.title')}</CardTitle>
+                    <CardDescription>{t('signup.subtitle')}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <FormField
@@ -178,9 +177,9 @@ export default function Login() {
                       name="fullName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Nama Lengkap</FormLabel>
+                          <FormLabel>{t('signup.fullname')}</FormLabel>
                           <FormControl>
-                            <Input placeholder="John Doe" {...field} />
+                            <Input placeholder={t('signup.fullname.placeholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -191,9 +190,9 @@ export default function Login() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel>{t('login.email')}</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="nama@email.com" {...field} />
+                            <Input type="email" placeholder={t('login.email.placeholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -204,9 +203,9 @@ export default function Login() {
                       name="password"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password</FormLabel>
+                          <FormLabel>{t('login.password')}</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="••••••••" {...field} />
+                            <Input type="password" placeholder={t('login.password.placeholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -217,9 +216,9 @@ export default function Login() {
                       name="confirmPassword"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Konfirmasi Password</FormLabel>
+                          <FormLabel>{t('signup.confirmPassword')}</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="••••••••" {...field} />
+                            <Input type="password" placeholder={t('login.password.placeholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -228,7 +227,7 @@ export default function Login() {
                   </CardContent>
                   <CardFooter>
                     <Button type="submit" className="w-full" disabled={isLoading}>
-                      {isLoading ? 'Memproses...' : 'Daftar'}
+                      {isLoading ? t('login.processing') : t('signup.button')}
                     </Button>
                   </CardFooter>
                 </form>
