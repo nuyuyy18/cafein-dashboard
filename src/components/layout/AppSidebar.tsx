@@ -1,5 +1,5 @@
 import { Coffee, LayoutDashboard, MapPin, Settings, LogOut, User } from 'lucide-react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, Link, useNavigate } from "react-router-dom";
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
@@ -22,6 +22,7 @@ import { Separator } from '@/components/ui/separator';
 
 export function AppSidebar() {
   const { state } = useSidebar();
+  const navigate = useNavigate();
   const location = useLocation();
   const { profile, role, signOut } = useAuth();
   const { t } = useLanguage();
@@ -54,7 +55,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" className="border-r-0">
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-3">
-          <img src="/logo.jpg" alt="CafeIn Logo" className="h-10 w-10 object-contain" />
+          <img src="/logo.jpg" alt="CafeIn Logo" className="h-12 w-12 object-contain" />
           {!collapsed && (
             <span className="text-lg font-bold text-sidebar-foreground">{t('app.title')}</span>
           )}
@@ -94,27 +95,29 @@ export function AppSidebar() {
       <SidebarFooter className="p-4">
         <Separator className="mb-4 bg-sidebar-border" />
 
-        <div className="flex items-center gap-3">
-          <Avatar className="h-10 w-10 border-2 border-sidebar-accent">
-            <AvatarImage src={profile?.avatar_url || undefined} />
-            <AvatarFallback className="bg-sidebar-accent text-sidebar-accent-foreground">
-              {getInitials(profile?.full_name)}
-            </AvatarFallback>
-          </Avatar>
+        <div onClick={() => navigate('/profile')}>
+          <div className="flex cursor-pointer items-center gap-3 rounded-lg p-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
+            <Avatar className="h-10 w-10 border-2 border-sidebar-accent">
+              <AvatarImage src={profile?.avatar_url || undefined} />
+              <AvatarFallback className="bg-sidebar-accent text-sidebar-accent-foreground">
+                {getInitials(profile?.full_name)}
+              </AvatarFallback>
+            </Avatar>
 
-          {!collapsed && (
-            <div className="flex flex-1 flex-col overflow-hidden">
-              <span className="truncate text-sm font-medium text-sidebar-foreground">
-                {profile?.full_name || 'User'}
-              </span>
-              <Badge
-                variant="secondary"
-                className="mt-1 w-fit text-xs"
-              >
-                {roleLabels[role]}
-              </Badge>
-            </div>
-          )}
+            {!collapsed && (
+              <div className="flex flex-1 flex-col overflow-hidden">
+                <span className="truncate text-sm font-medium text-sidebar-foreground">
+                  {profile?.full_name || 'User'}
+                </span>
+                <Badge
+                  variant="secondary"
+                  className="mt-1 w-fit text-xs"
+                >
+                  {roleLabels[role]}
+                </Badge>
+              </div>
+            )}
+          </div>
         </div>
 
         {!collapsed && (

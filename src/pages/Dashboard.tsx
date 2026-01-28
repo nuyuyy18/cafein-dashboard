@@ -46,7 +46,7 @@ export default function Dashboard() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-foreground">
-          {t('dashboard.welcome', { name: profile?.full_name?.split(' ')[0] || 'User' })}
+          {t('dashboard.welcome', { name: profile?.full_name || 'User' })}
         </h1>
         <p className="mt-2 text-muted-foreground">
           {isAdmin
