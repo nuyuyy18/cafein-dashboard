@@ -58,7 +58,7 @@ export default function Dashboard() {
       {/* Stats Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          title={t('dashboard.stats.total')}
+          title={t('dashboard.stat.cafes')}
           value={stats?.totalCafes || 0}
           icon={Coffee}
           description={t('dashboard.stats.total.desc')}

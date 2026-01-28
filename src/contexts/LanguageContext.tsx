@@ -40,8 +40,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         localStorage.setItem('language', lang);
     };
 
-    const t = (key: string): string => {
-        return translationData[key] || key;
+    const t = (key: string, params?: Record<string, string | number>): string => {
+        let text = translationData[key] || key;
+        if (params) {
+            Object.entries(params).forEach(([key, value]) => {
+                text = text.replace(`{${key}}`, String(value));
+            });
+        }
+        return text;
     };
 
     return (

@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .sidebar-logo {
+    filter: invert(1);
+  }
+
+  .dark .sidebar-logo {
+    filter: none;
+  }
+}
+
 /* Cafein Design System - Coffee-themed palette */
 
 @layer base {

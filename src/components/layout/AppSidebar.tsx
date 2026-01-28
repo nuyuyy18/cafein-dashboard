@@ -55,7 +55,11 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" className="border-r-0">
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-3">
-          <img src="/logo.jpg" alt="CafeIn Logo" className="h-12 w-12 object-contain" />
+          <img
+            src="/logo-white.png"
+            alt="CafeIn Logo"
+            className="h-14 w-14 object-contain sidebar-logo"
+          />
           {!collapsed && (
             <span className="text-lg font-bold text-sidebar-foreground">{t('app.title')}</span>
           )}
