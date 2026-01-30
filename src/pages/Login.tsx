@@ -90,7 +90,7 @@ export default function Login() {
       <div className="w-full max-w-md animate-fade-in">
         {/* Logo */}
         <div className="mb-8 flex flex-col items-center">
-          <img src="/logo.jpg" alt="CafeIn Logo" className="mb-4 h-16 w-16 object-contain" />
+          <img src="/logo-transparent.png" alt="CafeIn Logo" className="mb-4 h-16 w-16 object-contain" />
           <h1 className="text-3xl font-bold text-foreground">{t('app.title')}</h1>
         </div>
 
