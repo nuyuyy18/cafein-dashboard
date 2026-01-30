@@ -1,0 +1,10 @@
+2026-01-30 19:35:22,908 - INFO - Starting sync process...
+2026-01-30 19:35:22,908 - ERROR - Error during sync: name 'params' is not defined
+2026-01-30 19:36:20,783 - INFO - Starting sync process...
+2026-01-30 19:36:20,783 - INFO - Searching for: Coffeeshop in Yogyakarta
+2026-01-30 19:36:20,921 - INFO - Found 2 cafes from SerpApi
+2026-01-30 19:36:20,921 - ERROR - Error during sync: name 'mapped_cafes' is not defined
+2026-01-30 19:37:22,068 - INFO - Starting sync process...
+2026-01-30 19:37:22,069 - INFO - Searching for: Coffeeshop in Yogyakarta
+2026-01-30 19:37:22,156 - INFO - Found 2 cafes from SerpApi
+2026-01-30 19:37:22,156 - INFO - No mapped cafes found.
