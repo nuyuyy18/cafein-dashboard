@@ -68,12 +68,26 @@ def sync_cafes():
         if "error" in results:
             raise HTTPException(status_code=500, detail=f"SerpApi error: {results['error']}")
             
-        local_results = results.get("local_results", [])
+        local_results_data = results.get("local_results", {})
+        
+        if isinstance(local_results_data, list):
+             local_results = local_results_data
+        elif isinstance(local_results_data, dict):
+             local_results = local_results_data.get("places", [])
+        else:
+             local_results = []
+
         logging.info(f"Found {len(local_results)} cafes from SerpApi")
         print(f"Found {len(local_results)} cafes from SerpApi")
+        
+        if local_results:
+             logging.info(f"local_results content sample: {local_results[0]}")
 
         # ... mapping ...
         mapped_cafes = []
+
+
+
         
         for place in local_results:
             # Debugging: Log keys if needed

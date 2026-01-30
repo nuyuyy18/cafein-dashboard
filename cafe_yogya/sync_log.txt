@@ -8,3 +8,31 @@
 2026-01-30 19:37:22,069 - INFO - Searching for: Coffeeshop in Yogyakarta
 2026-01-30 19:37:22,156 - INFO - Found 2 cafes from SerpApi
 2026-01-30 19:37:22,156 - INFO - No mapped cafes found.
+2026-01-30 19:38:26,466 - INFO - Starting sync process...
+2026-01-30 19:38:26,468 - INFO - Searching for: Coffeeshop in Yogyakarta
+2026-01-30 19:38:26,566 - INFO - Found 2 cafes from SerpApi
+2026-01-30 19:38:26,566 - ERROR - Error during sync: 'str' object has no attribute 'get'
+2026-01-30 19:39:00,371 - INFO - Starting sync process...
+2026-01-30 19:39:00,373 - INFO - Searching for: Coffeeshop in Yogyakarta
+2026-01-30 19:39:00,511 - INFO - Found 2 cafes from SerpApi
+2026-01-30 19:39:00,511 - ERROR - Error during sync: 0
+2026-01-30 19:42:25,175 - INFO - Starting sync process...
+2026-01-30 19:42:25,175 - INFO - Searching for: Coffeeshop in Yogyakarta
+2026-01-30 19:42:25,310 - INFO - Found 2 cafes from SerpApi
+2026-01-30 19:42:25,311 - INFO - local_results type: <class 'dict'>
+2026-01-30 19:42:25,311 - INFO - local_results content: {'places': [{'position': 1, 'rating': 4.6, 'reviews': 4000, 'reviews_original': '(4K)', 'price': '$$', 'description': '"I’ve been to Blanco Coffeeshop a few times, and it never disappoints."', 'lsig': 'AB86z5Vs5OFnWGvvRAFMUpp8fEfg', 'thumbnail': 'https://serpapi.com/searches/697ca46b99d5f49cf886c744/images/50905c5b9e13b8cfcfe3e9f0bf1daa465fdee3453a9a9423eb941b163fc2ca1523a8d58b5e6cb44f.jpeg', 'place_id': '16535642583182340365', 'place_id_search': 'https://serpapi.com/search.json?device=desktop&engine=google&google_domain=google.com&ludocid=16535642583182340365&num=20&q=Coffeeshop+in+Yogyakarta&start=0', 'gps_coordinates': {'latitude': -7.7814083, 'longitude': 110.36477}, 'title': 'Blanco Coffee And Books', 'type': 'Coffee shop', 'address': 'Jl. Kranggan No.30'}, {'position': 2, 'rating': 4.7, 'reviews': 1700, 'reviews_original': '(1.7K)', 'price': '$$', 'description': '"If you are looking for the perfect place to \'nyore\' in the city, this is it."', 'lsig': 'AB86z5UXiGns8cUjgHE4qWajO3EI', 'thumbnail': 'https://serpapi.com/searches/697ca46b99d5f49cf886c744/images/50905c5b9e13b8cfcfe3e9f0bf1daa460fc4200ea157473075fda9bcd5bd945b88235c29f108b85a.jpeg', 'place_id': '11306593593292611205', 'place_id_search': 'https://serpapi.com/search.json?device=desktop&engine=google&google_domain=google.com&ludocid=11306593593292611205&num=20&q=Coffeeshop+in+Yogyakarta&start=0', 'gps_coordinates': {'latitude': -7.785225, 'longitude': 110.36659}, 'title': 'Nyore Coffee & Space', 'type': 'Cafe', 'address': 'Jl. Margo Utomo No.79'}, {'position': 3, 'rating': 4.6, 'reviews': 1300, 'reviews_original': '(1.3K)', 'price': '$$', 'description': '"I got a complimentary donuts which took their service the extra mile!"', 'lsig': 'AB86z5ViqTaQe--vRLah050z_veK', 'thumbnail': 'https://serpapi.com/searches/697ca46b99d5f49cf886c744/images/50905c5b9e13b8cfcfe3e9f0bf1daa467d46981d02988ca09969f4d53c238ccdb4b0f84533bbb050.jpeg', 'place_id': '11536266390216853266', 'place_id_search': 'https://serpapi.com/search.json?device=desktop&engine=google&google_domain=google.com&ludocid=11536266390216853266&num=20&q=Coffeeshop+in+Yogyakarta&start=0', 'gps_coordinates': {'latitude': -7.813627, 'longitude': 110.354065}, 'title': 'Lunaria Coffee Yogyakarta', 'type': 'Coffee shop', 'address': 'Jl. Gedongkiwo No.29'}], 'more_locations_link': 'https://www.google.com/search?q=Coffee+Shop+in+Yogyakarta&sca_esv=df52ca8c294ba93d&udm=1&lsack=bKR8aZnAIuuIptQPx66D6QQ&sa=X&ved=2ahUKEwiZpqaforOSAxVrhIkEHUfXIE0QjGp6BAgwEAA'}
+2026-01-30 19:42:25,311 - ERROR - Error during sync: 'str' object has no attribute 'get'
+2026-01-30 19:55:25,407 - INFO - Starting sync process...
+2026-01-30 19:55:25,408 - INFO - Searching for: Coffeeshop in Yogyakarta
+2026-01-30 19:55:25,555 - INFO - Found 3 cafes from SerpApi
+2026-01-30 19:55:25,556 - INFO - local_results content sample: {'position': 1, 'rating': 4.6, 'reviews': 4000, 'reviews_original': '(4K)', 'price': '$$', 'description': '"I’ve been to Blanco Coffeeshop a few times, and it never disappoints."', 'lsig': 'AB86z5Vs5OFnWGvvRAFMUpp8fEfg', 'thumbnail': 'https://serpapi.com/searches/697ca46b99d5f49cf886c744/images/50905c5b9e13b8cfcfe3e9f0bf1daa465fdee3453a9a9423eb941b163fc2ca1523a8d58b5e6cb44f.jpeg', 'place_id': '16535642583182340365', 'place_id_search': 'https://serpapi.com/search.json?device=desktop&engine=google&google_domain=google.com&ludocid=16535642583182340365&num=20&q=Coffeeshop+in+Yogyakarta&start=0', 'gps_coordinates': {'latitude': -7.7814083, 'longitude': 110.36477}, 'title': 'Blanco Coffee And Books', 'type': 'Coffee shop', 'address': 'Jl. Kranggan No.30'}
+2026-01-30 19:55:25,556 - INFO - Upserting 3 cafes to Supabase...
+2026-01-30 19:55:27,565 - INFO - HTTP Request: GET https://cexzrgtnfogcqoqetltt.supabase.co/rest/v1/cafes?select=id&name=eq.Blanco+Coffee+And+Books "HTTP/2 200 OK"
+2026-01-30 19:55:27,960 - INFO - HTTP Request: POST https://cexzrgtnfogcqoqetltt.supabase.co/rest/v1/cafes "HTTP/2 401 Unauthorized"
+2026-01-30 19:55:27,962 - ERROR - Failed to sync Blanco Coffee And Books: {'message': 'new row violates row-level security policy for table "cafes"', 'code': '42501', 'hint': None, 'details': None}
+2026-01-30 19:55:28,276 - INFO - HTTP Request: GET https://cexzrgtnfogcqoqetltt.supabase.co/rest/v1/cafes?select=id&name=eq.Nyore+Coffee+%26+Space "HTTP/2 200 OK"
+2026-01-30 19:55:28,891 - INFO - HTTP Request: POST https://cexzrgtnfogcqoqetltt.supabase.co/rest/v1/cafes "HTTP/2 401 Unauthorized"
+2026-01-30 19:55:28,892 - ERROR - Failed to sync Nyore Coffee & Space: {'message': 'new row violates row-level security policy for table "cafes"', 'code': '42501', 'hint': None, 'details': None}
+2026-01-30 19:55:29,198 - INFO - HTTP Request: GET https://cexzrgtnfogcqoqetltt.supabase.co/rest/v1/cafes?select=id&name=eq.Lunaria+Coffee+Yogyakarta "HTTP/2 200 OK"
+2026-01-30 19:55:29,505 - INFO - HTTP Request: POST https://cexzrgtnfogcqoqetltt.supabase.co/rest/v1/cafes "HTTP/2 401 Unauthorized"
+2026-01-30 19:55:29,506 - ERROR - Failed to sync Lunaria Coffee Yogyakarta: {'message': 'new row violates row-level security policy for table "cafes"', 'code': '42501', 'hint': None, 'details': None}
