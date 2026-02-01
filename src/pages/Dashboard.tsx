@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Coffee, Star, MessageSquare, TrendingUp, Search, MapPin } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCafes, useDashboardStats } from '@/hooks/useCafes';
@@ -14,25 +14,41 @@ import type { Cafe } from '@/types/database';
 export default function Dashboard() {
   const { profile, role, isAdmin } = useAuth();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const PAGE_SIZE = 20;
-  const [page, setPage] = useState(0);
+
+  const page = Number(searchParams.get('page')) || 0;
+  const searchQuery = searchParams.get('q') || '';
 
   const { data: stats, isLoading: statsLoading } = useDashboardStats();
-  const { data: cafesResponse, isLoading: cafesLoading } = useCafes(page, PAGE_SIZE);
+  const { data: cafesResponse, isLoading: cafesLoading } = useCafes(page, PAGE_SIZE, searchQuery);
   const cafes = cafesResponse?.cafes || [];
 
   const { t } = useLanguage();
-  const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredCafes = useMemo(() => {
-    if (!cafes) return [];
-    const query = searchQuery.toLowerCase();
-    return cafes.filter(
-      (cafe) =>
-        cafe.name.toLowerCase().includes(query) ||
-        cafe.address.toLowerCase().includes(query)
-    );
-  }, [cafes, searchQuery]);
+  const setPage = (newPage: number) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('page', String(newPage));
+    setSearchParams(newParams);
+  };
+
+  const updateSearch = (query: string) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (query) {
+      newParams.set('q', query);
+    } else {
+      newParams.delete('q');
+    }
+    // Reset page on search
+    newParams.set('page', '0');
+    setSearchParams(newParams);
+  };
+
+  // Handled by URL params now
+  // const [searchQuery, setSearchQuery] = useState('');
+
+  // Client-side filtering removed as it is now handled by server
+  const filteredCafes = cafes;
 
   const StatCard = ({
     title,
@@ -124,7 +140,7 @@ export default function Dashboard() {
                   placeholder="Cari nama atau daerah..."
                   className="pl-8"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => updateSearch(e.target.value)}
                 />
               </div>
             </div>
@@ -177,7 +193,7 @@ export default function Dashboard() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => setPage(p => Math.max(0, p - 1))}
+                      onClick={() => setPage(Math.max(0, page - 1))}
                       disabled={page === 0}
                     >
                       Sebelumnya
@@ -185,7 +201,7 @@ export default function Dashboard() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => setPage(p => p + 1)}
+                      onClick={() => setPage(page + 1)}
                       disabled={(page + 1) * PAGE_SIZE >= (cafesResponse?.count || 0)}
                     >
                       Selanjutnya

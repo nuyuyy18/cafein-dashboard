@@ -41,10 +41,13 @@ const reviewSchema = z.object({
 type MenuForm = z.infer<typeof menuSchema>;
 type ReviewForm = z.infer<typeof reviewSchema>;
 
+import { useLanguage } from '@/contexts/LanguageContext';
+
 export default function CafeDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useLanguage();
   const { user, isAdmin, isStoreManager } = useAuth();
 
   const { data: cafe, isLoading, refetch } = useCafe(id);
@@ -94,10 +97,10 @@ export default function CafeDetail() {
 
     try {
       await updateCafe.mutateAsync({ id, ...editForm });
-      toast({ title: 'Kafe berhasil diperbarui' });
+      toast({ title: t('detail.toast.update.success') });
       setIsEditing(false);
     } catch (error) {
-      toast({ variant: 'destructive', title: 'Gagal memperbarui kafe' });
+      toast({ variant: 'destructive', title: t('detail.toast.update.failed') });
     }
   };
 
@@ -106,10 +109,10 @@ export default function CafeDetail() {
 
     try {
       await deleteCafe.mutateAsync(id);
-      toast({ title: 'Kafe berhasil dihapus' });
+      toast({ title: t('detail.toast.delete.success') });
       navigate('/cafes');
     } catch (error) {
-      toast({ variant: 'destructive', title: 'Gagal menghapus kafe' });
+      toast({ variant: 'destructive', title: t('detail.toast.delete.failed') });
     }
   };
 
@@ -124,11 +127,11 @@ export default function CafeDetail() {
         category: data.category,
         description: data.description,
       });
-      toast({ title: 'Menu berhasil ditambahkan' });
+      toast({ title: t('detail.toast.menu.success') });
       setMenuDialogOpen(false);
       menuForm.reset();
     } catch (error) {
-      toast({ variant: 'destructive', title: 'Gagal menambahkan menu' });
+      toast({ variant: 'destructive', title: t('detail.toast.menu.failed') });
     }
   };
 
@@ -180,11 +183,11 @@ export default function CafeDetail() {
         comment: data.comment || undefined,
         is_admin_created: isAdmin,
       });
-      toast({ title: 'Ulasan berhasil ditambahkan' });
+      toast({ title: t('detail.toast.review.success') });
       setReviewDialogOpen(false);
       reviewForm.reset();
     } catch (error) {
-      toast({ variant: 'destructive', title: 'Gagal menambahkan ulasan' });
+      toast({ variant: 'destructive', title: t('detail.toast.review.failed') });
     }
   };
 
@@ -201,9 +204,9 @@ export default function CafeDetail() {
   if (!cafe) {
     return (
       <div className="flex flex-col items-center justify-center py-12">
-        <p className="text-lg text-muted-foreground">Kafe tidak ditemukan</p>
+        <p className="text-lg text-muted-foreground">{t('detail.notfound')}</p>
         <Button variant="link" onClick={() => navigate('/cafes')}>
-          Kembali ke daftar kafe
+          {t('detail.back')}
         </Button>
       </div>
     );
@@ -223,9 +226,9 @@ export default function CafeDetail() {
     <div className="animate-fade-in space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <Button variant="ghost" onClick={() => navigate('/cafes')} className="gap-2">
+        <Button variant="ghost" onClick={() => navigate(-1)} className="gap-2">
           <ArrowLeft className="h-4 w-4" />
-          Kembali
+          {t('detail.back_button')}
         </Button>
 
         {canEdit && (
@@ -233,36 +236,36 @@ export default function CafeDetail() {
             {isEditing ? (
               <>
                 <Button variant="outline" onClick={() => setIsEditing(false)}>
-                  Batal
+                  {t('detail.cancel')}
                 </Button>
                 <Button onClick={handleSave} disabled={updateCafe.isPending}>
                   <Save className="mr-2 h-4 w-4" />
-                  Simpan
+                  {t('detail.save')}
                 </Button>
               </>
             ) : (
               <>
                 <Button variant="outline" onClick={() => setIsEditing(true)}>
                   <Pencil className="mr-2 h-4 w-4" />
-                  Edit
+                  {t('detail.edit')}
                 </Button>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button variant="destructive">
                       <Trash2 className="mr-2 h-4 w-4" />
-                      Hapus
+                      {t('detail.delete')}
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Hapus Kafe?</AlertDialogTitle>
+                      <AlertDialogTitle>{t('detail.dialog.delete.title')}</AlertDialogTitle>
                       <AlertDialogDescription>
-                        Tindakan ini tidak dapat dibatalkan. Semua data kafe termasuk menu dan ulasan akan dihapus.
+                        {t('detail.dialog.delete.desc')}
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Batal</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleDelete}>Hapus</AlertDialogAction>
+                      <AlertDialogCancel>{t('detail.cancel')}</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleDelete}>{t('detail.delete')}</AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
@@ -297,7 +300,7 @@ export default function CafeDetail() {
               ) : (
                 <div className="flex items-center gap-3">
                   <h1 className="text-2xl font-bold">{cafe.name}</h1>
-                  {!cafe.is_active && <Badge variant="destructive">Tutup</Badge>}
+                  {!cafe.is_active && <Badge variant="destructive">{t('detail.closed')}</Badge>}
                 </div>
               )}
 
@@ -305,7 +308,7 @@ export default function CafeDetail() {
                 <div className="flex items-center gap-1">
                   <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                   <span className="font-semibold text-foreground">{Number(cafe.rating).toFixed(1)}</span>
-                  <span>({cafe.review_count} ulasan)</span>
+                  <span>({t('detail.reviews.desc', { count: cafe.review_count })})</span>
                 </div>
               </div>
 
@@ -351,14 +354,14 @@ export default function CafeDetail() {
               )}
 
               {/* Operating Hours */}
-              {cafe.operating_hours && cafe.operating_hours.length > 0 && (
-                <div className="mt-4 border-t pt-4">
-                  <h3 className="mb-2 font-semibold flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    Jam Operasional
-                  </h3>
-                  <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                    {[...cafe.operating_hours]
+              <div className="mt-4 border-t pt-4">
+                <h3 className="mb-2 font-semibold flex items-center gap-2">
+                  <Clock className="h-4 w-4" />
+                  {t('detail.hours')}
+                </h3>
+                <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                  {cafe.operating_hours && cafe.operating_hours.length > 0 ? (
+                    [...cafe.operating_hours]
                       .sort((a, b) => {
                         // Sort MON(1)..SUN(0) -> MON(1)..SUN(7)
                         const dayA = a.day_of_week === 0 ? 7 : a.day_of_week;
@@ -370,14 +373,18 @@ export default function CafeDetail() {
                           <span className="w-24 font-medium">{DAYS_OF_WEEK[hour.day_of_week]}</span>
                           <span>
                             {hour.is_closed
-                              ? 'Tutup'
+                              ? t('detail.hours.closed')
                               : `${hour.open_time?.slice(0, 5)} - ${hour.close_time?.slice(0, 5)}`}
                           </span>
                         </div>
-                      ))}
-                  </div>
+                      ))
+                  ) : (
+                    <div className="flex items-center gap-2 text-primary font-medium">
+                      <span>{t('detail.hours.24h')}</span>
+                    </div>
+                  )}
                 </div>
-              )}            </div>
+              </div>            </div>
           </div>
         </CardContent>
       </Card>
@@ -387,16 +394,16 @@ export default function CafeDetail() {
         <TabsList>
           <TabsTrigger value="menu" className="gap-2">
             <Coffee className="h-4 w-4" />
-            Menu
+            {t('detail.menu')}
           </TabsTrigger>
           <TabsTrigger value="reviews" className="gap-2">
             <Star className="h-4 w-4" />
-            Ulasan
+            {t('detail.reviews')}
           </TabsTrigger>
           {canEdit && (
             <TabsTrigger value="images" className="gap-2">
               <Upload className="h-4 w-4" />
-              Foto
+              {t('detail.photos')}
             </TabsTrigger>
           )}
         </TabsList>
@@ -406,15 +413,15 @@ export default function CafeDetail() {
           <Card className="border-0 shadow-card">
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
-                <CardTitle>Menu</CardTitle>
-                <CardDescription>Daftar menu yang tersedia</CardDescription>
+                <CardTitle>{t('detail.menu')}</CardTitle>
+                <CardDescription>{t('detail.menu.desc')}</CardDescription>
               </div>
               {/* Menu Link Button if exists */}
               {cafe.cafe_menus?.map(m => {
                 if (m.name === 'Link Menu' && m.description) {
                   return (
                     <Button key={m.id} variant="outline" className="gap-2" onClick={() => window.open(m.description, '_blank')}>
-                      <p className="font-semibold text-primary">Buka Menu Digital</p>
+                      <p className="font-semibold text-primary">{t('detail.menu.digital')}</p>
                     </Button>
                   )
                 }
@@ -426,15 +433,15 @@ export default function CafeDetail() {
                   <DialogTrigger asChild>
                     <Button size="sm" className="gap-2">
                       <Plus className="h-4 w-4" />
-                      Tambah Menu
+                      {t('detail.menu.add')}
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <Form {...menuForm}>
                       <form onSubmit={menuForm.handleSubmit(handleAddMenu)}>
                         <DialogHeader>
-                          <DialogTitle>Tambah Menu Baru</DialogTitle>
-                          <DialogDescription>Isi detail menu yang akan ditambahkan</DialogDescription>
+                          <DialogTitle>{t('detail.menu.add')}</DialogTitle>
+                          <DialogDescription>{t('detail.menu.desc')}</DialogDescription>
                         </DialogHeader>
                         <div className="space-y-4 py-4">
                           <FormField
@@ -591,23 +598,23 @@ export default function CafeDetail() {
           <Card className="border-0 shadow-card">
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
-                <CardTitle>Ulasan</CardTitle>
-                <CardDescription>{cafe.review_count} ulasan dari pelanggan</CardDescription>
+                <CardTitle>{t('detail.reviews')}</CardTitle>
+                <CardDescription>{t('detail.reviews.desc', { count: cafe.review_count })}</CardDescription>
               </div>
               {user && (
                 <Dialog open={reviewDialogOpen} onOpenChange={setReviewDialogOpen}>
                   <DialogTrigger asChild>
                     <Button size="sm" className="gap-2">
                       <Plus className="h-4 w-4" />
-                      Tulis Ulasan
+                      {t('detail.reviews.write')}
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <Form {...reviewForm}>
                       <form onSubmit={reviewForm.handleSubmit(handleAddReview)}>
                         <DialogHeader>
-                          <DialogTitle>Tulis Ulasan</DialogTitle>
-                          <DialogDescription>Bagikan pengalaman Anda</DialogDescription>
+                          <DialogTitle>{t('detail.reviews.write')}</DialogTitle>
+                          <DialogDescription>{t('detail.reviews.desc', { count: 0 })}</DialogDescription>
                         </DialogHeader>
                         <div className="space-y-4 py-4">
                           <FormField
@@ -723,8 +730,8 @@ export default function CafeDetail() {
         <TabsContent value="images">
           <Card className="border-0 shadow-card">
             <CardHeader>
-              <CardTitle>Foto Kafe</CardTitle>
-              <CardDescription>Galeri foto suasana dan menu</CardDescription>
+              <CardTitle>{t('detail.photos')}</CardTitle>
+              <CardDescription>{t('detail.photos.desc')}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-4 md:grid-cols-3">
@@ -757,7 +764,7 @@ export default function CafeDetail() {
                 {canEdit && (
                   <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/30 p-8 transition-colors hover:border-primary/50">
                     <Upload className="mb-2 h-8 w-8 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">Upload foto</span>
+                    <span className="text-sm text-muted-foreground">{t('detail.photos.upload')}</span>
                     <input
                       type="file"
                       accept="image/*"

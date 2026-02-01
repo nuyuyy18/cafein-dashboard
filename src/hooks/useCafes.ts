@@ -4,18 +4,25 @@ import type { Cafe, CafeWithDetails, CafeMenu, OperatingHours, CafeImage, Review
 
 // Fetch all cafes
 // Fetch cafes with pagination
-export function useCafes(page = 0, pageSize = 20) {
+// Fetch cafes with pagination and search
+export function useCafes(page = 0, pageSize = 20, searchQuery = '') {
   return useQuery({
-    queryKey: ['cafes', page, pageSize],
+    queryKey: ['cafes', page, pageSize, searchQuery],
     queryFn: async () => {
       const from = page * pageSize;
       const to = from + pageSize - 1;
 
-      const { data, error, count } = await supabase
+      let query = supabase
         .from('cafes')
         .select('*', { count: 'exact' })
         .order('created_at', { ascending: false })
         .range(from, to);
+
+      if (searchQuery) {
+        query = query.or(`name.ilike.%${searchQuery}%,address.ilike.%${searchQuery}%`);
+      }
+
+      const { data, error, count } = await query;
 
       if (error) {
         console.error("Error fetching cafes:", error);
