@@ -7,14 +7,20 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import type { Cafe } from '@/types/database';
 
 export default function Dashboard() {
   const { profile, role, isAdmin } = useAuth();
   const navigate = useNavigate();
+  const PAGE_SIZE = 20;
+  const [page, setPage] = useState(0);
+
   const { data: stats, isLoading: statsLoading } = useDashboardStats();
-  const { data: cafes, isLoading: cafesLoading } = useCafes();
+  const { data: cafesResponse, isLoading: cafesLoading } = useCafes(page, PAGE_SIZE);
+  const cafes = cafesResponse?.cafes || [];
+
   const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -109,7 +115,7 @@ export default function Dashboard() {
               <div>
                 <CardTitle className="text-xl">Daftar Kafe</CardTitle>
                 <CardDescription>
-                  Menampilkan {filteredCafes.length} dari {cafes?.length || 0} kafe
+                  Menampilkan {cafes.length > 0 ? (page * PAGE_SIZE + 1) : 0} - {Math.min((page + 1) * PAGE_SIZE, cafesResponse?.count || 0)} dari total {cafesResponse?.count || 0} kafe
                 </CardDescription>
               </div>
               <div className="relative w-full md:w-72">
@@ -131,36 +137,62 @@ export default function Dashboard() {
                 ))}
               </div>
             ) : filteredCafes.length > 0 ? (
-              <ScrollArea className="h-[600px] pr-4">
-                <div className="space-y-3">
-                  {filteredCafes.map((cafe) => (
-                    <div
-                      key={cafe.id}
-                      onClick={() => navigate(`/cafes/${cafe.id}`)}
-                      className="flex items-center justify-between p-4 rounded-lg border bg-card hover:bg-accent/50 cursor-pointer transition-colors group"
-                    >
-                      <div className="flex flex-col gap-1">
-                        <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
-                          {cafe.name}
-                        </h3>
-                        <p className="text-sm text-muted-foreground flex items-center gap-1">
-                          <MapPin className="h-3 w-3" />
-                          {cafe.address}
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <div className="flex items-center justify-end gap-1 text-yellow-500 font-medium">
-                          <Star className="h-4 w-4 fill-yellow-500" />
-                          {Number(cafe.rating).toFixed(1)}
+              <>
+                <ScrollArea className="h-[600px] pr-4">
+                  <div className="space-y-3">
+                    {filteredCafes.map((cafe) => (
+                      <div
+                        key={cafe.id}
+                        onClick={() => navigate(`/cafes/${cafe.id}`)}
+                        className="flex items-center justify-between p-4 rounded-lg border bg-card hover:bg-accent/50 cursor-pointer transition-colors group"
+                      >
+                        <div className="flex flex-col gap-1">
+                          <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
+                            {cafe.name}
+                          </h3>
+                          <p className="text-sm text-muted-foreground flex items-center gap-1">
+                            <MapPin className="h-3 w-3" />
+                            {cafe.address}
+                          </p>
                         </div>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {cafe.review_count} ulasan
-                        </p>
+                        <div className="text-right">
+                          <div className="flex items-center justify-end gap-1 text-yellow-500 font-medium">
+                            <Star className="h-4 w-4 fill-yellow-500" />
+                            {Number(cafe.rating).toFixed(1)}
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {cafe.review_count} ulasan
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                </ScrollArea>
+                {/* Pagination Controls */}
+                <div className="flex items-center justify-between pt-4 border-t mt-4">
+                  <p className="text-sm text-muted-foreground">
+                    Halaman {page + 1} dari {Math.ceil((cafesResponse?.count || 0) / PAGE_SIZE)}
+                  </p>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setPage(p => Math.max(0, p - 1))}
+                      disabled={page === 0}
+                    >
+                      Sebelumnya
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setPage(p => p + 1)}
+                      disabled={(page + 1) * PAGE_SIZE >= (cafesResponse?.count || 0)}
+                    >
+                      Selanjutnya
+                    </Button>
+                  </div>
                 </div>
-              </ScrollArea>
+              </>
             ) : (
               <div className="text-center py-12 text-muted-foreground">
                 <Coffee className="h-12 w-12 mx-auto mb-3 opacity-20" />

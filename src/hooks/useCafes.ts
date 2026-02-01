@@ -3,20 +3,28 @@ import { supabase } from '@/integrations/supabase/client';
 import type { Cafe, CafeWithDetails, CafeMenu, OperatingHours, CafeImage, Review, MenuCategory } from '@/types/database';
 
 // Fetch all cafes
-export function useCafes() {
+// Fetch cafes with pagination
+export function useCafes(page = 0, pageSize = 20) {
   return useQuery({
-    queryKey: ['cafes'],
+    queryKey: ['cafes', page, pageSize],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('cafes')
-        .select(`
-          *,
-          cafe_images (*)
-        `)
-        .order('created_at', { ascending: false });
+      const from = page * pageSize;
+      const to = from + pageSize - 1;
 
-      if (error) throw error;
-      return data as (Cafe & { cafe_images: CafeImage[] })[];
+      const { data, error, count } = await supabase
+        .from('cafes')
+        .select('*', { count: 'exact' })
+        .order('created_at', { ascending: false })
+        .range(from, to);
+
+      if (error) {
+        console.error("Error fetching cafes:", error);
+        throw error;
+      };
+      return {
+        cafes: data as Cafe[],
+        count: count || 0
+      };
     },
   });
 }
@@ -41,19 +49,19 @@ export function useCafe(id: string | undefined) {
         .maybeSingle();
 
       if (error) throw error;
-      
+
       // Fetch profile data for reviews separately
       if (data?.reviews && data.reviews.length > 0) {
         const userIds = data.reviews
           .map((r: Review) => r.user_id)
           .filter((id: string | null): id is string => id !== null);
-        
+
         if (userIds.length > 0) {
           const { data: profiles } = await supabase
             .from('profiles')
             .select('*')
             .in('user_id', userIds);
-          
+
           if (profiles) {
             data.reviews = data.reviews.map((review: Review) => ({
               ...review,
@@ -62,7 +70,7 @@ export function useCafe(id: string | undefined) {
           }
         }
       }
-      
+
       return data as CafeWithDetails | null;
     },
     enabled: !!id,
@@ -308,10 +316,26 @@ export function useDashboardStats() {
 
       if (cafesError) throw cafesError;
 
-      const totalCafes = cafes?.length || 0;
-      const totalReviews = cafes?.reduce((sum, c) => sum + (c.review_count || 0), 0) || 0;
-      const avgRating = cafes?.length 
-        ? cafes.reduce((sum, c) => sum + (Number(c.rating) || 0), 0) / cafes.length 
+      const { count: totalCafes, error: countError } = await supabase
+        .from('cafes')
+        .select('*', { count: 'exact', head: true });
+
+      if (countError) throw countError;
+
+      // For stats aggregation, we need a larger sample or a DB function. 
+      // Since we don't have a DB function, we'll fetch up to 3000 rows (covering all 1929) 
+      // just for rating/review_count to be accurate.
+      // This is safe for ~2000 rows (approx 50-100KB payload).
+      const { data: statsData, error: statsError } = await supabase
+        .from('cafes')
+        .select('rating, review_count')
+        .range(0, 2500); // Increased limit to cover all cafes
+
+      if (statsError) throw statsError;
+
+      const totalReviews = statsData?.reduce((sum, c) => sum + (c.review_count || 0), 0) || 0;
+      const avgRating = statsData?.length
+        ? statsData.reduce((sum, c) => sum + (Number(c.rating) || 0), 0) / statsData.length
         : 0;
 
       // Top cafes by reviews
