@@ -1,14 +1,32 @@
-import { Coffee, Star, MessageSquare, TrendingUp } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Coffee, Star, MessageSquare, TrendingUp, Search, MapPin } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useDashboardStats } from '@/hooks/useCafes';
+import { useCafes, useDashboardStats } from '@/hooks/useCafes';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import type { Cafe } from '@/types/database';
 
 export default function Dashboard() {
   const { profile, role, isAdmin } = useAuth();
-  const { data: stats, isLoading } = useDashboardStats();
+  const navigate = useNavigate();
+  const { data: stats, isLoading: statsLoading } = useDashboardStats();
+  const { data: cafes, isLoading: cafesLoading } = useCafes();
   const { t } = useLanguage();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredCafes = useMemo(() => {
+    if (!cafes) return [];
+    const query = searchQuery.toLowerCase();
+    return cafes.filter(
+      (cafe) =>
+        cafe.name.toLowerCase().includes(query) ||
+        cafe.address.toLowerCase().includes(query)
+    );
+  }, [cafes, searchQuery]);
 
   const StatCard = ({
     title,
@@ -27,7 +45,7 @@ export default function Dashboard() {
         <Icon className="h-5 w-5 text-primary" />
       </CardHeader>
       <CardContent>
-        {isLoading ? (
+        {statsLoading ? (
           <Skeleton className="h-8 w-24" />
         ) : (
           <>
@@ -42,7 +60,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in pb-10">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-foreground">
@@ -83,95 +101,71 @@ export default function Dashboard() {
         />
       </div>
 
-      {/* Top Cafes */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      {/* Cafe List Section */}
+      <div className="grid gap-6">
         <Card className="border-0 shadow-card">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-primary" />
-              {t('dashboard.top.cafes')}
-            </CardTitle>
-            <CardDescription>{t('dashboard.top.cafes.desc')}</CardDescription>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <CardTitle className="text-xl">Daftar Kafe</CardTitle>
+                <CardDescription>
+                  Menampilkan {filteredCafes.length} dari {cafes?.length || 0} kafe
+                </CardDescription>
+              </div>
+              <div className="relative w-full md:w-72">
+                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Cari nama atau daerah..."
+                  className="pl-8"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
-            {isLoading ? (
-              <div className="space-y-3">
-                {[1, 2, 3].map((i) => (
-                  <Skeleton key={i} className="h-12 w-full" />
+            {cafesLoading ? (
+              <div className="space-y-4">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Skeleton key={i} className="h-16 w-full" />
                 ))}
               </div>
-            ) : stats?.topCafes && stats.topCafes.length > 0 ? (
-              <div className="space-y-3">
-                {stats.topCafes.map((cafe, index) => (
-                  <div
-                    key={cafe.id}
-                    className="flex items-center justify-between rounded-lg bg-muted/50 p-3"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                        {index + 1}
-                      </span>
-                      <span className="font-medium">{cafe.name}</span>
-                    </div>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        {Number(cafe.rating).toFixed(1)}
-                      </span>
-                      <span>{cafe.review_count} ulasan</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="py-8 text-center text-muted-foreground">
-                {t('dashboard.no.data')}
-              </p>
-            )}
-          </CardContent>
-        </Card>
-
-        <Card className="border-0 shadow-card">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Star className="h-5 w-5 text-primary" />
-              {t('dashboard.top.rating')}
-            </CardTitle>
-            <CardDescription>{t('dashboard.top.rating.desc')}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {isLoading ? (
-              <div className="space-y-3">
-                {[1, 2, 3].map((i) => (
-                  <Skeleton key={i} className="h-12 w-full" />
-                ))}
-              </div>
-            ) : stats?.topCafes && stats.topCafes.length > 0 ? (
-              <div className="space-y-3">
-                {[...stats.topCafes]
-                  .sort((a, b) => Number(b.rating) - Number(a.rating))
-                  .map((cafe, index) => (
+            ) : filteredCafes.length > 0 ? (
+              <ScrollArea className="h-[600px] pr-4">
+                <div className="space-y-3">
+                  {filteredCafes.map((cafe) => (
                     <div
                       key={cafe.id}
-                      className="flex items-center justify-between rounded-lg bg-muted/50 p-3"
+                      onClick={() => navigate(`/cafes/${cafe.id}`)}
+                      className="flex items-center justify-between p-4 rounded-lg border bg-card hover:bg-accent/50 cursor-pointer transition-colors group"
                     >
-                      <div className="flex items-center gap-3">
-                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-sm font-bold text-secondary-foreground">
-                          {index + 1}
-                        </span>
-                        <span className="font-medium">{cafe.name}</span>
+                      <div className="flex flex-col gap-1">
+                        <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
+                          {cafe.name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1">
+                          <MapPin className="h-3 w-3" />
+                          {cafe.address}
+                        </p>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className="font-semibold">{Number(cafe.rating).toFixed(1)}</span>
+                      <div className="text-right">
+                        <div className="flex items-center justify-end gap-1 text-yellow-500 font-medium">
+                          <Star className="h-4 w-4 fill-yellow-500" />
+                          {Number(cafe.rating).toFixed(1)}
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          {cafe.review_count} ulasan
+                        </p>
                       </div>
                     </div>
                   ))}
-              </div>
+                </div>
+              </ScrollArea>
             ) : (
-              <p className="py-8 text-center text-muted-foreground">
-                {t('dashboard.no.data')}
-              </p>
+              <div className="text-center py-12 text-muted-foreground">
+                <Coffee className="h-12 w-12 mx-auto mb-3 opacity-20" />
+                <p>Tidak ada kafe yang ditemukan</p>
+              </div>
             )}
           </CardContent>
         </Card>

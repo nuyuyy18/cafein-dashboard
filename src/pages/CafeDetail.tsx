@@ -3,9 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { 
-  ArrowLeft, Star, MapPin, Phone, Clock, Coffee, 
-  Pencil, Trash2, Plus, Upload, X, Save 
+import {
+  ArrowLeft, Star, MapPin, Phone, Clock, Coffee,
+  Pencil, Trash2, Plus, Upload, X, Save
 } from 'lucide-react';
 import { useCafe, useUpdateCafe, useDeleteCafe, useCreateMenu, useDeleteMenu, useUploadCafeImage, useDeleteCafeImage, useCreateReview } from '@/hooks/useCafes';
 import { useAuth } from '@/contexts/AuthContext';
@@ -46,7 +46,7 @@ export default function CafeDetail() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user, isAdmin, isStoreManager } = useAuth();
-  
+
   const { data: cafe, isLoading, refetch } = useCafe(id);
   const updateCafe = useUpdateCafe();
   const deleteCafe = useDeleteCafe();
@@ -91,7 +91,7 @@ export default function CafeDetail() {
 
   const handleSave = async () => {
     if (!id) return;
-    
+
     try {
       await updateCafe.mutateAsync({ id, ...editForm });
       toast({ title: 'Kafe berhasil diperbarui' });
@@ -103,7 +103,7 @@ export default function CafeDetail() {
 
   const handleDelete = async () => {
     if (!id) return;
-    
+
     try {
       await deleteCafe.mutateAsync(id);
       toast({ title: 'Kafe berhasil dihapus' });
@@ -115,10 +115,10 @@ export default function CafeDetail() {
 
   const handleAddMenu = async (data: MenuForm) => {
     if (!id) return;
-    
+
     try {
-      await createMenu.mutateAsync({ 
-        cafe_id: id, 
+      await createMenu.mutateAsync({
+        cafe_id: id,
         name: data.name,
         price: data.price,
         category: data.category,
@@ -134,7 +134,7 @@ export default function CafeDetail() {
 
   const handleDeleteMenu = async (menuId: string) => {
     if (!id) return;
-    
+
     try {
       await deleteMenu.mutateAsync({ id: menuId, cafe_id: id });
       toast({ title: 'Menu berhasil dihapus' });
@@ -145,12 +145,12 @@ export default function CafeDetail() {
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!id || !e.target.files?.[0]) return;
-    
+
     try {
-      await uploadImage.mutateAsync({ 
-        cafe_id: id, 
+      await uploadImage.mutateAsync({
+        cafe_id: id,
         file: e.target.files[0],
-        is_primary: !cafe?.cafe_images?.length 
+        is_primary: !cafe?.cafe_images?.length
       });
       toast({ title: 'Gambar berhasil diunggah' });
     } catch (error) {
@@ -160,7 +160,7 @@ export default function CafeDetail() {
 
   const handleDeleteImage = async (imageId: string, imageUrl: string) => {
     if (!id) return;
-    
+
     try {
       await deleteImage.mutateAsync({ id: imageId, cafe_id: id, image_url: imageUrl });
       toast({ title: 'Gambar berhasil dihapus' });
@@ -171,10 +171,10 @@ export default function CafeDetail() {
 
   const handleAddReview = async (data: ReviewForm) => {
     if (!id || !user) return;
-    
+
     try {
-      await createReview.mutateAsync({ 
-        cafe_id: id, 
+      await createReview.mutateAsync({
+        cafe_id: id,
         user_id: user.id,
         rating: data.rating,
         comment: data.comment || undefined,
@@ -349,7 +349,35 @@ export default function CafeDetail() {
                   )}
                 </div>
               )}
-            </div>
+
+              {/* Operating Hours */}
+              {cafe.operating_hours && cafe.operating_hours.length > 0 && (
+                <div className="mt-4 border-t pt-4">
+                  <h3 className="mb-2 font-semibold flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    Jam Operasional
+                  </h3>
+                  <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                    {[...cafe.operating_hours]
+                      .sort((a, b) => {
+                        // Sort MON(1)..SUN(0) -> MON(1)..SUN(7)
+                        const dayA = a.day_of_week === 0 ? 7 : a.day_of_week;
+                        const dayB = b.day_of_week === 0 ? 7 : b.day_of_week;
+                        return dayA - dayB;
+                      })
+                      .map((hour) => (
+                        <div key={hour.id} className="flex items-center gap-6">
+                          <span className="w-24 font-medium">{DAYS_OF_WEEK[hour.day_of_week]}</span>
+                          <span>
+                            {hour.is_closed
+                              ? 'Tutup'
+                              : `${hour.open_time?.slice(0, 5)} - ${hour.close_time?.slice(0, 5)}`}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              )}            </div>
           </div>
         </CardContent>
       </Card>
@@ -381,6 +409,18 @@ export default function CafeDetail() {
                 <CardTitle>Menu</CardTitle>
                 <CardDescription>Daftar menu yang tersedia</CardDescription>
               </div>
+              {/* Menu Link Button if exists */}
+              {cafe.cafe_menus?.map(m => {
+                if (m.name === 'Link Menu' && m.description) {
+                  return (
+                    <Button key={m.id} variant="outline" className="gap-2" onClick={() => window.open(m.description, '_blank')}>
+                      <p className="font-semibold text-primary">Buka Menu Digital</p>
+                    </Button>
+                  )
+                }
+                return null;
+              })}
+
               {canEdit && (
                 <Dialog open={menuDialogOpen} onOpenChange={setMenuDialogOpen}>
                   <DialogTrigger asChild>
@@ -475,8 +515,22 @@ export default function CafeDetail() {
             <CardContent>
               {Object.keys(groupedMenus).length > 0 ? (
                 <div className="space-y-6">
+                  {/* Display Menu Images First if any */}
+                  {cafe.cafe_images && cafe.cafe_images.length > 0 && (
+                    <div className="mb-6">
+                      <h3 className="mb-3 text-lg font-semibold">Foto Menu</h3>
+                      <div className="flex gap-4 overflow-x-auto pb-4">
+                        {cafe.cafe_images.map(img => (
+                          <div key={img.id} className="relative h-40 w-40 flex-none overflow-hidden rounded-lg border">
+                            <img src={img.image_url} alt="Menu" className="h-full w-full object-cover" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {MENU_CATEGORIES.map((cat) => {
-                    const menus = groupedMenus[cat.value];
+                    const menus = groupedMenus[cat.value]?.filter(m => m.name !== 'Link Menu'); // Filter out the link item
                     if (!menus?.length) return null;
 
                     return (
@@ -516,7 +570,17 @@ export default function CafeDetail() {
                   })}
                 </div>
               ) : (
-                <p className="py-8 text-center text-muted-foreground">Belum ada menu</p>
+                <div className="py-8 text-center text-muted-foreground space-y-4">
+                  <p>Belum ada detail menu terdaftar</p>
+                  {/* If images exist even if no text menu items */}
+                  {cafe.cafe_images && cafe.cafe_images.length > 0 && (
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                      {cafe.cafe_images.map(img => (
+                        <img key={img.id} src={img.image_url} className="rounded-lg border object-cover aspect-square" />
+                      ))}
+                    </div>
+                  )}
+                </div>
               )}
             </CardContent>
           </Card>
@@ -606,11 +670,10 @@ export default function CafeDetail() {
                             {Array.from({ length: 5 }).map((_, i) => (
                               <Star
                                 key={i}
-                                className={`h-4 w-4 ${
-                                  i < review.rating
-                                    ? 'fill-yellow-400 text-yellow-400'
-                                    : 'text-muted-foreground/30'
-                                }`}
+                                className={`h-4 w-4 ${i < review.rating
+                                  ? 'fill-yellow-400 text-yellow-400'
+                                  : 'text-muted-foreground/30'
+                                  }`}
                               />
                             ))}
                           </div>
@@ -622,8 +685,29 @@ export default function CafeDetail() {
                           {new Date(review.created_at).toLocaleDateString('id-ID')}
                         </span>
                       </div>
+                      <div className="mb-2">
+                        {review.profiles ? (
+                          <div className="flex items-center gap-2">
+                            <div className="font-semibold text-sm">{review.profiles.full_name}</div>
+                          </div>
+                        ) : (
+                          // Parsing author name from comment if formatted like "[Author] Comment"
+                          review.comment?.startsWith('[') ? (
+                            <div className="font-semibold text-sm text-muted-foreground">
+                              {review.comment.substring(1, review.comment.indexOf(']'))} (Google User)
+                            </div>
+                          ) : (
+                            <div className="font-semibold text-sm text-muted-foreground">Google User</div>
+                          )
+                        )}
+                      </div>
                       {review.comment && (
-                        <p className="text-muted-foreground">{review.comment}</p>
+                        <p className="text-muted-foreground">
+                          {/* Remove [Author] prefix for display if present */}
+                          {review.comment.startsWith('[')
+                            ? review.comment.substring(review.comment.indexOf(']') + 1).trim()
+                            : review.comment}
+                        </p>
                       )}
                     </div>
                   ))}
@@ -635,25 +719,26 @@ export default function CafeDetail() {
           </Card>
         </TabsContent>
 
-        {/* Images Tab (Edit only) */}
-        {canEdit && (
-          <TabsContent value="images">
-            <Card className="border-0 shadow-card">
-              <CardHeader>
-                <CardTitle>Foto Kafe</CardTitle>
-                <CardDescription>Kelola foto-foto kafe</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4 md:grid-cols-3">
-                  {cafe.cafe_images?.map((image) => (
-                    <div key={image.id} className="group relative">
-                      <AspectRatio ratio={4 / 3}>
-                        <img
-                          src={image.image_url}
-                          alt="Cafe"
-                          className="h-full w-full rounded-lg object-cover"
-                        />
-                      </AspectRatio>
+        {/* Images Tab (Visible to all) */}
+        <TabsContent value="images">
+          <Card className="border-0 shadow-card">
+            <CardHeader>
+              <CardTitle>Foto Kafe</CardTitle>
+              <CardDescription>Galeri foto suasana dan menu</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 md:grid-cols-3">
+                {cafe.cafe_images?.map((image) => (
+                  <div key={image.id} className="group relative">
+                    <AspectRatio ratio={4 / 3}>
+                      <img
+                        src={image.image_url}
+                        alt="Cafe"
+                        loading="lazy"
+                        className="h-full w-full rounded-lg object-cover"
+                      />
+                    </AspectRatio>
+                    {canEdit && (
                       <Button
                         variant="destructive"
                         size="icon"
@@ -662,11 +747,14 @@ export default function CafeDetail() {
                       >
                         <X className="h-4 w-4" />
                       </Button>
-                      {image.is_primary && (
-                        <Badge className="absolute left-2 top-2">Utama</Badge>
-                      )}
-                    </div>
-                  ))}
+                    )}
+                    {image.is_primary && (
+                      <Badge className="absolute left-2 top-2">Utama</Badge>
+                    )}
+                  </div>
+                ))}
+
+                {canEdit && (
                   <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/30 p-8 transition-colors hover:border-primary/50">
                     <Upload className="mb-2 h-8 w-8 text-muted-foreground" />
                     <span className="text-sm text-muted-foreground">Upload foto</span>
@@ -677,11 +765,11 @@ export default function CafeDetail() {
                       onChange={handleImageUpload}
                     />
                   </label>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        )}
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
       </Tabs>
     </div>
   );
