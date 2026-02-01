@@ -14,8 +14,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 
 const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
+  email: z.string().email().trim(),
+  password: z.string().min(6).trim(),
 });
 
 const signupSchema = z.object({
@@ -58,8 +58,11 @@ export default function Login() {
       toast({
         variant: 'destructive',
         title: t('toast.login.failed'),
-        description: t('toast.login.failed.desc'),
+        title: t('toast.login.failed'),
+        description: error.message || t('toast.login.failed.desc'),
+        duration: 5000,
       });
+      console.error('Login error details:', error);
     } else {
       toast({ title: t('toast.login.success') });
       navigate('/dashboard');

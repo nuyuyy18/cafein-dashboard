@@ -1,5 +1,0 @@
-fastapi
-uvicorn
-supabase
-google-search-results
-python-dotenv
