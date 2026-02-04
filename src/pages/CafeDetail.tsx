@@ -578,7 +578,7 @@ export default function CafeDetail() {
                 </div>
               ) : (
                 <div className="py-8 text-center text-muted-foreground space-y-4">
-                  <p>Belum ada detail menu terdaftar</p>
+                  <p>{t('detail.menu.empty')}</p>
                   {/* If images exist even if no text menu items */}
                   {cafe.cafe_images && cafe.cafe_images.length > 0 && (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
