@@ -13,6 +13,13 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 export default function CafeList() {
   const navigate = useNavigate();
+  const { isAdmin, isStoreManager } = useAuth();
+  const { t } = useLanguage();
+
+  const [search, setSearch] = useState('');
+  const [view, setView] = useState<'split' | 'grid' | 'map'>('split');
+  const [hoveredCafeId, setHoveredCafeId] = useState<string | null>(null);
+
   // useCafes now returns { cafes, count } object
   // Pass search state to hook (although we might want to debounce this in a real app, strict mode is fine for now)
   const { data: cafesData, isLoading } = useCafes(0, 1000, search);
