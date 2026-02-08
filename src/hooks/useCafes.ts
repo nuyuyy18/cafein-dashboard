@@ -15,12 +15,22 @@ export function useCafes(page = 0, pageSize = 20, searchQuery = '') {
       let query = supabase
         .from('cafes')
         .select('*', { count: 'exact' })
-        .order('created_at', { ascending: false })
-        .range(from, to);
+        .order('created_at', { ascending: false });
 
-      if (searchQuery) {
-        query = query.or(`name.ilike.%${searchQuery}%,address.ilike.%${searchQuery}%`);
+      // Apply search filter BEFORE pagination
+      // Split search query into words and match each word in name OR address
+      if (searchQuery.trim()) {
+        const words = searchQuery.trim().split(/\s+/).filter(w => w.length > 0);
+
+        // For each word, it must appear in either name OR address
+        // We chain .or() for each word to create an AND of ORs
+        for (const word of words) {
+          query = query.or(`name.ilike.%${word}%,address.ilike.%${word}%`);
+        }
       }
+
+      // Apply pagination
+      query = query.range(from, to);
 
       const { data, error, count } = await query;
 
