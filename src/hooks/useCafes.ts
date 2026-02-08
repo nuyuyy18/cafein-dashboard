@@ -14,7 +14,7 @@ export function useCafes(page = 0, pageSize = 20, searchQuery = '') {
 
       let query = supabase
         .from('cafes')
-        .select('*', { count: 'exact' })
+        .select('*, cafe_images(image_url, is_primary)', { count: 'exact' })
         .order('created_at', { ascending: false });
 
       // Apply search filter BEFORE pagination
@@ -39,7 +39,7 @@ export function useCafes(page = 0, pageSize = 20, searchQuery = '') {
         throw error;
       };
       return {
-        cafes: data as Cafe[],
+        cafes: data as CafeWithDetails[],
         count: count || 0
       };
     },
