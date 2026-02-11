@@ -59,15 +59,79 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Supabase (Backend & Database)
 
 ## How can I deploy this project?
 
+### Deploy to Vercel (Recommended)
+
+This project is pre-configured for deployment to Vercel with [`vercel.json`](vercel.json).
+
+#### Prerequisites
+- A [Vercel account](https://vercel.com/signup)
+- Your Supabase credentials (found in `.env` file)
+
+#### Deployment Steps
+
+1. **Install Vercel CLI** (optional, for command-line deployment)
+   ```sh
+   npm i -g vercel
+   ```
+
+2. **Deploy via Vercel Dashboard** (easiest method)
+   - Go to [vercel.com/new](https://vercel.com/new)
+   - Import your Git repository
+   - Vercel will auto-detect the Vite framework
+   - Click "Deploy"
+
+3. **Configure Environment Variables**
+   
+   After deployment, add these environment variables in Vercel dashboard:
+   - Go to your project → Settings → Environment Variables
+   - Add the following variables (copy values from your `.env` file):
+     - `VITE_SUPABASE_URL`
+     - `VITE_SUPABASE_PUBLISHABLE_KEY`
+     - `VITE_SUPABASE_PROJECT_ID`
+
+4. **Redeploy**
+   - After adding environment variables, trigger a new deployment
+   - Go to Deployments → click "..." → Redeploy
+
+#### Deploy via CLI
+
+```sh
+# Login to Vercel
+vercel login
+
+# Deploy to production
+vercel --prod
+```
+
+When prompted, set environment variables or add them via the Vercel dashboard.
+
+#### Post-Deployment Checklist
+
+- [ ] Application loads without errors
+- [ ] Login/logout functionality works
+- [ ] All routes are accessible
+- [ ] Map displays correctly
+- [ ] Data loads from Supabase
+- [ ] Images display properly
+- [ ] Admin features work (for admin users)
+
+### Deploy via Lovable
+
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
-## Can I connect a custom domain to my Lovable project?
+## Can I connect a custom domain to my project?
 
 Yes, you can!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### For Vercel Deployments
+- Navigate to your Vercel project → Settings → Domains
+- Click "Add Domain" and follow the instructions
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### For Lovable Deployments
+- Navigate to Project > Settings > Domains and click Connect Domain
+- Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
