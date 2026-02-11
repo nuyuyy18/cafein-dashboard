@@ -1,0 +1,10 @@
+playwright
+requests
+fastapi
+uvicorn
+supabase
+python-dotenv
+opencv-python-headless
+numpy
+imagehash
+Pillow
