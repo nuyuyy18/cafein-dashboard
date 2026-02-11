@@ -5,25 +5,25 @@ import type { Cafe, CafeWithDetails, CafeMenu, OperatingHours, CafeImage, Review
 // Fetch all cafes
 // Fetch cafes with pagination
 // Fetch cafes with pagination and search
-export function useCafes(page = 0, pageSize = 20, searchQuery = '') {
+export function useCafes(page = 0, pageSize = 20, searchQuery = '', options = { withImages: false }) {
   return useQuery({
-    queryKey: ['cafes', page, pageSize, searchQuery],
+    queryKey: ['cafes', page, pageSize, searchQuery, options],
     queryFn: async () => {
       const from = page * pageSize;
       const to = from + pageSize - 1;
 
+      let selectQuery = '*';
+      // Remove usage of join in main query
+      // if (options.withImages) { selectQuery += ', cafe_images(image_url, is_primary)'; }
+
       let query = supabase
         .from('cafes')
-        .select('*, cafe_images(image_url, is_primary)', { count: 'exact' })
+        .select(selectQuery, { count: 'exact' })
         .order('created_at', { ascending: false });
 
       // Apply search filter BEFORE pagination
-      // Split search query into words and match each word in name OR address
       if (searchQuery.trim()) {
         const words = searchQuery.trim().split(/\s+/).filter(w => w.length > 0);
-
-        // For each word, it must appear in either name OR address
-        // We chain .or() for each word to create an AND of ORs
         for (const word of words) {
           query = query.or(`name.ilike.%${word}%,address.ilike.%${word}%`);
         }
@@ -32,14 +32,37 @@ export function useCafes(page = 0, pageSize = 20, searchQuery = '') {
       // Apply pagination
       query = query.range(from, to);
 
-      const { data, error, count } = await query;
+      const { data: cafesData, error, count } = await query;
+      const cafes = cafesData as unknown as Cafe[];
 
       if (error) {
         console.error("Error fetching cafes:", error);
         throw error;
       };
+
+      if (!cafes || cafes.length === 0) {
+        return { cafes: [], count: 0 };
+      }
+
+      // Manual join for images if requested
+      let finalCafes = cafes;
+      if (options.withImages) {
+        const cafeIds = cafes.map(c => c.id);
+        const { data: images, error: imgError } = await supabase
+          .from('cafe_images')
+          .select('cafe_id, image_url, is_primary')
+          .in('cafe_id', cafeIds);
+
+        if (!imgError && images) {
+          finalCafes = cafes.map(cafe => ({
+            ...cafe,
+            cafe_images: images.filter(img => img.cafe_id === cafe.id)
+          }));
+        }
+      }
+
       return {
-        cafes: data as CafeWithDetails[],
+        cafes: finalCafes as unknown as CafeWithDetails[],
         count: count || 0
       };
     },

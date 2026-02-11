@@ -21,10 +21,15 @@ export default function CafeList() {
 
   // useCafes now returns { cafes, count } object
   // Pass search state to hook (although we might want to debounce this in a real app, strict mode is fine for now)
-  const { data: cafesData, isLoading } = useCafes(0, 1000, search);
-  const filteredCafes = cafesData?.cafes || [];
+  const { data: listData, isLoading: isLoadingList } = useCafes(0, 20, search, { withImages: true });
+  const { data: mapData, isLoading: isLoadingMap } = useCafes(0, 1000, search, { withImages: false });
 
-  const mapMarkers = filteredCafes
+  const filteredCafes = listData?.cafes || [];
+  const mapCafes = mapData?.cafes || [];
+  // Use mapData count as it fetches all items (or at least more) and is lightweight
+  const totalCount = mapData?.count || 0;
+
+  const mapMarkers = mapCafes
     .filter(cafe => cafe.latitude && cafe.longitude)
     .map(cafe => ({
       id: cafe.id,
@@ -35,6 +40,7 @@ export default function CafeList() {
     }));
 
   const canAddCafe = isAdmin || isStoreManager;
+  const isLoading = isLoadingList || isLoadingMap;
 
   return (
     <div className="h-full animate-fade-in">
@@ -43,7 +49,7 @@ export default function CafeList() {
         <div>
           <h1 className="text-3xl font-bold text-foreground">{t('cafelist.title')}</h1>
           <p className="mt-1 text-muted-foreground">
-            {t('cafelist.found', { count: filteredCafes.length })}
+            {t('cafelist.found', { count: totalCount })}
           </p>
         </div>
 
