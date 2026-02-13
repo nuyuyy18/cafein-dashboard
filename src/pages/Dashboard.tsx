@@ -82,7 +82,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="space-y-8 animate-fade-in pb-10">
+    <div className="space-y-8 animate-fade-in pb-10 overflow-x-hidden">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-foreground">
@@ -220,7 +220,7 @@ export default function Dashboard() {
                   </div>
 
                   {/* Pagination Controls - Sticky Bottom */}
-                  <div className="sticky bottom-0 left-0 right-0 bg-card py-4 border-t flex items-center justify-between z-10">
+                  <div className="sticky bottom-0 left-0 right-0 bg-card py-2 border-t flex items-center justify-between z-10">
                     <p className="text-sm text-muted-foreground">
                       Halaman {page + 1} dari {Math.ceil((cafesResponse?.count || 0) / PAGE_SIZE)}
                     </p>
