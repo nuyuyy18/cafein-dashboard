@@ -154,8 +154,8 @@ export default function Dashboard() {
               </div>
             ) : filteredCafes.length > 0 ? (
               <>
-                <ScrollArea className="h-[600px] pr-4">
-                  <div className="space-y-3">
+                <ScrollArea className="h-[600px] pr-4 overflow-x-hidden">
+                  <div className="space-y-3 pb-20">
                     {filteredCafes.map((cafe) => {
                       const primaryImage = cafe.cafe_images?.find((img) => img.is_primary) || cafe.cafe_images?.[0];
                       const imageUrl = primaryImage?.image_url || 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=300&fit=crop';
@@ -218,31 +218,32 @@ export default function Dashboard() {
                       );
                     })}
                   </div>
-                </ScrollArea>
-                {/* Pagination Controls */}
-                <div className="flex items-center justify-between pt-4 border-t mt-4">
-                  <p className="text-sm text-muted-foreground">
-                    Halaman {page + 1} dari {Math.ceil((cafesResponse?.count || 0) / PAGE_SIZE)}
-                  </p>
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setPage(Math.max(0, page - 1))}
-                      disabled={page === 0}
-                    >
-                      Sebelumnya
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setPage(page + 1)}
-                      disabled={(page + 1) * PAGE_SIZE >= (cafesResponse?.count || 0)}
-                    >
-                      Selanjutnya
-                    </Button>
+
+                  {/* Pagination Controls - Sticky Bottom */}
+                  <div className="sticky bottom-0 left-0 right-0 bg-card py-4 border-t flex items-center justify-between z-10">
+                    <p className="text-sm text-muted-foreground">
+                      Halaman {page + 1} dari {Math.ceil((cafesResponse?.count || 0) / PAGE_SIZE)}
+                    </p>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setPage(Math.max(0, page - 1))}
+                        disabled={page === 0}
+                      >
+                        Sebelumnya
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setPage(page + 1)}
+                        disabled={(page + 1) * PAGE_SIZE >= (cafesResponse?.count || 0)}
+                      >
+                        Selanjutnya
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                </ScrollArea>
               </>
             ) : (
               <div className="text-center py-12 text-muted-foreground">
