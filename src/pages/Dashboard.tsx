@@ -21,7 +21,7 @@ export default function Dashboard() {
   const searchQuery = searchParams.get('q') || '';
 
   const { data: stats, isLoading: statsLoading } = useDashboardStats();
-  const { data: cafesResponse, isLoading: cafesLoading } = useCafes(page, PAGE_SIZE, searchQuery);
+  const { data: cafesResponse, isLoading: cafesLoading } = useCafes(page, PAGE_SIZE, searchQuery, { withImages: true });
   const cafes = cafesResponse?.cafes || [];
 
   const { t } = useLanguage();
@@ -156,32 +156,67 @@ export default function Dashboard() {
               <>
                 <ScrollArea className="h-[600px] pr-4">
                   <div className="space-y-3">
-                    {filteredCafes.map((cafe) => (
-                      <div
-                        key={cafe.id}
-                        onClick={() => navigate(`/cafes/${cafe.id}`)}
-                        className="flex items-center justify-between p-4 rounded-lg border bg-card hover:bg-accent/50 cursor-pointer transition-colors group"
-                      >
-                        <div className="flex flex-col gap-1">
-                          <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
-                            {cafe.name}
-                          </h3>
-                          <p className="text-sm text-muted-foreground flex items-center gap-1">
-                            <MapPin className="h-3 w-3" />
-                            {cafe.address}
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <div className="flex items-center justify-end gap-1 text-yellow-500 font-medium">
-                            <Star className="h-4 w-4 fill-yellow-500" />
-                            {Number(cafe.rating).toFixed(1)}
+                    {filteredCafes.map((cafe) => {
+                      const primaryImage = cafe.cafe_images?.find((img) => img.is_primary) || cafe.cafe_images?.[0];
+                      const imageUrl = primaryImage?.image_url || 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=300&fit=crop';
+
+                      return (
+                        <div
+                          key={cafe.id}
+                          onClick={() => navigate(`/cafes/${cafe.id}`)}
+                          className="flex gap-4 p-4 rounded-lg border bg-card hover:bg-accent/50 cursor-pointer transition-colors group"
+                        >
+                          {/* Image Section - Fixed size like Google Maps */}
+                          <div className="w-[100px] h-[100px] shrink-0 overflow-hidden rounded-md">
+                            <img
+                              src={imageUrl}
+                              alt={cafe.name}
+                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
                           </div>
-                          <p className="text-xs text-muted-foreground mt-1">
-                            {cafe.review_count} ulasan
-                          </p>
+
+                          {/* Content Section */}
+                          <div className="flex flex-col justify-between flex-1 min-w-0">
+                            <div className="flex justify-between items-start gap-2">
+                              <h3 className="font-semibold text-lg truncate group-hover:text-primary transition-colors">
+                                {cafe.name}
+                              </h3>
+                              {cafe.is_active === false && (
+                                <span className="text-xs font-medium text-destructive whitespace-nowrap">Tutup</span>
+                              )}
+                            </div>
+
+                            <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+                              <div className="flex items-center gap-2 text-sm">
+                                <div className="flex items-center font-medium text-foreground">
+                                  <span className="text-yellow-500 mr-1">{Number(cafe.rating).toFixed(1)}</span>
+                                  <div className="flex">
+                                    {[1, 2, 3, 4, 5].map((star) => (
+                                      <Star
+                                        key={star}
+                                        className={`h-3 w-3 ${star <= Math.round(Number(cafe.rating)) ? 'fill-yellow-400 text-yellow-400' : 'fill-muted text-muted'}`}
+                                      />
+                                    ))}
+                                  </div>
+                                  <span className="text-muted-foreground ml-1 font-normal">({cafe.review_count})</span>
+                                </div>
+                              </div>
+
+                              <div className="flex items-center gap-2 text-sm">
+                                <span>Cafe</span>
+                                <span>•</span>
+                                <span>Rp 15.000 - Rp 50.000</span>
+                              </div>
+
+                              <div className="flex items-center gap-1 text-sm truncate">
+                                <MapPin className="h-3 w-3 shrink-0" />
+                                <span className="truncate">{cafe.address}</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </ScrollArea>
                 {/* Pagination Controls */}
