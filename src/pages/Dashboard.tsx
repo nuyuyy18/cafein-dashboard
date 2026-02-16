@@ -8,7 +8,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import type { Cafe } from '@/types/database';
 
 export default function Dashboard() {
@@ -145,7 +144,7 @@ export default function Dashboard() {
               </div>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6 pt-0 pb-0">
             {cafesLoading ? (
               <div className="space-y-4">
                 {[1, 2, 3, 4, 5].map((i) => (
@@ -153,8 +152,8 @@ export default function Dashboard() {
                 ))}
               </div>
             ) : filteredCafes.length > 0 ? (
-              <div className="space-y-0">
-                <ScrollArea className="h-[540px]">
+              <div>
+                <div className="h-[540px] overflow-y-auto overflow-x-hidden">
                   <div className="space-y-3 pr-4">
                     {filteredCafes.map((cafe) => {
                       const primaryImage = cafe.cafe_images?.find((img) => img.is_primary) || cafe.cafe_images?.[0];
@@ -218,10 +217,10 @@ export default function Dashboard() {
                       );
                     })}
                   </div>
-                </ScrollArea>
+                </div>
 
-                {/* Pagination Controls - Outside ScrollArea */}
-                <div className="bg-card pt-3 border-t flex items-center justify-between">
+                {/* Pagination Controls */}
+                <div className="bg-card pt-3 pb-0 border-t flex items-center justify-between mt-0">
                   <p className="text-sm text-muted-foreground">
                     Halaman {page + 1} dari {Math.ceil((cafesResponse?.count || 0) / PAGE_SIZE)}
                   </p>
