@@ -162,21 +162,41 @@ class CafeScraper:
             self.page.keyboard.press("PageDown")
             time.sleep(1)
             
+            allowed_keywords = ['menu', 'kopi', 'coffee', 'cafe', 'kafe', 'makanan', 'minuman', 'food', 'drink', 'beverage', 'latte', 'espresso', 'cake', 'roast', 'brew']
             elements = self.page.locator("img, div[style*='background-image']").all()
             for el in elements:
                 if len(image_urls) > 30: break
                 src = ""
+                alt_text = ""
                 try:
                     tagName = el.evaluate("el => el.tagName")
                     if tagName == "IMG":
                         src = el.get_attribute("src")
+                        alt_attr = el.get_attribute("alt") or ""
+                        aria_attr = el.get_attribute("aria-label") or ""
+                        alt_text = f"{alt_attr} {aria_attr}".lower()
                     elif tagName == "DIV":
                         style = el.get_attribute("style")
                         if "url(" in style:
                             src = style.split('url("')[1].split('")')[0]
+                        alt_text = (el.get_attribute("aria-label") or "").lower()
                 except: continue
                 
-                if src and "googleusercontent.com" in src:
+                # Filtering logic: require related keywords.
+                # If no meaningful alt text, only add if we have very few images.
+                is_valid = False
+                if any(kw in alt_text for kw in allowed_keywords):
+                    is_valid = True
+                elif not alt_text.strip() or alt_text.strip() in ["image", "photo", "foto", "gambar"]:
+                    # only keep unknown images if we are desperate (less than 5 images found)
+                    if len(image_urls) < 5:
+                        is_valid = True
+                else:
+                    # check if the text contains general words related to eating/drinking 
+                    if "restaurant" in alt_text or "resto" in alt_text:
+                        is_valid = True
+                        
+                if src and "googleusercontent.com" in src and is_valid:
                     hd = self.get_hd_image_url(src)
                     image_urls.add(hd)
             
@@ -273,9 +293,10 @@ class CafeScraper:
             address = task.get('address', '')
             region_file = self.determine_region_file(address)
             
-            if self.already_exists(name, region_file):
-                print(f"[{i+1}] SKIP: {name}")
-                continue
+            # Force update, bypass SKIP logic:
+            # if self.already_exists(name, region_file):
+            #     print(f"[{i+1}] SKIP: {name}")
+            #     continue
                 
             print(f"\n[{i+1}] Processing: {name}")
             data = self.scrape_direct(name, address)
@@ -287,12 +308,17 @@ class CafeScraper:
                         current = json.load(f)
                 else: current = []
                 
-                if not any(d.get('name') == data.get('name') for d in current):
+                existing_idx = next((index for index, d in enumerate(current) if d.get('name') == data.get('name')), None)
+                if existing_idx is not None:
+                    current[existing_idx] = data
+                    print(f"  💾 Updated {name} in {region_file}")
+                else:
                     current.append(data)
-                    with open(region_file, 'w', encoding='utf-8') as f:
-                        json.dump(current, f, indent=4, ensure_ascii=False)
-                    print(f"  💾 Saved to {region_file}")
-                    added += 1
+                    print(f"  💾 Saved new {name} to {region_file}")
+                
+                with open(region_file, 'w', encoding='utf-8') as f:
+                    json.dump(current, f, indent=4, ensure_ascii=False)
+                added += 1
             else:
                 print("  ✗ Not found")
             time.sleep(1)
