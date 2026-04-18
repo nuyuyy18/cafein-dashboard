@@ -393,14 +393,13 @@ class CafeScraper:
             # Expand "More" buttons safely using JS
             print("      Expanding long reviews...")
             self.page.evaluate("""
-                document.querySelectorAll('button.w8nwRe.kyuRq').forEach(btn => {
-                    const label = btn.getAttribute('aria-label') || '';
-                    if (label.includes('More') || label.includes('Lainnya') || btn.innerText.includes('More')) {
+                document.querySelectorAll('button.w8oYf, span.w8oYf, button.w8nwRe.kyuRq').forEach(btn => {
+                    if (btn.innerText.includes('More') || btn.innerText.includes('Lainnya') || btn.getAttribute('aria-label')?.includes('More')) {
                         btn.click();
                     }
                 });
             """)
-            time.sleep(1)
+            time.sleep(1.5)
 
             review_blocks = self.page.locator("div.jftiEf").all()
             for i, block in enumerate(review_blocks):
@@ -411,17 +410,15 @@ class CafeScraper:
                     if block.locator(".d4r55").count() > 0:
                         author = block.locator(".d4r55").first.inner_text()
                     
-                    # Rating - Extracting from aria-label of kvMYIc
+                    # Rating - Trying multiple confirmed Maps classes
                     rating = "N/A"
-                    stars_el = block.locator("span.kvMYIc").first
-                    if stars_el.count() == 0:
-                        stars_el = block.locator("span.kvMY6c").first # Fallback
-                    
-                    if stars_el.count() > 0:
-                        rating_aria = stars_el.get_attribute("aria-label")
-                        if rating_aria:
-                            # Matches "5 stars" or "4.6"
-                            rating = rating_aria.split()[0]
+                    for cls in ["span.kvqyne", "span.kvMYIc", "span.kvMY6c"]:
+                        stars_el = block.locator(cls).first
+                        if stars_el.count() > 0:
+                            rating_aria = stars_el.get_attribute("aria-label")
+                            if rating_aria:
+                                rating = rating_aria.split()[0]
+                                break
                     
                     # Text
                     text = ""
