@@ -151,22 +151,19 @@ class CafeScraper:
             return f"{url.split('=')[0]}=s0"
         return url
 
-    def _scroll_gallery_panel(self, rounds=15):
-        """Scroll the left thumbnail panel in the photo gallery using JS on the scrollable container."""
+    def _scroll_gallery_panel(self, rounds=8):
+        """Scroll the thumbnail panel in the photo gallery. Uses JS on the known container class."""
         try:
-            # The gallery thumbnail grid live in a scrollable div - typically .m6QErb.DxyBCb or similar
-            # We hover the mouse over the left panel (about x=275, y=400) then wheel-scroll it
-            self.page.mouse.move(275, 400)
-            for _ in range(rounds):
-                self.page.mouse.wheel(0, 1500)
-                time.sleep(0.35)
-            # Also try JS scroll on the known gallery scroll containers
-            for selector in [".m6QErb.DxyBCb", ".m6QErb[role='main']", ".m6QErb"]:
-                try:
-                    containers = self.page.locator(selector).all()
-                    for container in containers:
-                        self.page.evaluate("(el) => el.scrollTop += 15000", container.element_handle())
-                except: pass
+            # Key container: div.m6QErb.DxyBCb — confirmed scrollHeight ~9261 for Tomoro Coffee
+            for scroll_js in [
+                "document.querySelector('.m6QErb.DxyBCb') && (document.querySelector('.m6QErb.DxyBCb').scrollTop += 3000)",
+                "document.querySelector('.m6QErb.DxyBCb.kA9KIf') && (document.querySelector('.m6QErb.DxyBCb.kA9KIf').scrollTop += 3000)",
+            ]:
+                for _ in range(rounds):
+                    try:
+                        self.page.evaluate(scroll_js)
+                        time.sleep(0.4)
+                    except: pass
         except Exception as e:
             print(f"      scroll warning: {e}")
 
@@ -195,26 +192,29 @@ class CafeScraper:
 
     def _open_gallery_and_get_all(self):
         """
-        Opens the photo gallery from the main banner button and returns
-        a dict: { 'all': set_of_image_urls, 'menu': set_of_menu_image_urls }
+        Opens the photo gallery and returns:
+        { 'all': set_of_cafe_photo_urls, 'menu': set_of_menu_photo_urls }
         """
         result = {'all': set(), 'menu': set()}
         try:
-            # The main photo banner button uses class aoRNLd
             photo_btn = self.page.locator("button.aoRNLd").first
             if photo_btn.count() == 0:
-                print("      No gallery button found - using fallback thumbnails")
-                # Fallback: collect thumbnails from the overview panel
+                print("      No gallery button — using fallback")
                 result['all'].update(self._extract_images_from_dom())
                 return result
 
             photo_btn.click(timeout=10000)
-            time.sleep(3)
 
-            # Close any sign-in/login modal
+            # Wait for gallery chips to appear (confirms gallery is open)
             try:
-                for close_sel in ["button[aria-label='Close']", "button[aria-label='Tutup']",
-                                  "button.Cwoqlf", "[data-mdc-dialog-action='close'] button"]:
+                self.page.wait_for_selector("button.hh2c6", timeout=8000)
+            except:
+                print("      Gallery chips not found — may still have images")
+            time.sleep(1)
+
+            # Close any login modal
+            try:
+                for close_sel in ["button.Cwoqlf", "button[aria-label='Close']", "button[aria-label='Tutup']"]:
                     c = self.page.locator(close_sel)
                     if c.count() > 0:
                         c.first.click(timeout=2000)
@@ -222,7 +222,7 @@ class CafeScraper:
                         break
             except: pass
 
-            # Read gallery chips: Semua, Menu, Video, Makanan & minuman, Suasana, etc.
+            # Read chips
             chips = self.page.locator("button.hh2c6").all()
             chip_texts = []
             menu_chip = None
