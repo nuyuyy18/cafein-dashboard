@@ -151,19 +151,29 @@ class CafeScraper:
             return f"{url.split('=')[0]}=s0"
         return url
 
-    def _scroll_gallery_panel(self, rounds=8):
-        """Scroll the thumbnail panel in the photo gallery. Uses JS on the known container class."""
+    def _scroll_gallery_panel(self, max_scrolls=60):
+        """Scroll the thumbnail panel until no more content is added or max reached."""
         try:
-            # Key container: div.m6QErb.DxyBCb — confirmed scrollHeight ~9261 for Tomoro Coffee
-            for scroll_js in [
-                "document.querySelector('.m6QErb.DxyBCb') && (document.querySelector('.m6QErb.DxyBCb').scrollTop += 3000)",
-                "document.querySelector('.m6QErb.DxyBCb.kA9KIf') && (document.querySelector('.m6QErb.DxyBCb.kA9KIf').scrollTop += 3000)",
-            ]:
-                for _ in range(rounds):
-                    try:
-                        self.page.evaluate(scroll_js)
-                        time.sleep(0.4)
-                    except: pass
+            selector = '.m6QErb.DxyBCb'
+            last_count = 0
+            no_change_count = 0
+            
+            for i in range(max_scrolls):
+                # Scroll
+                self.page.evaluate(f"document.querySelector('{selector}').scrollTop += 5000")
+                time.sleep(1.2) # Increased sleep for slow network
+                
+                # Check for new items
+                current_count = self.page.locator(f"{selector} div[style*='background-image']").count()
+                if current_count == last_count:
+                    no_change_count += 1
+                    if no_change_count >= 5: break # Be more patient (5 scrolls)
+                else:
+                    no_change_count = 0
+                last_count = current_count
+                
+                if (i+1) % 5 == 0:
+                    print(f"      Scrolled {i+1} times, found {current_count} tiles...")
         except Exception as e:
             print(f"      scroll warning: {e}")
 
@@ -235,18 +245,30 @@ class CafeScraper:
                 except: pass
             print(f"      Gallery chips: {chip_texts}")
 
-            # --- Step 1: Collect ALL cafe photos (default 'Semua'/'All' chip) ---
-            self._scroll_gallery_panel(rounds=20)
+            # --- Step 1: Collect ALL cafe photos ---
+            self._scroll_gallery_panel(max_scrolls=40)
             result['all'].update(self._extract_images_from_dom())
-            print(f"      [Gallery All] {len(result['all'])} images")
+            print(f"      [Gallery All] Final: {len(result['all'])} images")
 
-            # --- Step 2: Click 'Menu' chip for menu photos ---
-            if menu_chip:
-                menu_chip.click(timeout=3000)
-                time.sleep(2)
-                self._scroll_gallery_panel(rounds=15)
-                result['menu'].update(self._extract_images_from_dom())
-                print(f"      [Gallery Menu chip] {len(result['menu'])} images")
+            # --- Step 2: Collect Menu & Food photos ---
+            menu_related_chips = []
+            for c in chips:
+                try:
+                    t = c.inner_text().strip().lower()
+                    if any(x in t for x in ('menu', 'food', 'makanan', 'minuman', 'drink')):
+                        menu_related_chips.append(c)
+                except: pass
+            
+            print(f"      Found {len(menu_related_chips)} menu-related chips.")
+            for chip in menu_related_chips:
+                try:
+                    chip.click(timeout=3000)
+                    time.sleep(2)
+                    self._scroll_gallery_panel(max_scrolls=20)
+                    chunk = self._extract_images_from_dom()
+                    result['menu'].update(chunk)
+                    print(f"      [Gallery Menu-Related] Current menu total: {len(result['menu'])} images")
+                except: pass
 
             # Close gallery
             self.page.keyboard.press("Escape")
@@ -344,22 +366,75 @@ class CafeScraper:
         try:
             # Click reviews tab
             tabs = self.page.locator("button.hh2c6").all()
+            found_tab = False
             for tab in tabs:
-                if "Review" in tab.inner_text() or "Ulasan" in tab.inner_text():
+                text = tab.inner_text().lower()
+                if "review" in text or "ulasan" in text:
                     tab.click()
                     time.sleep(2)
+                    found_tab = True
                     break
             
+            if not found_tab:
+                # Fallback role-based selector
+                rev_tab = self.page.locator('button[role="tab"][aria-label*="Review"], button[role="tab"][aria-label*="Ulasan"]').first
+                if rev_tab.count() > 0:
+                    rev_tab.click()
+                    time.sleep(2)
+
+            # Scroll to load more reviews
+            print("      Scrolling reviews...")
+            for i in range(8):
+                self.page.evaluate("document.querySelector('.m6QErb.DxyBCb').scrollTop += 3000")
+                time.sleep(1.5)
+                if (i+1) % 4 == 0:
+                    print(f"      Review scroll {i+1}...")
+
+            # Expand "More" buttons safely using JS
+            print("      Expanding long reviews...")
+            self.page.evaluate("""
+                document.querySelectorAll('button.w8nwRe.kyuRq').forEach(btn => {
+                    const label = btn.getAttribute('aria-label') || '';
+                    if (label.includes('More') || label.includes('Lainnya') || btn.innerText.includes('More')) {
+                        btn.click();
+                    }
+                });
+            """)
+            time.sleep(1)
+
             review_blocks = self.page.locator("div.jftiEf").all()
             for i, block in enumerate(review_blocks):
-                if i >= 5: break
+                if i >= 10: break # Get top 10 reviews
                 try:
+                    # Author
+                    author = "N/A"
+                    if block.locator(".d4r55").count() > 0:
+                        author = block.locator(".d4r55").first.inner_text()
+                    
+                    # Rating - Extracting from aria-label of kvMYIc
+                    rating = "N/A"
+                    stars_el = block.locator("span.kvMYIc").first
+                    if stars_el.count() == 0:
+                        stars_el = block.locator("span.kvMY6c").first # Fallback
+                    
+                    if stars_el.count() > 0:
+                        rating_aria = stars_el.get_attribute("aria-label")
+                        if rating_aria:
+                            # Matches "5 stars" or "4.6"
+                            rating = rating_aria.split()[0]
+                    
+                    # Text
+                    text = ""
+                    if block.locator(".wiI7pd").count() > 0:
+                        text = block.locator(".wiI7pd").first.inner_text()
+                    
                     reviews.append({
-                        "author": block.locator(".d4r55").inner_text(),
-                        "rating": block.locator(".kvMYJc").get_attribute("aria-label"),
-                        "text": block.locator(".wiI7pd").inner_text()
+                        "author": author,
+                        "rating": rating,
+                        "text": text
                     })
                 except: continue
+            print(f"      Scraped {len(reviews)} reviews.")
         except Exception as e:
             print(f"      ERROR reviews: {e}")
         return reviews
