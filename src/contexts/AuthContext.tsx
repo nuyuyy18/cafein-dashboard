@@ -104,11 +104,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-    if (error) console.error('Supabase login error:', error);
+    
+    if (error) {
+      console.error('Supabase login error:', error);
+    } else if (data.session) {
+      // Set state synchronously to prevent race condition before navigate() is called
+      setSession(data.session);
+      setUser(data.user);
+    }
+    
     return { error };
   };
 

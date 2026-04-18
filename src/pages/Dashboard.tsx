@@ -81,7 +81,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="space-y-8 animate-fade-in pb-10 overflow-hidden">
+    <div className="space-y-8 animate-fade-in pb-4 min-w-0 overflow-x-hidden">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-foreground">
@@ -123,21 +123,21 @@ export default function Dashboard() {
       </div>
 
       {/* Cafe List Section */}
-      <div className="grid gap-6">
-        <Card className="border-0 shadow-card">
+      <div className="grid gap-6 min-w-0">
+        <Card className="border-0 shadow-card min-w-0 overflow-hidden">
           <CardHeader>
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <CardTitle className="text-xl">Daftar Kafe</CardTitle>
-                <CardDescription>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 min-w-0">
+              <div className="min-w-0 flex-1">
+                <CardTitle className="text-xl truncate">Daftar Kafe</CardTitle>
+                <CardDescription className="truncate">
                   Menampilkan {cafes.length > 0 ? (page * PAGE_SIZE + 1) : 0} - {Math.min((page + 1) * PAGE_SIZE, cafesResponse?.count || 0)} dari total {cafesResponse?.count || 0} kafe
                 </CardDescription>
               </div>
-              <div className="relative w-full md:w-72">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+              <div className="relative w-full md:w-64 shrink-0">
+                <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Cari nama atau daerah..."
-                  className="pl-8"
+                  className="pl-9 w-full"
                   value={searchQuery}
                   onChange={(e) => updateSearch(e.target.value)}
                 />
@@ -152,9 +152,9 @@ export default function Dashboard() {
                 ))}
               </div>
             ) : filteredCafes.length > 0 ? (
-              <div>
-                <div className="h-[540px] overflow-y-auto overflow-x-hidden">
-                  <div className="space-y-3 pr-4">
+              <div className="flex flex-col h-full min-w-0">
+                <div className="flex-1 min-w-0">
+                  <div className="space-y-3 min-w-0">
                     {filteredCafes.map((cafe) => {
                       const primaryImage = cafe.cafe_images?.find((img) => img.is_primary) || cafe.cafe_images?.[0];
                       const imageUrl = primaryImage?.image_url || 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=300&fit=crop';
@@ -163,7 +163,7 @@ export default function Dashboard() {
                         <div
                           key={cafe.id}
                           onClick={() => navigate(`/cafes/${cafe.id}`)}
-                          className="flex gap-4 p-4 rounded-lg border bg-card hover:bg-accent/50 cursor-pointer transition-colors group"
+                          className="flex gap-4 p-4 rounded-lg border bg-card hover:bg-accent/50 cursor-pointer transition-colors group min-w-0"
                         >
                           {/* Image Section - Fixed size like Google Maps */}
                           <div className="w-[100px] h-[100px] shrink-0 overflow-hidden rounded-md">
@@ -171,12 +171,13 @@ export default function Dashboard() {
                               src={imageUrl}
                               alt={cafe.name}
                               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                              referrerPolicy="no-referrer"
                             />
                           </div>
 
                           {/* Content Section */}
                           <div className="flex flex-col justify-between flex-1 min-w-0">
-                            <div className="flex justify-between items-start gap-2">
+                            <div className="flex justify-between items-start gap-2 min-w-0">
                               <h3 className="font-semibold text-lg truncate group-hover:text-primary transition-colors">
                                 {cafe.name}
                               </h3>
@@ -185,7 +186,7 @@ export default function Dashboard() {
                               )}
                             </div>
 
-                            <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+                            <div className="flex flex-col gap-1 text-sm text-muted-foreground min-w-0">
                               <div className="flex items-center gap-2 text-sm">
                                 <div className="flex items-center font-medium text-foreground">
                                   <span className="text-yellow-500 mr-1">{Number(cafe.rating).toFixed(1)}</span>
@@ -207,7 +208,7 @@ export default function Dashboard() {
                                 <span>Rp 15.000 - Rp 50.000</span>
                               </div>
 
-                              <div className="flex items-center gap-1 text-sm truncate">
+                              <div className="flex items-center gap-1 text-sm min-w-0">
                                 <MapPin className="h-3 w-3 shrink-0" />
                                 <span className="truncate">{cafe.address}</span>
                               </div>
@@ -220,7 +221,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Pagination Controls */}
-                <div className="bg-card pt-3 pb-0 border-t flex items-center justify-between mt-0">
+                <div className="bg-card pt-4 pb-4 border-t flex items-center justify-between mt-4">
                   <p className="text-sm text-muted-foreground">
                     Halaman {page + 1} dari {Math.ceil((cafesResponse?.count || 0) / PAGE_SIZE)}
                   </p>

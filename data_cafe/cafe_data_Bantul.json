@@ -3,56 +3,30 @@
         "name": "Ekstens Coffee & Space",
         "address": "Jl. Raya Janti No.486, Wonocatur, Banguntapan, Kec. Banguntapan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55198",
         "rating": "4.6",
-        "reviews_count": "2,933",
+        "reviews_count": "2,942",
         "category": "Coffee shop",
         "phone": "0812-2867-9090",
-        "link": "https://www.google.com/maps/place/Ekstens+Coffee+%26+Space/@-7.7989883,110.4093046,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5726d8d1f28d:0xd7c5127a4bd6008f!8m2!3d-7.7989883!4d110.4093046!16s%2Fg%2F11hf692xpb?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Ekstens+Coffee+%26+Space/@-7.7989883,110.4093046,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5726d8d1f28d:0xd7c5127a4bd6008f!8m2!3d-7.7989883!4d110.4093046!16s%2Fg%2F11hf692xpb?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday8.00 am–12.00 am",
-            "Sunday(Easter)8.00 am–12.00 am Hours might differ",
+            "Sunday8.00 am–12.00 am",
             "Monday8.00 am–12.00 am",
             "Tuesday8.00 am–12.00 am",
             "Wednesday8.00 am–12.00 am",
             "Thursday8.00 am–12.00 am",
             "Friday8.00 am–12.00 am"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEcOnHmrYUPtI9QzVc2SVeoW_uJgTvlld-A6JdYkmJp9j_zxDYjWd3HJ5A3DFSDptxFQxIImDGBjiKUObH5sSs87qWeJB8QO_v1larIAU2GfJpdiL6uYCPoqSaaipzAYdC4ZZ-_ubD2kwGo=s0",
+            "//lh3.googleusercontent.com/a/ACg8ocIfOvh4PI4R145s5WskFakuN8m587Hcd-G51vVh7Tttv7a6wA=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipPMOYHvD1mWTykBt0USYFpOtjP_xItPZF33lmOz=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEFJzA3KYD3E6hRyp710wk_mc7krRt5VLsOiN5DIBXs9hK2dYfbPfmyBV9EVTOjTR6cqIPlzmcb3nMaM8Qdsx7yOKO5YRb7cjmxDh53Uat8tTORP25nYZUPza48K6QsuUb4tocJ_g=s0"
+        ],
         "menu": {
             "link": null,
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepQoTUw-7mSBll9u04ZGf3qdpDHGU0p5lh6SQqHr3eXQGwfk-lMXwzcU6aDEL84ZLGLNo4w7VR2A1pLl8E18RLrvowGScL1tetA5aBhMXnU_aTwU4UiMnAlf4YOXOTQLkgZXLec=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepgJCfNseYAiB_jA1GBYwLUscODkvMG4sRVNMq0sXfCMm09Y9-tb0JH5BN9GIfJhAUN_qa7r4NJBPkthmhha9JIJipOpIVVqHP8T29mUHI2Yb6Z57m4nSEgBlcIV_s8Im2fkPQ=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepTNmNDXmbZrzW_7KIZ_EAnVM2DIQRRt1nR79G7dnEwW3MXLn3edxwkrHmAVU8CKQs_GhZMCmA45eBCuJlzJSCJ3dDw0z6yvUYQZC2zsW4xYdnFQhNUMM3wNGvOtXqLJxrC9lgJ5Q=s0",
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9pvlfAoc_cGQPCl2nTfx3AAQf61FsxqVKAxcv_QroE0DcSZ7xfaVr3pIPc_8on-C1f82usdpRFfAFFnNftZMF08irz9fBchPgJluD4XYB6OI64lMHA7MeCSNhSM0Qz8gE4N2xEJcVuMU0YkL=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepj7wo4QkTyWisFOZJuUIlnqkdZEh0EM7AFdp5ZiOfyDy9JguA5wSKl1MTrrakxhzYkyAJZs_PraPG9QvdDt5nrvbIDERKUEPUTodPWALQUid23eL4QRWt-qpuzt2n3BGyjWmaaC0iahl0=s0"
-            ]
+            "images": []
         },
-        "customer_reviews": [
-            {
-                "author": "Ricky",
-                "rating": "5 stars",
-                "text": "The place is quite spacious with plenty of tables, both indoor and outdoor, and they even have a dedicated working space and meeting room for rent. The only downside during my visit was the number of insects in the outdoor area, which made …"
-            },
-            {
-                "author": "블루",
-                "rating": "5 stars",
-                "text": "cozy vibes, good ambience, friendly and good service... has proper mushola and the toilet is super clean.. definitely going to be my go to place for hanging out"
-            },
-            {
-                "author": "Firin Homebaking",
-                "rating": "4 stars",
-                "text": "The place is cozy enough for chilling, but the food and the drink could be more better taste  impproved or cooked. Overalla excellent service and good atmosphere 🥰 …"
-            },
-            {
-                "author": "Faris",
-                "rating": "5 stars",
-                "text": "Location: Small signage. Hard to spot from moving vehicle but accurate on google maps. …"
-            },
-            {
-                "author": "walkingtourbin",
-                "rating": "4 stars",
-                "text": "Foods were delicious. The ambience of this coffee shop is quite beautiful. It had mixed vibes between traditional and modern. There were some flies in the garden space areas. I hope maybe next time they could prepare some candles on the table. The location is very close to JEC and the city centre."
-            }
-        ]
+        "customer_reviews": []
     },
     {
         "name": "Bawana Cafe & Eatery",
@@ -61,25 +35,44 @@
         "reviews_count": "209",
         "category": "Restaurant",
         "phone": "0821-3677-0970",
-        "link": "https://www.google.com/maps/place/Bawana+Cafe+%26+Eatery/@-7.7941088,110.4074862,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a57cdf7f05309:0xd4adc2cded6252ee!8m2!3d-7.7941088!4d110.4074862!16s%2Fg%2F11kqsrdb5c?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Bawana+Cafe+%26+Eatery/@-7.7941088,110.4074862,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a57cdf7f05309:0xd4adc2cded6252ee!8m2!3d-7.7941088!4d110.4074862!16s%2Fg%2F11kqsrdb5c?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday5.00 pm–1.00 am",
-            "Sunday(Easter)5.00 pm–1.00 am Hours might differ",
+            "Sunday5.00 pm–1.00 am",
             "MondayClosed",
             "Tuesday5.00 pm–1.00 am",
             "Wednesday5.00 pm–1.00 am",
             "Thursday5.00 pm–1.00 am",
             "Friday5.00 pm–1.00 am"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH4KqvXJ80Bfs93itsvdOlaGanri0rdfxT7BaFpurXolmt61-B0_N2q-eDqdRDMFIvjEWb_YC1jW4SqANGqh4rebYrR2eCj7F4IKxFvbbWjoGauSKNnA0UYfg_eG0YxioEuqFMNBg=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFJyEaUpYmEIBe41G-EyRl9foOQTLY4bIPNdI97st1SwxVdbCfmlrBta7FVi5k6DYl_RSgHRr6IP0Bl6zdFJaMLbjIrc7GyTSzk9ROzI-5onKiU-pnOy1YxBCuDPOwTuqIfgHXlBw=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF2MLVpJlFGNaEvCOxdOFsnR9weNBhZ1eESQUSCDpzAJucU-EXIfBEJA6qM3RskwHRtGi0APEoA8kSzdshURokPmm6wc6aUQDUi-UANU7zvkuTjZLrf0QRVCop0ugNcbhiQXaobOA=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHcqKOVGApbAGoJyeg99JexdiHeDcPv-QD43gSV0JQ6S_aLjzHURk0oRGzQ81llWKrLdtiEsPc-r9mdS1e0-RFmr1Muku4gx-C8ol3_n74aEmUD4kc7xBTYqvqsegVuy6M-c1CN=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGBU28El0DQTZ6_paDGkAMzuFjXjMy_pGUqYNAVP9ickV_YkRRvX-SQjM3wR-j5NBGW4W6d-XyfR7tM2f7hAJ4D-Yqrg5gNWFEKb0CmRwa60_KwrftrXsNApcCFi2A_4la0o9o=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAESLUrd20kc9fq_IA0ItkNGdtnYoab4mNfXZS3E4cJfr1QmaO8jecy2ABFZhtsZYefO4xPrblMhntUHb8LMAAkY6FLvJHcWkI2Y5bu4mj-KErM_lsK45Ud5v_Di8chrxmDexkEH=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipPmtjYgH0e24wbS80tEPYOIsCmkiprqGedV-z4r=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFkRbf6JE8LhajtJWe0-AdIR2CAoCzaD49bxWCKOJy8TmeViBMdYfykcSpqK0Q5pAnIYsOlMudnhLT6hgcjicHnPjZP0og1S6B2D7ZoAp9QVd2dyQwUcGvEjqI-lSl1TCUrU8sH=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFaRRp9acj4bFOM9wkSsqzgXWBggIEzTN89NYyfuA0oQjpF133F_AsVLSq1HBlQMWZbznYeHFnswOozeyDl3r_B_awNHTqNNtQyPJkSa-voYrj-GTY5otgWIRulivtmmfqtviB6Dw=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHFrC2fvlPzlgNu8dwa-qmNd2Re_LoOVb3ZwvB1sBydpFzNPWc630WbpO1vnUZ80UqcSIZ0zTia_Lg2UK74U99YDjeEpvVv8bAm0qtfkwXJ8qrGGXfsWtrHIC--wd18JWxHeh4B=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEF_IE3hPgE877r1FTZZSOgLkgseVATI6PNYw8DTwcZxSu8ZtF5WX99wDzDRqctGMAOdZZbD3AxGd9Dzyl8XixW5zjp5MTD1CGFHjgzXUhyZGrOhVgPTZ6RsjFqFLVWPw49lSJN=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHzzMq3IT5Sf1IRQtKgdNcxdCBYC_NopIicT-5Fk53BrTFPaXFtlaXxiFoDRJtjd0iU-aCrztQq0k2Vm5Yi_NpCO7K0mbEE7uT2b0VxZLhlSItAu79GDyE1QTcIffFuRWouWqzghA=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF_GVmwdQbdmlxRI2va8xL-TBpiCV-Gv-_Bb_5-9WQxhhp2Hubmt6bkCOwY6AOfr0kpe3J-OYCRZr3iiMG4a8WFkaGuqXcWVkdn5mPN2ovBEZIR82cOj8Rkll8PNsZispB4LFgtPg=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGlhg-J5qITXsjaKXxvm7_ku2yDsR_HqmDaytGbIeK7fNxZq3dqSAJnjz7Zy_4UIWdl-romeLUraoFMKVY4T2aPRKDPdNAexjmw-FnDHMVRwIP97JzlCOLF-8WmaL0BfAG24Yz2Qg=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEqRuh6B7u2uhNwozx9NGEP6AvDGr53HeGtrbS76V3w_N5mBKDZyAdAA3GCzp7uO4Zb0B1-tzQTXFUqnQZOGzIlRfb9hE4lV_VjwSWePbNsb6tek7RcaZ9Sd2lNYBknWbdfkblgLA=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGf8wMyjQ13IgqhZoZUxCUVRyQ5VnZwsfkH3l_qmN8w5aK5qKyeuV7RDKrNQHulgTTFa7fFtSugLBlx7jOrtNkhU_RBx2ti1g6PRx-Rk7BvxhNLkfbHRH3e9csUWpf5Nz-98Ha3=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE7jD4ydT3kOqbJNEKq8in-qUh-yNHOotkObPrzC7nCD1g1R8u0G3vIxLyX6_Yc6OWxC7F5jgIb2NyBGd1820BVsGipoByIzrnBKuKQPAq5CN4gEBSEy0g9zCKTqzUTx0cboUySgqUYG0Uz=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEB_a8TcZriCJDA4hFgfkYIAq0-xg0eWcrhsIEATBe-HE4cw8isnpoy2_Aha1VUDX3jpQm4UQpQq1rGykagIPlHDQWlcbHgrO2Sk1Tzbu4fSScz3hZ61c6bMssbawfJjC-DqPl8YCfiQYmL=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF-wao0Ln0CQHpcKmVQFL5jfGfaq6gKmw53HTmwPmF5aE22ZP0x2UXGRzajY6L1MXMcVH8Gnr6BYxJbAa-xd8aykpOi1zD_9vV7pmwF3-MFr-aK0z5PMBthNSXC78OuiEDAHj0CMw=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG8P9JRNuZ7QrhTfkdWrU2WBUCk3GPWPYJWLvos1lsUQqy_ajyvK8Ffy79BvSwX0kIG6jZTm1JPJz-OqT5Av5OVZvmWVU7qP25Y7DMew_n-pf48pJ_t9MCdV1ig5O5gxbgPJ1t2=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjUISChA8uOsOxmj0WoCq4jRNUtMNXf6GSAfAURiCpaPvh67_1E=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipMmpjrfzMfO4RZptAUMgjpC1M7UXlHuoHkFSJOp=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGlxHRe5sHrmpqlNwAlDhLXqtdXnSd0zEOJAcyo0HOG2yATkPiZgUE8DMaf_tXq8eoVTyTXA7n3pGuWR6BbAB63d_oAeckRZHbpAVAIeiCUjCbOP1hxXe4QZhUV5gzFL9OReBK4=s0"
+        ],
         "menu": {
             "link": "https://linktr.ee/bawanakopi",
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqts90kXofthpj2qMxAGeNCsvQ9qHUFz0Xe0j5jgKggJoO5pBWL8Hvc-6TEvG5k58aBzodKDHw2EtYvmybZLrswURmfbWharof7jxh4JgTTWm4gB5SvZ-VOZn6JwqftfIqBH0HmEw=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweokHsL_GRqh3GHme4MWyb9uQFkQtPquoshvLVNvR07kTpZ0ojKuHmcm24j8ZCLV7W673Sx8_govAs1kYVX4bb93ZLshieaQ8BNcpEolKByrxmrlH1IdTcJ1hkGW51PJILv-_LAnkg=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq0HRJGCS-lW4uUiiTytteUsyCC3ITfah59BHl8TgtDGhcNJRgu-qfBRdPaUDDgWDX_fnJmYLry_tTjm_GUD0FwZ8iadg0Fvhyt5gOZZHKD4dtIv-lGK5MNZV-UIeJRq4Q5eT07=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwephyPILeVqn5tr0nAFdbFZaqlLy7JwH61mWH-TyMVa4NW58OP6XMX1Hy3JDRr_oTm8DSCu4Mo_tTaGxqn1x5ozRNc8lQxOapZ76v13vpopPoDpTgSGztN8C1MflQbXqJ2GLhF8S=s0",
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9pv2eDq07qtrxVeRarJVSTLiGSIkmtyRgDI7h6b3eaSmy4DLNQTdrFKor-kwkIQptdMzW1APmrHFjm5jtZCohLeNn9l6yTCrr2I9JPZ8k5BUaKWKqBvfr55x-E0XmlKWberu7SwFxg=s0"
-            ]
+            "images": []
         },
         "customer_reviews": [
             {
@@ -96,25 +89,26 @@
         "reviews_count": "184",
         "category": "Coffee shop",
         "phone": "0813-3445-5932",
-        "link": "https://www.google.com/maps/place/Kelakon+coffee+and+eatery/@-7.8091002,110.4180386,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a577cfe571c4b:0x12fd6bc9be7f3ffa!8m2!3d-7.8091002!4d110.4180386!16s%2Fg%2F11rvhzsjg3?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Kelakon+coffee+and+eatery/@-7.8091002,110.4180386,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a577cfe571c4b:0x12fd6bc9be7f3ffa!8m2!3d-7.8091002!4d110.4180386!16s%2Fg%2F11rvhzsjg3?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday2.00–11.00 pm",
-            "Sunday(Easter)2.00–11.00 pm Hours might differ",
+            "Sunday2.00–11.00 pm",
             "Monday2.00–11.00 pm",
             "Tuesday2.00–11.00 pm",
             "Wednesday2.00–11.00 pm",
             "Thursday2.00–11.00 pm",
             "Friday2.00–11.00 pm"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHETRLCkqYQVWyPlBTtKkgdKLT30A2EE4NbL8_yXc7MpExXrs40vo2NQ5COwtM8WaTA_J_7rTDP8mD4zD2wboFg0FIfqUcwlElfAuhe8dxxjGKMoIKCu660yDSn1QyFvPu_aeHt=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjW-PWsQqajTW3TT4w1Mdmor30pjo7HolMRWoctS2hOyfaAxduI=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHotYByoP4GOOaoqbONzFHwTLQpHHVCfVisy7bOH3ZZLg9-eogZNUPfEvNZ0ZpduSZQF5IwM7Cxx_QFmmDuR71DQNZMZH45Wtc5xdjIJ_le141qg3e8kWBjnWJzzdZvy9dxjjNACA=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGQ99PbPqXdtdljWTuQw5CjC-w4QBXj92xTUrR2Q3GpY-AfQTuNKO0kQrX8IksGJQVfKVuq6qw6SLOqaBQ8XMFKtsN5npGuGngQayuJAAPmDJtELNZNkceplXaMOG3qnt-VvzH7=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipMVxmClXBhAC-FMKFdemGciL15WEAK62vxXfg4f=s0"
+        ],
         "menu": {
             "link": "https://linktr.ee/lakoni",
-            "images": [
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9psWUeDgwPem3y2OdB0uNev892mtbZcpSuJ_3oMatuDfsFajbZ4-Gi6rW658zfo64wz6OpMrUv_hTPbFoWdjWCLvwApVokONQ4DAUXKtgsWP5jDDleyn0b-xYFuEpygRfoMqAq7t=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqVPuKfU2HOBTUMAyVJ4nSlh0nDy6TrKIjC2S5nWAyLccSRQ0EYzI11_iv0Xw35fkC-6CvEqzByth0Tk1vKKt5iusmAgViabk7mBLg1ggscy7rHxFHetdY_Qais3DT9i3GCL9ep=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq83ibTQpjMKwxnnVF1V_borYXrUSAUn66Ts_f4iJA0W20lXHMEMy1zVfyYgysKbBF-82mKlUuoSUjrmQTPJdshlWOpLFHTQSCXNAEoNDec79e7-dtDJBo7s87EcSUGHahEBVQ0gA=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepDhlleM8GGQ2zVYNC9BIq2hD7mIE-9jfz_-6aweQXlH4VqUCGg4eRh7kaTeG7uue0YQCgCX7CPwZjKeFzLAWcTXJL5r6roocA_EzCqw00pkrHQwrukxyHzKVBojSsm-CEb30MU=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerV29Z373So50EOVEP7bPtV_iLvcF0P_bF3nqe_yf7qygR8r9WErj2T7X9AFw_3Mt7_xx3boH3UL0dM_6g2DXA7qUo8lqYrfOY4qMSGXsWwnY2x7yayU2yExIHwEhHeEFH59ncz=s0"
-            ]
+            "images": []
         },
         "customer_reviews": [
             {
@@ -148,28 +142,28 @@
         "name": "Soeltan Cafe And Eatery",
         "address": "Jl. Sukun Raya No.RT 09, Modalan, Banguntapan, Kec. Banguntapan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55198",
         "rating": "4.5",
-        "reviews_count": "200",
+        "reviews_count": "203",
         "category": "Cafe",
         "phone": "0821-3705-5162",
-        "link": "https://www.google.com/maps/place/Soeltan+Cafe+And+Eatery/@-7.7949055,110.4056713,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5722b8643785:0x643c0567ae5983d5!8m2!3d-7.7949055!4d110.4056713!16s%2Fg%2F11vd3grjxx?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Soeltan+Cafe+And+Eatery/@-7.7949055,110.4056713,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5722b8643785:0x643c0567ae5983d5!8m2!3d-7.7949055!4d110.4056713!16s%2Fg%2F11vd3grjxx?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday9.00 am–12.00 am",
-            "Sunday(Easter)9.00 am–12.00 am Hours might differ",
+            "Sunday9.00 am–12.00 am",
             "Monday9.00 am–12.00 am",
             "Tuesday9.00 am–12.00 am",
             "Wednesday9.00 am–12.00 am",
             "Thursday9.00 am–12.00 am",
             "Friday9.00 am–12.00 am"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFPMmrcTUNmzdLw_0AXWxYS5uhIk0nOwuOVciTpfcjHRaAfoBnhRIQVjU428ab-Qe2hQgOs7EMS5vwJNnAzmOrpxvJCq7P19HWyg0N1tXt_wd7gvQe_7YTyVN0V61jyzSSeEqhkHO26lxCa=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipPba-4-3YBMD27WEjCnEGTIP6wVF8dNHE3MmJdl=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHV9PJDC__5-E4nauY9lDdQTBqrfVS2MzTBMV-UpLXflMI1KR23vlWR-8XSmMhN3hxE1LGWi8sSXzT-_RxzbCn9iOeejc-4648HYIYK-r7SdwnUDGRvvaUkNo9K-_4FnVIQhSg=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjUL3dJ-q27JpSXL9RFfkE8sbRRL0uMcNc6i4yrZDmtvZMhYJWc=s0"
+        ],
         "menu": {
             "link": null,
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqptnL4oV5ahOTS9askj9kDxKWz7HYJMMIhk5-T5hZAn5mpI00pWnOXdq2OBCyXyJwJeOP6YZNSOcdXAj0kL-Ztc9SabR03O4d6a8uaTOvj8V2SgKEFWzasL3dPinjs5DsXIdFUetDIJNtQ=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerQ9MVHpJcY0WADwL70ZplSC_FZNTXUAqceHvjzoozi5u0wkvhCfkQmBJmYiE37DmKpydufIDOSMUqb7I6Qe6jIlLwMqT3TTb3YjSqhgFWrJbSAEWjZObltWPmkfhX86VKzAHW52g=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepbbDA_eRBHP0wUR7nKWfjRvRbt3pYXUztNp8L2oDj_C-zbJ8WNjSZ6zgJ2tiwlGuPfhIYu3SG2be3u3uMMeKksfAWoFH6Pvfdtyll659et4TmT6C5qZ9iCc3GRnqiel_TmfEwJcFzoEbiv=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepGuaSUPRnGenepV_Et-gK6NTS5289fvhlxZyypXYwp-dZl6RqoAgoZhE0hOngSsm7NXUVKvT_YRDgwfpcNbN6vIK_YUjRLktliJ7_FhZLzoc7iwfsIVgmCVb2Mk_ST9c2WnvHfFFe6QzNm=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqHBMyuayReG9xJaDWQ8Zzliwl8k1uCUF-8EQV4-AFcdyMBAqIisYjmjXRigQLW9Wl83dgDBesKgP7aeLHBPoGnHNZ2KpXBNJ0hFktth1urVfz5nPgyoUeKaC6FG-AxyrnqNgrZ1zCNuzPr=s0"
-            ]
+            "images": []
         },
         "customer_reviews": [
             {
@@ -188,132 +182,88 @@
         "name": "Swabenawa Coffee and Space",
         "address": "Jl. Ringroad Timur No.30A, Karang Janbe, Banguntapan, Kec. Banguntapan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55198",
         "rating": "4.8",
-        "reviews_count": "134",
+        "reviews_count": "137",
         "category": "Cafe",
         "phone": "N/A",
-        "link": "https://www.google.com/maps/place/Swabenawa+Coffee+and+Space/@-7.7986693,110.4102597,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a57044e26108f:0xd762575b9f22ec52!8m2!3d-7.7986693!4d110.4102597!16s%2Fg%2F11x1lw3fh6?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Swabenawa+Coffee+and+Space/@-7.7986693,110.4102597,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a57044e26108f:0xd762575b9f22ec52!8m2!3d-7.7986693!4d110.4102597!16s%2Fg%2F11x1lw3fh6?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday10.00 am–11.00 pm",
-            "Sunday(Easter)10.00 am–11.00 pm Hours might differ",
+            "Sunday10.00 am–11.00 pm",
             "Monday10.00 am–11.00 pm",
             "Tuesday10.00 am–11.00 pm",
             "Wednesday10.00 am–11.00 pm",
             "Thursday10.00 am–11.00 pm",
             "Friday10.00 am–11.00 pm"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGR2SJ0cjAc9IJrxwb59NfBjB1RnRpKuiDAFc_qqIArW0Ujqg8J6c84b4AUFDxK5dlkncqQ_Oi3wwpq_gS5OwOMESkBxfmsEqXKjI40TnVu-LZvZwbOErGUNkA7AmtdPE-1ByqmqCAseiVV=s0",
+            "//lh3.googleusercontent.com/a/ACg8ocJdnmjHBm8MZxEaaDpNC9MkjnIh-YJxkD3kjEXdczoKcvtzesM=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGLXMvbXbSdHOOFVks6zYYqqfos1tnN1UrT-oMgAU-fX8xFDftGYOpbbO7L9sf38heEkiju564I-pBH5x0mK6LhnFUcBscumKxrmaQ7zieKN8ZVJhIx5wOxud9GkP_FKrHk6VY9BQ=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGK-_QPSyqQAlychOryxanItn--JRSGDKD_TqpUuLlMuOanYHQiOsAwGJSLDpJfbqr1APbK_ozpj3BuyeWsUluP7wtocp3J1ExTB4oUUUeWvVC4ukAn2wkkxQ47gbAu5311qZlIupsyehc=s0"
+        ],
         "menu": {
             "link": null,
-            "images": [
-                "https://lh3.googleusercontent.com/a/ACg8ocJAm3-NxlEB-JC8rlv47Sdk9uuNA_MVnM5gCC2S56G_GtMvMQ=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwephyPILeVqn5tr0nAFdbFZaqlLy7JwH61mWH-TyMVa4NW58OP6XMX1Hy3JDRr_oTm8DSCu4Mo_tTaGxqn1x5ozRNc8lQxOapZ76v13vpopPoDpTgSGztN8C1MflQbXqJ2GLhF8S=s0",
-                "https://lh3.googleusercontent.com/a/ACg8ocLQAByfj1vEK10Ed2Q5gy90lP5jy72EUKuta56MlL8si3IVjak=s0",
-                "https://lh3.googleusercontent.com/a-/ALV-UjWTKhi06aJsHMhyFrwJc_PlLPg6rXln87v-06NJuBToktpAxqk=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoUWHVMDViN_m8rUVDhaFPQVep-IDYm1HOtt4h9gbpvD5EMypv1pQagK3FvTFdOWyQTaiNsFqKoqAd7gCt9eIpOfKwis5QsNcNZw6nLwtHwuAdD5dSvJVk6XwU4gF1flTtAvwqFi57sNhjd=s0"
-            ]
+            "images": []
         },
-        "customer_reviews": [
-            {
-                "author": "Furan",
-                "rating": "4 stars",
-                "text": "I come here at the opening, from the place decorated I feel like this is more like an eatery than a cafe so if you want a place to chill and socialize rather than a cafe filled with crowds of of workers, this would be a good spot. …"
-            },
-            {
-                "author": "Kug Nox",
-                "rating": "5 stars",
-                "text": "It's a very cozy place to eat and chat,  to drink some delicious goodies in here, my personal favorite goes to hot matcha latte, and im not a \"matcha\" person that would like a matcha, but they had a very good matcha, it tasted like a high quality matcha from Japan, i suggest u to come here and stopped by. ."
-            },
-            {
-                "author": "Deni Lay",
-                "rating": "5 stars",
-                "text": "Nice place to ngopi"
-            },
-            {
-                "author": "Pambudi",
-                "rating": "4 stars",
-                "text": "A restaurant in the Block O area, next to Harjolukito Hospital.\nIf you drive, it's a bit tricky because it's right next to a traffic light, so you have to turn around. …"
-            }
-        ]
+        "customer_reviews": []
     },
     {
         "name": "Teman Bicara Cafe",
         "address": "Botokenceng, Wirokerten, Banguntapan, Bantul Regency, Special Region of Yogyakarta 55194",
         "rating": "4.6",
-        "reviews_count": "506",
+        "reviews_count": "507",
         "category": "Coffee shop",
         "phone": "0812-2177-7809",
-        "link": "https://www.google.com/maps/place/Teman+Bicara+Cafe/@-7.8524714,110.3901368,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a57cb94712ba5:0x1994a1f4e7cc5675!8m2!3d-7.8524714!4d110.3901368!16s%2Fg%2F11fhxxr2km?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Teman+Bicara+Cafe/@-7.8524714,110.3901368,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a57cb94712ba5:0x1994a1f4e7cc5675!8m2!3d-7.8524714!4d110.3901368!16s%2Fg%2F11fhxxr2km?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday10.00 am–11.00 pm",
-            "Sunday(Easter)10.00 am–11.00 pm Hours might differ",
+            "Sunday10.00 am–11.00 pm",
             "Monday10.00 am–11.00 pm",
             "Tuesday10.00 am–11.00 pm",
             "Wednesday10.00 am–11.00 pm",
             "Thursday10.00 am–11.00 pm",
             "Friday1.00–11.00 pm"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHaKlTiQIB5lVD9VuajKzgarMLbKFIbg_LAjf0KFXf4MH9ZpmiQiGtoUkdG85uJErtpkfLTtAdEdV8Jbo33z3rXcOgRUhfTE-QzwrURPHwBGlma2N4BbL7M8T5UwFAY5FW3ytZkhn7OxCsd=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEMhgLZlrwxcX69y765b0VFvInplc4P4ltMuZ4t9Vaw6XxGgBskgvlqtT1mFWepJ7F1rkc73MVkiIAcXCZ5dsYGPVcN22HWgjFH8NL7iLANxKRFSZOn1HObgY0P-SY0As-z0P8CFDw22u0=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEUwOSW74AME7fQ_CTp2PNTGMd1BYDlfBxcQrtuIyh5XbCDlcSQi_FNcJEmnuh8VEZYgluefbzyeS7XvTbSIKg7n5x6nl25_RkIO70r05s6Qzi3sqV1J-P_WA92WRTsTbmh8d1-ZaG8Ci9L=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjUfu1gTRCS-ofU5pEEfaCLHwm4ZsekfMA0VsfKgX6A78UvpwOg=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGF2IDF_g2dOXLGC7iLLz9MmZIjcQ-48XFfQxdHGMGuq29J6zTGrl2RmF_DGkE3WTE5JDqiohRYHusiloPxr-q_F3cToJ1QEPg3amanwOyG0m3iXCrqOfoYY8BSo1SNESEFTl5IgW7TSzCF=s0"
+        ],
         "menu": {
             "link": null,
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweprC5lKBhk-aMbJHJZ_JPpvk-s01SIZ5lTV50Y6dtuoMtnc2T8iHlWgQXBPAkQbQVivqsY1GOp1yaqoSayz2clAb9FcoCODsiLVpKD1Usa8Kd4e0xLMAmfIqcWfkR181NicsiZoeJKiqhQQ=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweplXbELfLGbyGaRshGD7u1eWQfzeT2Dm7CmtN2f3W79fS7hAc_mM16SPK0Dj_2NxLESR8rZKgiIc2sYHtRdiL4ef-sCeNjKBhA6-76mBE27sRdCgLioTQIUB1YIl_NsISXl_evq=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerajIFKDEKbi5k4cVW-Yzjq_K_Ypza5yLRpOcrDTYmeSgsE01Kyh9N-NUDdZ7q4DtQ3wkJqkGaAFDfFOK845a4quvr9ijD4EbJo9Ydcxh7nNvUsLP4IvPvaCSb0shK9uODC6fgqJw=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwer2aQ1X1XUwyHXj0J9zALdtSjyAfFrz48q5fjYZ3e2fNFX1xAO235Fr_AZp6WRssu6R0nnPAWsf6Ts2zJ6RN24Wj58U8TKUdbEO8MtVU1NaVikXUYsM4jN8GKda4Ap33bhFldfj5Q=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepQBL6m5ujMTer0MemuLq7KPjNFrqrjksARCfv8JKeKzqKue9O2UAWXojKpEhHjrjWOMad-KQIDZFRjjhiGm-yrC3U0-kKAA5Alhs8CsLQBaO2Yt2_cuATi8TfkBtQaxpf-N_bIWA=s0"
-            ]
+            "images": []
         },
-        "customer_reviews": [
-            {
-                "author": "Ninaaa",
-                "rating": "5 stars",
-                "text": "Great place to visit if you are looking for some cafe to spent your time because it has a lovely interior design and some delicious coffee!"
-            },
-            {
-                "author": "Muklis taufiksudibya",
-                "rating": "5 stars",
-                "text": "Cozy place for hang out, dateng kesini deh guys. Friendly price for student. DM me for more info @taufiksudibya"
-            },
-            {
-                "author": "Anzala Ahmad Sauqi",
-                "rating": "5 stars",
-                "text": "Good views and nice coffee"
-            },
-            {
-                "author": "Ui poo",
-                "rating": "5 stars",
-                "text": "Very recomended"
-            },
-            {
-                "author": "Khoirun Nisa",
-                "rating": "4 stars",
-                "text": "nice"
-            }
-        ]
+        "customer_reviews": []
     },
     {
         "name": "Coday Coffee & Eatery",
         "address": "Jl. Ahmad Wahid, Kalangan, Baturetno, Kec. Banguntapan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55197",
         "rating": "4.6",
-        "reviews_count": "311",
+        "reviews_count": "313",
         "category": "Restaurant",
         "phone": "0811-262-203",
-        "link": "https://www.google.com/maps/place/Coday+Coffee+%26+Eatery/@-7.8153664,110.4124904,17z/data=!4m10!1m2!2m1!1sCoday+Coffee+%26+Eatery+Jl.+Ahmad+Wahid,+Kalangan,+Baturetno,+Kec.+Banguntapan,+Kabupaten+Bantul,+Daerah+Istimewa+Yogyakarta+55197!3m6!1s0x2e7a5743b5c0c385:0x93e4759b8620f288!8m2!3d-7.8153664!4d110.4169965!15sCoABQ29kYXkgQ29mZmVlICYgRWF0ZXJ5IEpsLiBBaG1hZCBXYWhpZCwgS2FsYW5nYW4sIEJhdHVyZXRubywgS2VjLiBCYW5ndW50YXBhbiwgS2FidXBhdGVuIEJhbnR1bCwgRGFlcmFoIElzdGltZXdhIFlvZ3lha2FydGEgNTUxOTdaeyJ5Y29kYXkgY29mZmVlICYgZWF0ZXJ5IGpsIGFobWFkIHdhaGlkIGthbGFuZ2FuIGJhdHVyZXRubyBrZWMgYmFuZ3VudGFwYW4ga2FidXBhdGVuIGJhbnR1bCBkYWVyYWggaXN0aW1ld2EgeW9neWFrYXJ0YSA1NTE5N5IBCnJlc3RhdXJhbnSaASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVUlNaMGxtYUVsM0VBReABAPoBBQiMBRAc!16s%2Fg%2F11smhgql34?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Coday+Coffee+%26+Eatery/@-7.8153664,110.4124904,17z/data=!4m10!1m2!2m1!1sCoday+Coffee+%26+Eatery+Jl.+Ahmad+Wahid,+Kalangan,+Baturetno,+Kec.+Banguntapan,+Kabupaten+Bantul,+Daerah+Istimewa+Yogyakarta+55197!3m6!1s0x2e7a5743b5c0c385:0x93e4759b8620f288!8m2!3d-7.8153664!4d110.4169965!15sCoABQ29kYXkgQ29mZmVlICYgRWF0ZXJ5IEpsLiBBaG1hZCBXYWhpZCwgS2FsYW5nYW4sIEJhdHVyZXRubywgS2VjLiBCYW5ndW50YXBhbiwgS2FidXBhdGVuIEJhbnR1bCwgRGFlcmFoIElzdGltZXdhIFlvZ3lha2FydGEgNTUxOTdaeyJ5Y29kYXkgY29mZmVlICYgZWF0ZXJ5IGpsIGFobWFkIHdhaGlkIGthbGFuZ2FuIGJhdHVyZXRubyBrZWMgYmFuZ3VudGFwYW4ga2FidXBhdGVuIGJhbnR1bCBkYWVyYWggaXN0aW1ld2EgeW9neWFrYXJ0YSA1NTE5N5IBCnJlc3RhdXJhbnSaASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVUlNaMGxtYUVsM0VBReABAPoBBQiMBRAc!16s%2Fg%2F11smhgql34?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday9.00 am–12.00 am",
-            "Sunday(Easter)9.00 am–12.00 am Hours might differ",
+            "Sunday9.00 am–12.00 am",
             "Monday9.00 am–12.00 am",
             "Tuesday9.00 am–12.00 am",
             "Wednesday9.00 am–12.00 am",
             "Thursday9.00 am–12.00 am",
             "Friday9.00 am–12.00 am"
         ],
+        "photos": [
+            "//lh3.googleusercontent.com/a-/ALV-UjX5U6UIfwknQR6bombxM_4s6YAofLkvkwTXG51HnhEvD5f5uIfI=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGOdnRh4DhYzF3l0iEHrSqCfMEvhjTx8R2qRr2_fImN1Z2ZqFM8srgr7JdDharwdRduqJ3S9wJCjKIVFJS6nMRb-WUzZIJgVQtMyj5vG6nnam-LoxE_U2JB7yzzrm1Tmj1JhvXiuZBFbHw=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFdLPcsBIMbqgDg73uyHecEeRPxafmw9jFKsYmsQ4vZhRpsSV-k-5lbfkvJ9rGZ7QLtWyTvLGhIr2k2pEJvbPR0Ybxj0HmshFYyL8fjBujwGM9gmE3i1KGjnG9cfvYhl-LAFdw=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFnAI_vaw0U3U8OxpdGENFw0jDvpzpPUhak_a0SagTHTNCOYthrQnqCuqEjjOHzYeoVBgBUahB43UTYKJQSffq6P5ZOFapMriC0r8Bx7MwjbIvhqcZPa515rm3mOz26Oym3J2_ZdPmX7iRp=s0"
+        ],
         "menu": {
             "link": null,
             "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqWJig1E9JEG4vzsMEeh3uaW0LWxsdozq7yo1mE3TOsq94uRn22AS5ol0aWZENOc-j6Y7wVTsZGbJvn-hZ0ox_JsaMcwFMfPZzi3zjR9a7DaOU9RWmr4m3DRA4aTcvcWlGht8KP=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqf0cAph2oyuZG1qoXKGFLSwc5Tws6AzWHAD2j2ggPJ9mFInrBQFjiAb5UI3JFIcDp4HtCEW7abVj9ht08CwNtCWQA_EpNEN3fe-fA-kFqCYGOJbtcOMb7oAu_K5hZaBmHYFIjByg=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwers0MJFLr1Q30lbo2tZp9iXi6cQxX3PACj-UlDZfzzuyik4ZJMYYDi3wdZi2bIVtkXXCiCFh6ajarrZVyjcCrazoAiOlPRt1oDfR-_zW3m-QCCTt-ViSS9Q720g5oO9m2pKYhKWz8cyjzmL=s0",
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9ptuNvN3IRC32g9mR-1ydQNbhhD5S68_qPMNo9hMRx_X98fPSIP47QsXm0se9cBIgDeffp-nvoJoCm-BajP8bnoFct3j40ZzXTMW5s0zSONsquV3hsYbn0P808d7r2kXpG6N27AMVcyvuXA=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerk9oDcw2bmrA7BqGxWpIw5dJ-Zo0QppduboewbmtuCrQFf82Y6x1-M2NKmfB9MtyeahfQwJpkllDHQnyOqcZxFj37EbiwSqsv2qEMbhokKnUIWmC1X7xFTAK4t5DelTVihCp-D=s0"
+                "https://lh3.googleusercontent.com/gps-cs-s/APNQkAG8onMkBRTzQepSnsixL9DtAHJD5jITe7zUPx9cddEjwQzMDAtdCS8RgW189mXbBL8jEqfetaU1i5Ma4zMdpDwyM2vstpuSiu1TaF47WsvFhTg_jsH7wpB1rSizh7bPy7Nbc86J=s0"
             ]
         },
         "customer_reviews": []
@@ -322,73 +272,57 @@
         "name": "Kopi Kesayangan",
         "address": "Potorono, Banguntapan, Bantul Regency, Special Region of Yogyakarta 55573",
         "rating": "4.8",
-        "reviews_count": "475",
+        "reviews_count": "478",
         "category": "Coffee shop",
         "phone": "0851-5616-2336",
-        "link": "https://www.google.com/maps/place/Kopi+Kesayangan/@-7.8240107,110.4276918,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5191c251d5b9:0x5242abe064768e05!8m2!3d-7.8240107!4d110.4276918!16s%2Fg%2F11n988cyf2?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Kopi+Kesayangan/@-7.8240107,110.4276918,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5191c251d5b9:0x5242abe064768e05!8m2!3d-7.8240107!4d110.4276918!16s%2Fg%2F11n988cyf2?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
-            "Saturday12.00–10.00 pm",
-            "Sunday(Easter)12.00–10.00 pm Hours might differ",
-            "Monday12.00–10.00 pm",
-            "Tuesday12.00–10.00 pm",
-            "Wednesday12.00–10.00 pm",
-            "Thursday12.00–10.00 pm",
-            "Friday12.00–10.00 pm"
+            "Saturday12.00–11.00 pm",
+            "Sunday12.00–11.00 pm",
+            "Monday12.00–11.00 pm",
+            "Tuesday12.00–11.00 pm",
+            "Wednesday12.00–11.00 pm",
+            "Thursday12.00–11.00 pm",
+            "Friday12.00–11.00 pm"
+        ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFEFP8MU0O68sj3iFHcoYF_GjlWh3blmkg6he6QCWjSwYZ4vlC4VWzhbyOuHYRJTjoJ1GJ40WFm2gxQILl4hay_Hyz7gdCwLuE_xfJ6jkd5yk1rbVb1ocU39cBgpX_DS5GlxEpzYLjW5JmT=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE92KgBpD1gZxLrxS--HOlBxXp5z9-etuw4OeQk6VcnWQj2JbruMdnp7_kLVf1nevTsQhRXeYweztQbfHL_oAmcOO3eY0YCyGw7Y_Zbv19eCBJo6qkdsuJGkOkHdfHTZ5y7yrU=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGnsf8mNFhZtFtUVjlz7qNDa7nZcPWIFDyN4StaBtRR50l12Y4C691Wc9O8XQCFOPj1AYeuNVDy6Jf_u2vF9v5oOGMZCUt7LtVVqIOtMGDC7JgaO1X2lS9eWq0YnTDETp8xHhgxew=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjXAuuBgrS8kWpepk_281mTL8Kzcc3nBITQ8JpdvIw2-KHObdkU=s0"
         ],
         "menu": {
             "link": null,
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerRSe7utt1oCpq_G3XRs462jo-MUavmAdIooECWBDlZ38d_9Ly5D5ceGKk7BI18GMGM2az45Ps1jqHbWePpKvVPQ7InPS_CfFJ6B9aXKDpLNbXkqfBeO7koi2Yio6GSrkchYv5d=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqzohGHQ4HLC-j9PoTfXhv2cNTIkVU0qjkVaslVWpGu7wROaV8gVxqYWXcOFFJvRSEm0dK05UyPjoA-THZ55KorY6yN4YyIIErRNskQ7AGdCHJdGBRzG97dm5Iv5SUYtW_xfTFC-TPZFg7v=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweotZp-AdEMi3pcYEhjU6lw_538bLqNEtZgOKuJ5TwMLaaOurEBjvkQmprAxxGcI_eWJIs4qnW4Phhp4KfBy1qd-NMUZlrTHjoaTcKLyLTzH72eoAUxUGaYC0TLNXUUFHib7AjA_kiVW8Xlk=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweooMMIWlxc-RpaOy9QhvtItUnGh62q3pydeehTEf0n8IOsRQ12bDywAdUT3VZn5rsZhZW5Pi3l4cur7zWH07GS7FvhqTz39rlTUnZh5hG2H77k2QyycnBuPq3UQKCvJzF-3zfqw=s0",
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9psm2-xcTZMjYZ-Dw3bH52OWREOa2UFD-EmHiC8u3lS-jClk-D7JMN2kW80E-k9dwR0Kn_0LQ0mvzGDhTFo49oACYwgOv0dBUT3wJ1xO3xD5nqR3FxVU8vhfTMTzv_PljMgDmjGxfjUpn43U=s0"
-            ]
+            "images": []
         },
-        "customer_reviews": [
-            {
-                "author": "anisa dewi",
-                "rating": "5 stars",
-                "text": "Have been here few times and ordered on site and online. The food and beverages surprisingly good, not too pricey nor cheap. It has indoor and outdoor area and has wifi too."
-            },
-            {
-                "author": "Alfian Darmawan",
-                "rating": "5 stars",
-                "text": "Cozy, cheap, power source to charge laptop under the desk. Lots of meals and drinks to choose"
-            },
-            {
-                "author": "Theofilus Bayu",
-                "rating": "5 stars",
-                "text": "Nice one"
-            }
-        ]
+        "customer_reviews": []
     },
     {
         "name": "Mampeer Coffee & Me Jawa",
         "address": "Jalan Monumen TNI AU Kerobokan RT 02, Krobokan, Tamanan, Banguntapan, Bantul Regency, Special Region of Yogyakarta 55191",
         "rating": "4.5",
-        "reviews_count": "617",
+        "reviews_count": "618",
         "category": "Coffee shop",
         "phone": "0821-3750-9440",
-        "link": "https://www.google.com/maps/place/Mampeer+Coffee+%26+Me+Jawa/@-7.8431362,110.3837564,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a572be92542cf:0x1db378fea57c650d!8m2!3d-7.8431362!4d110.3837564!16s%2Fg%2F11rjz9117z?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Mampeer+Coffee+%26+Me+Jawa/@-7.8431362,110.3837564,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a572be92542cf:0x1db378fea57c650d!8m2!3d-7.8431362!4d110.3837564!16s%2Fg%2F11rjz9117z?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday10.00 am–11.00 pm",
-            "Sunday(Easter)10.00 am–11.00 pm Hours might differ",
+            "Sunday10.00 am–11.00 pm",
             "Monday10.00 am–11.00 pm",
             "Tuesday10.00 am–11.00 pm",
             "Wednesday10.00 am–11.00 pm",
             "Thursday10.00 am–11.00 pm",
             "Friday10.00 am–11.00 pm"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAESD56GDILhiw--DR9BkeG_kq1r7o9LL7jFuvXXxOx7EnxsfKucu_knfGuELDCobAp5VZzVbCf1ikikbRBgnU10iCNdYQgt1od9xX4N3f-b1fAs-An93iekfNezVfXArC57HvKa6A=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipOAjoCoSODdm45mQJn-jFQPlXtVi4LFRgj-iV44=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipOEwQp3nc9txrzXGHPeOgR0vrUjTeDffy4b7Cg1=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjWpxblh6GUMxsxPduPUmnbjL96SKuXv9NaM75A7demSgvZXFvo=s0"
+        ],
         "menu": {
             "link": null,
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwersgzGzYPS693B4YYdHVjCThgszkGCHeMUkCBEc6Q_tlMcf7Y0DMxrzL7PsibMupd1GScpcBzB5HKkmrjWb7v7Te764AatU-eXmw-TO8kPR-vfkZMocurIqF_vlb70viDk1F0wysA=s0",
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9psG9F11CSxcPq5tVjHcNOpxixmPHWA7Pfco_eC9X8oRpb-Cd_DZZo2uHUErF0vJIW8ot547byC6BxaoetH-uFsNkAlFXsUo9oEQYUMqH9_7zgY6V1nvVszkGHtl8HYrluznEPB1dw=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwep3xB44DZxItgYLgVuRdwkmAJqH5PmSrU-Q_YapB-l8FI10wJQCtcikg9htlQ_LK345E8cLKIpOzB4n91oC8-S560Qci0zl8oD_7HgD3zDREi7-_WEbUp04Ba3xPzj2k66ul2Dm=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweprmQ8CC38pDAY3gqJ9mw58pL7Aik7oXRGpGfaAvKIkdCkPdiLaPRdRcSp278twI2mx-TNxNN3_C6KjTGxsWnWVkI0s5BmU_Pf_YY-cbFoLLYMaquVITZ7Viz3UMzo2JtfA5dg=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqNp9Of2aKCzkxlcaBgnZms7RYkTmh7LcZTsAiwovnpAfwv-XH4R_xi0u2X_lJEqJEzoolANXAzfp6_HE7GApb0LCfyGZGtnwsepdsIr4oAj33byO5GiIqNnnZFWgaZd6BCkQAz=s0"
-            ]
+            "images": []
         },
         "customer_reviews": [
             {
@@ -422,57 +356,68 @@
         "name": "D'djamboeri",
         "address": "Jl. Mursidi No.34, Pringgolayan, Banguntapan, Kec. Banguntapan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55198",
         "rating": "4.7",
-        "reviews_count": "259",
+        "reviews_count": "260",
         "category": "Coffee shop",
         "phone": "0813-3009-0601",
-        "link": "https://www.google.com/maps/place/D'djamboeri/@-7.8045852,110.4062369,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a578266322c81:0x294db0d85452471c!8m2!3d-7.8045852!4d110.4062369!16s%2Fg%2F11h_llnn40?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/D'djamboeri/@-7.8045852,110.4062369,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a578266322c81:0x294db0d85452471c!8m2!3d-7.8045852!4d110.4062369!16s%2Fg%2F11h_llnn40?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday11.00 am–10.00 pm",
-            "Sunday(Easter)11.00 am–10.00 pm Hours might differ",
+            "Sunday11.00 am–10.00 pm",
             "Monday11.00 am–10.00 pm",
             "Tuesday11.00 am–10.00 pm",
             "Wednesday11.00 am–10.00 pm",
             "Thursday11.00 am–10.00 pm",
             "Friday11.00 am–10.00 pm"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/p/AF1QipMJlMuv2GIgqW9MD3XO7wEjjauQmA2pJMzqeMJR=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipPmFlEK7x9Fp9TtEPvXDYGQgDEgK75ciSgDzCtV=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjXSjfiTH4bPITmC29C-HHKwJpQIMxdHt8TfTqdOa5GR-m6ncM0g=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHya-h6gqQxHdPfeErUu2HVPzJ7pCyCfCoBh62Nm8KBRP7nNs3zDSxJkaM0GUroBa0uQd_BqAofowwri5PbycuvEstZnkuNGA8Qjye4tmnuvdb2gSMIKiiFzfwtCTjNCZnjRM8acQ=s0"
+        ],
         "menu": {
             "link": null,
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqT4jRNu-8RjpR7Ff3yORp_FFatXWK4yHlM-JlGPmVhYjrMydxXtU9U9xr1t7l-YUdBu1fWG4MkVfqZf2hA62xrCX7N_iertlpXZT8Cps3qLQ5syJJbF3pxietlul7eTssjM26MpJ5F_LEM=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoWQf_9yHacTpIAhjla6oF3bTKkrPSeM_ylFn9gthgtwHXYxHquMj_xdBnPTQktggglJoTRzzrRLsB3zd2KPURwFUElXLZz7wKbJ26nSnOm2XAA0J2iV3e300lta7xKPSa65Pbp=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerIeZ8AFbUUHq-J_Yomvgnk-124lheZY1BrWI_YkxcHHlBQpmBsd9_Q04y0_kPpJLKzGKVY4A7b-C7cW5pO4626S4LS1wWLTix6eD6IiiP1WESyAYVklqDQ0XZZrNhkb1RMy3B5Hg=s0",
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9pu0mvLXwYN7C6tNvHuKP7BDjUYFxRmRHrX4WQTswO8u98R1I5PQ1jwsy-aNW625NmOeNF2G1mtJn1OVfQMrd49khQY8v12Q3aSMva6PJTazqQrNamjkejhBCY-Kt70zgzrs6NmJ=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweovx_nDMbAU-1FAHEwqiwe3vd1m1X3X4QsO01xqfksuWFfUSwj2L4qKtvgiEZroF58AzQwMxOMacawdutiVpQHknTS8zJciCIy2YnvRJh7pis4-pBlzLroX84iSGnE_szqzy7i12Q=s0"
-            ]
+            "images": []
         },
-        "customer_reviews": []
+        "customer_reviews": [
+            {
+                "author": "Icha Bulan",
+                "rating": "5 stars",
+                "text": "D'djamboeri offered a varied menu so we don't need to worry about which menu that will be suitable for us when we visit that place. The coffee was great, they also have a good indoor and outdoor space that you can choose as your …"
+            },
+            {
+                "author": "Yas Rambe",
+                "rating": "5 stars",
+                "text": "Couldn't stop feeling comfort and warm when i was here. Fave vibes, fav outdoor, coxy and good beverages. Animal Friendly, nice place for kids and family. baristas are skillfull and kind. So that the cats too. A - Must be come here- destination one."
+            }
+        ]
     },
     {
         "name": "Metreum Cafe",
         "address": "Jomblangan, Banguntapan, Bantul Regency, Special Region of Yogyakarta",
         "rating": "4.5",
-        "reviews_count": "621",
+        "reviews_count": "623",
         "category": "Coffee shop",
         "phone": "N/A",
-        "link": "https://www.google.com/maps/place/Metreum+Cafe/@-7.7908688,110.3982202,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a597433e99cf3:0x7507b9c10d4be8f2!8m2!3d-7.7908688!4d110.3982202!16s%2Fg%2F11vbrq5yn3?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Metreum+Cafe/@-7.7908688,110.3982202,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a597433e99cf3:0x7507b9c10d4be8f2!8m2!3d-7.7908688!4d110.3982202!16s%2Fg%2F11vbrq5yn3?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday11.00 am–1.00 am",
-            "Sunday(Easter)11.00 am–1.00 am Hours might differ",
+            "Sunday11.00 am–1.00 am",
             "Monday11.00 am–1.00 am",
             "Tuesday11.00 am–1.00 am",
             "Wednesday11.00 am–1.00 am",
             "Thursday11.00 am–1.00 am",
             "Friday11.00 am–1.00 am"
         ],
+        "photos": [
+            "//lh3.googleusercontent.com/a-/ALV-UjXUcYPNvJLDt3N1p9CREW5d1Z5buEuuc8gMFlhU6RtikGYvUzo=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFeT0b0VbjyGd2ceal_MwbwJA-eSllgVDDtbwWI4YGxLHQw3Qpgayvlnz0pVclSvMRivLmXXDoDbwLsrM5FCvE2oUKxZRe8QxsuSJT-AM2fQvGW5dJejtZMCMVplyEoGHVn3meg-ZXYXLTv=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipMkqJq3k9mYqJENJEo71PexezPjDhxW80DoM2NX=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipOuoXpTs3BS4H78yDZPSiHcimYJsYu8O15IYJDZ=s0"
+        ],
         "menu": {
             "link": "http://linktr.ee/metreumcafe",
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerGgZ5A9uDwahWINpU7srrgBO08HUIZDPVXY1ntlZqPhBz2rNyHKnqLX5gnnFx3mSd5BSmhU_xV1u8UAfPxRKRi-eTm4tKnYIE7V2btxSCY3BS1roWpR06MQ8XPlSiJSQg3uoAbthmCZsUw=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweonQ8pP9cyejsO_4JDJSUX9RBHJZxwvoq15PF36Jbqrw5iUf7HeLeAKghVGRy2aWjt4mBR4nkDjeTqt377xfBk2iUDocmU1zIy7zUOylpm7jSDeJid7M-_xcS3dni1NdkODk6ay=s0",
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9pvtgLQiR2Nm0cNqbxEp8YmY3z8uWmyD4UopVy80DpBIYY6s44KCgZPeH6p1zZVz6VLFesnXvnIqVYPw6FQ4j8vco3SjwuzLUNMZZ0bEgcuuijm_AObq4xlVFpJomDTFWq-jejrbUAHtq5WY=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwer7LUx3je1SVwL2L906wz4M9I7CXIXM61tw3mrOF9InaVldC-s64vJ9r9Zw9ejBt3GqcejvbU2ng00zkC2rCwPQWwssYcutFTWdRL0KwRUsKvejbM_lQ6ZMe01FLW1bOKA3oaNSSA=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwer14Tykf3onuoF5qd8m5WvCQcxwiyyvbmjyc40cFgl0HnyNSWHCdPyHe_mDlPUtZxacw8zEzXOtoJX6VeBw0hj9OZQu6FV5mvAXjT7WiueGltCuVBt2ozOGs28RrG8H_D2EDDa6_w=s0"
-            ]
+            "images": []
         },
         "customer_reviews": [
             {
@@ -509,25 +454,25 @@
         "reviews_count": "377",
         "category": "Cafe",
         "phone": "N/A",
-        "link": "https://www.google.com/maps/place/Rekaya+Artisan+Coffee+and+Eatery/@-7.7981365,110.4056479,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5744038df3ef:0xffb78d5091a9b975!8m2!3d-7.7981365!4d110.4056479!16s%2Fg%2F11t2q9k5s3?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Rekaya+Artisan+Coffee+and+Eatery/@-7.7981365,110.4056479,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5744038df3ef:0xffb78d5091a9b975!8m2!3d-7.7981365!4d110.4056479!16s%2Fg%2F11t2q9k5s3?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday8.00 am–11.00 pm",
-            "Sunday(Easter)8.00 am–11.00 pm Hours might differ",
+            "Sunday8.00 am–11.00 pm",
             "Monday8.00 am–11.00 pm",
             "Tuesday8.00 am–11.00 pm",
             "Wednesday8.00 am–11.00 pm",
             "Thursday8.00 am–11.00 pm",
             "Friday8.00 am–11.00 pm"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEo5BpbGzAsLobKwF0kgfjxBmBQwU9DwlYoJAdYoKd-ey1RuslKFE6kL1Ad9l_ukNPHM0JEUF3v7HBpnlZVpc6dnHyj6-aoqWybbyP2aJX7br4F0SA2FRUPZALPJhWmXD4A4ec3jZGTtw-L=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFNKDXBracfNsMysF6B_-WKdgNrLlB-u69oQ2Yj9tmLegfjs0wN8SDn0HqUr82qcYxNJCVRV8MFqFMU8akaOC49WGfjrWqiRz-jvCGp24-FmC6HsWxf5YfFy1DLrxYj197PVEijMA=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFLdBxW4xxkHUrcADIJhEa-5Oq4YSGDIIl0kdbAJO-IfgJIAg5j4bf7ed48D_PhbYwOVvWDB7wm11IeV45iwOxCTu3x0crumH4jwXSQ_DSC0ER__FMYEH4mTfviuMzhBKe8BaUOxw=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjWGqcM010dTQt04qA29VkR3uT5VOkrPOnWq35fRXySy9knh3dDXyQ=s0"
+        ],
         "menu": {
             "link": "https://bit.ly/rekayaartisancoffeandeatery",
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepzaFtpm6YCwY4tdvy93U7YXhBShfIm_lKf3V_A_vBstb24UIqL_6v4eOEDZLP2WXfmCJ7GLlwnCfa8EWy4AvvkiaCbSyqvTr1kaojLlSf01icR4swix6sHC3MdK__SilRlcEr3=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqGQZSuPGA2c1FL4mgoPPZZmHEciMojNe1yg49lbcoBdFm4M5mSU08zC8A08rWcPtiLiOIVJT06z4GCwYvApXExBeklnPvOvExrg-IB8idXfK3zeR-NtC-aJ_paKeBsUFbbd5a7=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerRZNw-peMYp8YZ0ZfhFC3cqMZ3bJeAySAIWmqyWlJo-mv28PFwCBj_NJbH4JnsAl-eNjcoqIR7T5LHrDaKEYk1FxAIP0V5IqPVv26MFp1isaQr2rzspp8j0JOjhPAinkJq3HZ6=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqzc5k0ZLVHhocbm73KNLgw9HkFn35OQQHaFyQ7K258eLEKLtHbB3aSfgiAEilFC6FxqoAwF3h2mbsrsSpZqPAkMVmDBh0wDC7zP8JHHlDbwhmeAnPr4TlZ0xqCVrRzI2Eusm2nWlynu5Aq=s0",
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9puSjB9i8zDSR5hsTpwS0ppBEff3Z_Ybx3IR68hBXBLconEm0HZBrnC8UZ19spIfLilM4oD-_x56sBGxSVzrZ5C0lvnV-hlEvjreVyzsWFx22wErfsrmlgE8iabVa9FCZ3ntsH6KfW95QVk=s0"
-            ]
+            "images": []
         },
         "customer_reviews": [
             {
@@ -561,28 +506,28 @@
         "name": "Cafe Keko Indonesia",
         "address": "Jl. Pasopati, Kauman, Tamanan, Kec. Banguntapan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55191",
         "rating": "4.8",
-        "reviews_count": "256",
+        "reviews_count": "257",
         "category": "Coffee shop",
         "phone": "0852-9332-4105",
-        "link": "https://www.google.com/maps/place/Cafe+Keko+Indonesia/@-7.8424146,110.3824573,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a57acb56c153d:0xca351b916542e586!8m2!3d-7.8424146!4d110.3824573!16s%2Fg%2F11kqh9_yjg?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Cafe+Keko+Indonesia/@-7.8424146,110.3824573,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a57acb56c153d:0xca351b916542e586!8m2!3d-7.8424146!4d110.3824573!16s%2Fg%2F11kqh9_yjg?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday10.00 am–12.00 am",
-            "Sunday(Easter)Closed Hours might differ",
+            "SundayClosed",
             "Monday1.00 pm–12.00 am",
             "Tuesday10.00 am–12.00 am",
             "Wednesday10.00 am–12.00 am",
             "Thursday10.00 am–12.00 am",
             "Friday10.00 am–12.00 am"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFIQELAJLm-QoHCfsJ8CW-aXLElPbP-HJ7ax9pgyT7hDI5YgxF0Y7yOHGZl2DNKuArXet30lLW6SQCDrKD96_XB1Ef1O4ai7dK3TWMjmnbJIcKAZcc_GrJ8D7GzEMnd3wSoCWVL=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFhbp-fM4ma0IHrmvfTN6D3vcOqG6Ou2zBltCZ-Cm7vifQgnqAiD6bF7bXZo0I7lg5tpW690z0RuDEA2j6THSvDbV_c79AMI9LpWrwVk2j4FFKs-EJHNMa6MwtH61bIdqae0Nzc_jfhYggz=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjV6uC7zl4Id6zn4ihDZ9Pd4UnTzUtva7Tithkmc_Z3Mr-via3KL=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFViTLg6hROSBqD6ownlTsnoi_IuvTFzyc1qsb3zRVhyBqOCDs1jHjVM_b4nH4DAz8-e-zQw7XgGyizWex9CZqwzZKsWSnzsDwJbEUabKyTpk6wb7bPlaFzk9AXrLQsFRiNrgE=s0"
+        ],
         "menu": {
             "link": null,
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq7uKcGJ9R6FGmCI0mi3hyUIQJBh54l7kSPa867bwD5hkIddJp9I9xZCbFiyUuiwQq1ZjFgdp8yJWCdAJ6zcpjeywE7q9egcyIqHP3bWFhIj85cTIiYgNzeQ_uBQdweSW4c9CkV=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqtWjI3zxH_p1RdyO44ON98Ryfzbf6gfT3yXqIA-x69oKUsStdBoztxtyEKpcvEx1pCEuu4F-FCe2nM2vToaOTRnyq_bV-oxKUbbD4Sy1VAzaOjENZd-aIzrSN9q3xS8P-q-cK8=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepEWJVqPR_A19ISVjAQRiqO0r2lnqQ_b6MbCZshC6ujhRylloBMcdTyvFIv6LD0RYvxOI1m9N0YQNvBrk8MbyJ89XqE3vJBzUhrr2Bf7TP160wNiyA0dM695b1Lq3pknWYIURiOPg=s0",
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9ptRjpUBniZ2WcQHQwzMbRcGqO16RoJ8Q_Je2kYtOpmrRhWZeuNCteKWALyEWkAupVvBEb8JFMq6S4xZHFNhulOZ_oLRnMEg8lsyzKz-eH5K6LluCx6R4VUPu5X8bmG8Aq2Dr2DI=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqjl8S1G4dhRj650fhPn8UfR4jMQ1C26v3gbS7CGmUfVrrp7mRkLqSApRq3cjpUqUiGRlwh7SBYRl2H2MTUY2zmgNtGGnD7Xja-DaqJKCB_YLULT22uz3kd9kg9UcijEw1hb10=s0"
-            ]
+            "images": []
         },
         "customer_reviews": []
     },
@@ -593,25 +538,25 @@
         "reviews_count": "65",
         "category": "Coffee shop",
         "phone": "N/A",
-        "link": "https://www.google.com/maps/place/Insieme+Coffee/@-7.8304162,110.3839242,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5718843d3239:0xa57fd64aed624c05!8m2!3d-7.8304162!4d110.3839242!16s%2Fg%2F11px92q75s?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Insieme+Coffee/@-7.8304162,110.3839242,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5718843d3239:0xa57fd64aed624c05!8m2!3d-7.8304162!4d110.3839242!16s%2Fg%2F11px92q75s?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
             "Saturday4.00–11.30 pm",
-            "Sunday(Easter)4.00–11.30 pm Hours might differ",
+            "Sunday4.00–11.30 pm",
             "Monday4.00–11.30 pm",
             "Tuesday4.00–11.30 pm",
             "Wednesday4.00–11.30 pm",
             "Thursday4.00–11.30 pm",
             "Friday4.00–11.30 pm"
         ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGjq6T7uYky7-FQzpEXmzLv4S5n1hyiEzXALYkvBj3qrv4e_u4oXUeXwR_mj9_ZxYAx9rsJB-UfY5r7uT9PS19VE6YjyZx9p1K7q8kvP7pN_jToad_A0OTaEojTpONFZdxqLRVE=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjWwjWaAHX2gF6iLmPo3CqosF-a3titttaIhEEs-t5MhCrXfofA-=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHJn_l30zBUKwb_95t12zwN5-V475MjuHRuFN4IC9TuZ_1bACAslyBPU121lhUIGts9O-YHkc75DNIM1sVOz4iYT2WkYlCHrMA312pKToKX3MGRNbna-LknE5hW7stRoyGkHke27Q=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHmNgCKSwGY-hyYu2awGHd1hDkoVkH66dYik-tyZoCCRY1NrgU_Y0NU1eqAAQkto5b-sne8mGmMKlo7p4tuV70YQheQmeTUGWpdRzeRAxVf8GsVaDhPyBYY73bgPqUqP4pTHSFKJQ=s0"
+        ],
         "menu": {
             "link": null,
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepnJLB2tS1BRLd-ipRzFqKk7jDxSXiobo3e_UZKHf2c5tzteq3LvgBN_Q3FcG1HuCNTR6ezKlht4xh50OWMafSaNEQgtpSLZHeLmDCQmQalMMrcD5qiVz_eHdPNDVc15PHpft2zmg=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerBZRWkwpd-a8xZb_t95_QMuzQqQv_9_qvKytOLTVL3mCU5QrqlylIk27J4ZVXKN-sdP-vraNgowfHPT5o5eHKH7m1JxLRlfRniDpJQyjWF_wfLq-vAhwbOtlmhj9ecUFePaoFI=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqfpwb4DDV15lEgp1cF8Ut7x8RIWbL4y1jKNM50_QCdg7bWk5UkdKDH8u9GfeFLBEPBqX59KYdO0na-rYNVU8BMw5uYkyk2aA2L_JzdwKmFOPuy8M76PVIHfrU9R5DuYPoQ5XLLWA=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerlq2-eIhmu1p1ovELZexsUj6rTpTB3Pg2uM9jAxlaQ7wlAP8NL1JKyaqB0gznR5sNofijQTPwV527lQjOU9B12eLJwoXSsFQ8TyRDiBOK89FBLNetGShzzwvsIrjJCJitFs3U=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqMz2l-_q4Afn82tQCc3LyyCqM8J4DOOr51BOtoJDB16ZvqbZXLAyj_pejQCZ2XHKor-EJhpye9m3SXxi1Ji0pGAo2o7BrdqFWh7Foy330tiM5brEtydvR0SquWXJh_Z65qC2t0=s0"
-            ]
+            "images": []
         },
         "customer_reviews": [
             {
@@ -645,28 +590,28 @@
         "name": "Kafe Mainmain",
         "address": "Jl. Sukun Raya No.422, Jaranan, Banguntapan, Kec. Banguntapan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55198",
         "rating": "4.4",
-        "reviews_count": "1,413",
+        "reviews_count": "1,414",
         "category": "Coffee shop",
         "phone": "N/A",
-        "link": "https://www.google.com/maps/place/Kafe+Mainmain/@-7.7929225,110.4055823,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5942478cbccb:0x92ada86cc0cf244d!8m2!3d-7.7929225!4d110.4055823!16s%2Fg%2F11jn4zg0n0?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D",
+        "link": "https://www.google.com/maps/place/Kafe+Mainmain/@-7.7929225,110.4055823,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a5942478cbccb:0x92ada86cc0cf244d!8m2!3d-7.7929225!4d110.4055823!16s%2Fg%2F11jn4zg0n0?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
         "opening_hours": [
-            "Saturday9.00 am–2.00 am",
-            "Sunday(Easter)9.00 am–2.00 am Hours might differ",
-            "Monday9.00 am–2.00 am",
-            "Tuesday9.00 am–2.00 am",
-            "Wednesday9.00 am–2.00 am",
-            "Thursday9.00 am–2.00 am",
-            "Friday9.00 am–2.00 am"
+            "Saturday10.00 am–1.30 am",
+            "Sunday10.00 am–1.30 am",
+            "Monday10.00 am–1.30 am",
+            "Tuesday10.00 am–1.30 am",
+            "Wednesday10.00 am–1.30 am",
+            "Thursday10.00 am–1.30 am",
+            "Friday10.00 am–1.30 am"
+        ],
+        "photos": [
+            "//lh3.googleusercontent.com/a-/ALV-UjX3TqtNi8y_u088HDE9hUGjjBDN-qnkdi43_VFR2Ug5e8fm_5A=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHnx7zFbiuS99f7s6Qh3EOBDZAS6jV_i3j9MconFersuwpISwKcL9swPg2JEwm56sxII9ZQLRwx-1fJnxmDlpZ9VF5KYq5mXX79AdN70xAOlaVFMCwNgZAYngOT-UdDI1TM8Mu0bQ=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHd8JFLFSHY86lraTnMDA3jF0DzNevZt141-od9Vv_h95ubGEyn-ov1jEkYP3eRkPAMNKVkKsHsNwcgcdiNmBdQ5TOJ7jdC8AAUsZYSgtVzqTi76j6jmIWpTCUAVVo8306t8V2Wi_IV05Ks=s0",
+            "https://lh3.googleusercontent.com/p/AF1QipP1MbX7AoR_PbbrkwgULihOhbej8edpjvWvrXey=s0"
         ],
         "menu": {
             "link": null,
-            "images": [
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweosygbjeWjansihlbj4hsn4P6MDb01y7bFC9cgovV2cH70OsLDDEQs3DYzS5yHkGhzxuKNr1QSl3GVFirTcP815aUYDlnZyQBq6w_s7ig-TkTbpEzJvARfmDhzhCXjPOijc-a0=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqCu9Got7ZhZ-15CV6_QngNMtvEb864Zj6eCvEgQNVdkGBnJx7_6XsXeDBPbtNAjjytpOYaqlhRGyovGfGgrteD-AV001e5f0AU9ZwlYD09_LXrYZ4zpl1m3pLGvZTxHjJDGfHk=s0",
-                "https://lh3.googleusercontent.com/geougc-cs/ABOP9psxJFD9OK8q-Cx9JsrQampIDDjV-CHRRCE3ZmPZNpy4m_jWPMO4ExiOuokv_IC59mWeSYJThNDfZy0-ro4l9pGj1hrELqui4Dxl1zs1AsbLnY-8STYulA_fjOfEXX07ZfmUBAcSuA=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoJbgyE9lbAtIu7ss4HQVHmv8xpldQtavHULGcNxI0lj1wbzx4SnFc8e-PjsBTeEuYUJRAtHclKDGanEysG9Q6KQFO7oy0EjXomzMsNhp4i9gvjcvRXFFI4aryvS7aqFCue4_08=s0",
-                "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepu1Qd-mLPxD3j5mScpMELCOXa-dVCfwKJH95LxauqYSMxRkMRvMsKxsfH2CM8ctFcIuXDqLhAczgLzDIo72B7wovBVULfRxqETUvsrmeLPuGMhrHQCWx_s7wuX7Bt9-MMOEgqTXQ=s0"
-            ]
+            "images": []
         },
         "customer_reviews": [
             {

@@ -1,0 +1,57 @@
+[
+    {
+        "name": "TOMORO COFFEE - Seturan",
+        "address": "Jl. Seturan Raya No.C8, Kledokan, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281",
+        "rating": "4.2",
+        "reviews_count": "190",
+        "category": "Coffee shop",
+        "phone": "N/A",
+        "link": "https://www.google.com/maps/place/TOMORO+COFFEE+-+Seturan/@-7.7688398,110.4098469,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a59005dcf6a4f:0xf2345c93407471b9!8m2!3d-7.7688398!4d110.4098469!16s%2Fg%2F11lcj0gg8s?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
+        "opening_hours": [
+            "Saturday7.00 am–11.45 pm",
+            "Sunday7.00 am–11.45 pm",
+            "Monday7.00 am–11.45 pm",
+            "Tuesday7.00 am–11.45 pm",
+            "Wednesday7.00 am–11.45 pm",
+            "Thursday7.00 am–11.45 pm",
+            "Friday7.00 am–11.45 pm"
+        ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEUDpVWEGR-19oCCqRgARLViWdFcCkAVzcZF7qoeDbBuO2ftWBQkU1H63rq9eDisdoSYeLWX8SREuEucii8nnL8I7OBZZMAbpMW5g3SGHFtHV-LfOmI9KsKPmTD1-TP7y2JL9o=s0",
+            "//lh3.googleusercontent.com/a-/ALV-UjVopUZwDgFoLAeSJYygyti0O0dBzaDlqWUQr2WrBmpZnSs-lHWaxw=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEjfjJvkMnC8bWubdmS7gLm4O4QiIidtbM0ocQ0MTv4E-SCiqM8ub0XDOtLRpF_swn0cW40NOHjgl-6_7DSfawsLonnzywT_DC0Y9Uhtlnjrj-971io2rq1UhGB9V6i5cXWGRDnx3Vz_Zaj=s0",
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEDdHpQ-ZrfaHeU3Qzmeq8DWSTakMgmgM89xgsXQvWhNeDUU_wiThdX0QnScGNb_1yfoEuZ7RTyhipnPuyOqCRXn-E8HXaLSzYndReyV9rvjBD6dBSBYCj6Tk4qdnqQ-yhBy1Vy=s0"
+        ],
+        "menu": {
+            "link": null,
+            "images": []
+        },
+        "customer_reviews": [
+            {
+                "author": "Rinda Hadiana",
+                "rating": "4 stars",
+                "text": "Tried Tomoro Coffee a few times for takeaway. Honestly, not my favorite so far, but I still gave it a chance on several visits. The concept is nice and practical for on-the-go coffee, but the taste hasn’t really won me over yet. Maybe I’ll try different menu options next time to see if one clicks with me."
+            },
+            {
+                "author": "jimmy christian",
+                "rating": "5 stars",
+                "text": "I can recommend this one for sure, the place is clean, the service is somewhat good, and the coffee is the breadwinner. Well it might seems kinda expensive but at least try it at least once. You might not regret it."
+            },
+            {
+                "author": "ini bucan",
+                "rating": "1 star",
+                "text": "Actually, there was no problem with the food or drinks, but the service was not friendly and felt almost neglected. The security was also very poor, as both of my helmets went missing, even though there was a parking attendant there. My …"
+            },
+            {
+                "author": "Bella Amelia Putri",
+                "rating": "5 stars",
+                "text": "sweet because with my bf"
+            },
+            {
+                "author": "Christopher S",
+                "rating": "5 stars",
+                "text": "Large space, maybe can be used for wfc/me time. Just like the other, they have a good coffee and good service. Keep it up."
+            }
+        ]
+    }
+]

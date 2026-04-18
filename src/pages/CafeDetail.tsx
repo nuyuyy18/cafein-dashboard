@@ -282,6 +282,7 @@ export default function CafeDetail() {
             src={primaryImage?.image_url || placeholderImage}
             alt={cafe.name}
             className="h-full w-full object-cover"
+            referrerPolicy="no-referrer"
           />
         </AspectRatio>
       </Card>
@@ -295,39 +296,41 @@ export default function CafeDetail() {
                 <Input
                   value={editForm.name}
                   onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                  className="text-2xl font-bold"
+                  className="text-xl font-bold"
                 />
               ) : (
                 <div className="flex items-center gap-3">
-                  <h1 className="text-2xl font-bold">{cafe.name}</h1>
-                  {!cafe.is_active && <Badge variant="destructive">{t('detail.closed')}</Badge>}
+                  <h1 className="text-xl font-bold">{cafe.name}</h1>
+                  {!cafe.is_active && <Badge variant="destructive" className="px-1.5 py-0 text-[10px]">{t('detail.closed')}</Badge>}
                 </div>
               )}
 
-              <div className="flex flex-wrap gap-4 text-muted-foreground">
-                <div className="flex items-center gap-1">
-                  <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+              <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-1.5">
+                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   <span className="font-semibold text-foreground">{Number(cafe.rating).toFixed(1)}</span>
                   <span>({t('detail.reviews.desc', { count: cafe.review_count })})</span>
                 </div>
               </div>
 
               {isEditing ? (
-                <div className="space-y-3">
+                <div className="space-y-3 text-sm">
                   <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
+                    <MapPin className="h-4 w-4 text-muted-foreground" />
                     <Input
                       value={editForm.address}
                       onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
                       placeholder="Alamat"
+                      className="text-sm"
                     />
                   </div>
                   <div className="flex items-center gap-2">
-                    <Phone className="h-4 w-4" />
+                    <Phone className="h-4 w-4 text-muted-foreground" />
                     <Input
                       value={editForm.phone}
                       onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
                       placeholder="Nomor telepon"
+                      className="text-sm"
                     />
                   </div>
                   <div className="flex items-center gap-2">
@@ -339,14 +342,14 @@ export default function CafeDetail() {
                   </div>
                 </div>
               ) : (
-                <div className="space-y-2 text-muted-foreground">
+                <div className="space-y-2 text-sm text-muted-foreground">
                   <div className="flex items-start gap-2">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                    <span>{cafe.address}</span>
+                    <MapPin className="mt-1 h-3.5 w-3.5 shrink-0" />
+                    <span className="leading-relaxed">{cafe.address}</span>
                   </div>
                   {cafe.phone && (
                     <div className="flex items-center gap-2">
-                      <Phone className="h-4 w-4" />
+                      <Phone className="h-3.5 w-3.5 shrink-0" />
                       <span>{cafe.phone}</span>
                     </div>
                   )}
@@ -355,11 +358,11 @@ export default function CafeDetail() {
 
               {/* Operating Hours */}
               <div className="mt-4 border-t pt-4">
-                <h3 className="mb-2 font-semibold flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
+                <h3 className="mb-3 text-sm font-semibold flex items-center gap-2 text-foreground">
+                  <Clock className="h-3.5 w-3.5" />
                   {t('detail.hours')}
                 </h3>
-                <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <div className="flex flex-col gap-1.5 text-sm text-muted-foreground">
                   {cafe.operating_hours && cafe.operating_hours.length > 0 ? (
                     [...cafe.operating_hours]
                       .sort((a, b) => {
@@ -370,8 +373,8 @@ export default function CafeDetail() {
                       })
                       .map((hour) => (
                         <div key={hour.id} className="flex items-center gap-6">
-                          <span className="w-24 font-medium">{DAYS_OF_WEEK[hour.day_of_week]}</span>
-                          <span>
+                          <span className="w-24">{DAYS_OF_WEEK[hour.day_of_week]}</span>
+                          <span className="font-medium text-foreground">
                             {hour.is_closed
                               ? t('detail.hours.closed')
                               : `${hour.open_time?.slice(0, 5)} - ${hour.close_time?.slice(0, 5)}`}
@@ -416,7 +419,6 @@ export default function CafeDetail() {
                 <CardTitle>{t('detail.menu')}</CardTitle>
                 <CardDescription>{t('detail.menu.desc')}</CardDescription>
               </div>
-              {/* Menu Link Button if exists */}
               {cafe.cafe_menus?.map(m => {
                 if (m.name === 'Link Menu' && m.description) {
                   return (
@@ -523,13 +525,13 @@ export default function CafeDetail() {
               {Object.keys(groupedMenus).length > 0 ? (
                 <div className="space-y-6">
                   {/* Display Menu Images First if any */}
-                  {cafe.cafe_images && cafe.cafe_images.length > 0 && (
+                  {cafe.cafe_menus?.some(m => m.name === 'Foto Menu') && (
                     <div className="mb-6">
                       <h3 className="mb-3 text-lg font-semibold">Foto Menu</h3>
                       <div className="flex gap-4 overflow-x-auto pb-4">
-                        {cafe.cafe_images.map(img => (
+                        {cafe.cafe_menus.filter(m => m.name === 'Foto Menu').map(img => (
                           <div key={img.id} className="relative h-40 w-40 flex-none overflow-hidden rounded-lg border">
-                            <img src={img.image_url} alt="Menu" className="h-full w-full object-cover" />
+                            <img src={img.description || ''} alt="Menu" className="h-full w-full object-cover" referrerPolicy="no-referrer" />
                           </div>
                         ))}
                       </div>
@@ -537,7 +539,7 @@ export default function CafeDetail() {
                   )}
 
                   {MENU_CATEGORIES.map((cat) => {
-                    const menus = groupedMenus[cat.value]?.filter(m => m.name !== 'Link Menu'); // Filter out the link item
+                    const menus = groupedMenus[cat.value]?.filter(m => m.name !== 'Link Menu' && m.name !== 'Foto Menu'); // Filter out the link and photo items
                     if (!menus?.length) return null;
 
                     return (
@@ -580,10 +582,10 @@ export default function CafeDetail() {
                 <div className="py-8 text-center text-muted-foreground space-y-4">
                   <p>{t('detail.menu.empty')}</p>
                   {/* If images exist even if no text menu items */}
-                  {cafe.cafe_images && cafe.cafe_images.length > 0 && (
+                  {cafe.cafe_menus?.some(m => m.name === 'Foto Menu') && (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-                      {cafe.cafe_images.map(img => (
-                        <img key={img.id} src={img.image_url} className="rounded-lg border object-cover aspect-square" />
+                      {cafe.cafe_menus.filter(m => m.name === 'Foto Menu').map(img => (
+                        <img key={img.id} src={img.description || ''} className="rounded-lg border object-cover aspect-square" referrerPolicy="no-referrer" />
                       ))}
                     </div>
                   )}
@@ -743,6 +745,7 @@ export default function CafeDetail() {
                         alt="Cafe"
                         loading="lazy"
                         className="h-full w-full rounded-lg object-cover"
+                        referrerPolicy="no-referrer"
                       />
                     </AspectRatio>
                     {canEdit && (

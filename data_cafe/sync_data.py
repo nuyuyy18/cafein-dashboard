@@ -174,31 +174,33 @@ def sync_data():
         })
 
         # 2. Images (Menu/Cafe) & Menu Link
+        
+        # Cafe Photos -> cafe_images
+        if "photos" in cafe and isinstance(cafe["photos"], list):
+            for i, url in enumerate(cafe["photos"]):
+                if url:
+                    images_data.append({
+                        "cafe_id": cafe_id_db,
+                        "image_url": url,
+                        "is_primary": i == 0  # First photo is primary
+                    })
+                    
+        # Menu Photos -> cafe_menus (as special items)
         if "menu" in cafe and isinstance(cafe["menu"], dict):
-            # Images
+            # Menu Images
             img_list = cafe["menu"].get("images")
             if isinstance(img_list, list):
                 for url in img_list:
                     if url:
-                        images_data.append({
+                        menus_data.append({
                             "cafe_id": cafe_id_db,
-                            "image_url": url,
-                            "is_primary": False
+                            "name": "Foto Menu",
+                            "price": 0,
+                            "category": "food",
+                            "description": url,
+                            "is_available": True
                         })
             
-            # Menu Link
-            menu_link = cafe["menu"].get("link")
-            if menu_link:
-                # Store as a special menu item since we don't have a column
-                # We'll use a hack: Category='non_coffee' (since it's an enum), name='Digital Menu', description=URL
-                # Check valid categories: 'coffee', 'non_coffee', 'food'
-                # Just insert into cafe_menus directly via separate list if needed, 
-                # but we can't batch insert easily if we don't have a "menus_data" list yet.
-                # Let's add a list for menus.
-                pass 
-                # Actually, I need to create a menus_data list and batch insert it too.
-                # But wait, the table 'cafe_menus' exists.
-                
             # Menu Link
             menu_link = cafe["menu"].get("link")
             if menu_link:
@@ -206,7 +208,7 @@ def sync_data():
                     "cafe_id": cafe_id_db,
                     "name": "Link Menu",
                     "price": 0,
-                    "category": "non_coffee", # Valid enum value
+                    "category": "non_coffee",
                     "description": menu_link,
                     "is_available": True
                 })

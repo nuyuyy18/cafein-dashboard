@@ -22,7 +22,7 @@ class CafeScraper:
     - checks for duplicates
     """
     
-    def __init__(self, input_file="consolidated_list.json"):
+    def __init__(self, input_file="../test_tomoro.json"):
         self.input_file = input_file
         self.browser = None
         self.page = None
@@ -150,121 +150,55 @@ class CafeScraper:
             return f"{url.split('=')[0]}=s0"
         return url
 
-    def extract_cafe_images(self):
-        images = set()
-        try:
-            # Click the main photo thumbnail in the overview to open gallery
-            photo_btn = self.page.locator("button[aria-label*='photo' i], button[aria-label*='foto' i]").first
-            if photo_btn.count() > 0:
-                photo_btn.click(timeout=5000)
-                time.sleep(3)
-                
-                # Scroll gallery pane down 10 times to load images
-                for _ in range(10):
-                    self.page.keyboard.press("PageDown")
-                    time.sleep(0.5)
-                    self.page.mouse.wheel(0, 1000)
-                    time.sleep(0.5)
-                
-                # Extract hi-res background images
-                els = self.page.locator("div[style*='background-image']").all()
-                for el in els:
-                    bg = el.get_attribute("style")
-                    if "url(\"" in bg:
-                        url = bg.split("url(\"")[1].split("\")")[0]
-                        if "googleusercontent.com" in url:
-                            images.add(self.get_hd_image_url(url))
-                
-                # Close gallery by pressing Escape
-                self.page.keyboard.press("Escape")
-                time.sleep(1)
-            else:
-                # Fallback to overview thumbnails
-                els = self.page.locator("img, div[style*='background-image']").all()
-                for el in els:
-                    if len(images) > 10: break
-                    tagName = el.evaluate("el => el.tagName")
-                    src = ""
-                    try:
-                        if tagName == "IMG": src = el.get_attribute("src")
-                        elif tagName == "DIV":
-                            style = el.get_attribute("style")
-                            if "url(\"" in style: src = style.split("url(\"")[1].split("\")")[0]
-                    except: continue
-                    if src and "googleusercontent.com" in src:
-                        images.add(self.get_hd_image_url(src))
-        except Exception as e:
-            print(f"      ERROR extraction cafe images: {e}")
-        return list(images)
-
     def extract_menu_images(self):
         menu = {"link": None, "images": []}
         try:
-            # Check for Google Drive menu link first
             if self.page.locator("a[data-item-id='menu']").count() > 0:
                 menu["link"] = self.page.locator("a[data-item-id='menu']").get_attribute("href")
                 if menu["link"] and "drive.google.com" in menu["link"]:
                      return menu
             
             image_urls = set()
+            self.page.keyboard.press("PageDown")
+            time.sleep(1)
             
-            # Click Menu tab if it exists
-            tabs = self.page.locator("button[role='tab']").all()
-            menu_tab = None
-            for t in tabs:
-                if 'Menu' in t.inner_text().strip():
-                    menu_tab = t
-                    break
-            
-            if menu_tab:
-                menu_tab.click()
-                time.sleep(3)
-                # Scroll Menu pane down (sideways scrolling menu images)
-                for _ in range(15):
-                    self.page.keyboard.press("PageDown")
-                    time.sleep(0.5)
-                    self.page.mouse.wheel(0, 1000)
-                    time.sleep(0.5)
+            allowed_keywords = ['menu', 'kopi', 'coffee', 'cafe', 'kafe', 'makanan', 'minuman', 'food', 'drink', 'beverage', 'latte', 'espresso', 'cake', 'roast', 'brew']
+            elements = self.page.locator("img, div[style*='background-image']").all()
+            for el in elements:
+                if len(image_urls) > 30: break
+                src = ""
+                alt_text = ""
+                try:
+                    tagName = el.evaluate("el => el.tagName")
+                    if tagName == "IMG":
+                        src = el.get_attribute("src")
+                        alt_attr = el.get_attribute("alt") or ""
+                        aria_attr = el.get_attribute("aria-label") or ""
+                        alt_text = f"{alt_attr} {aria_attr}".lower()
+                    elif tagName == "DIV":
+                        style = el.get_attribute("style")
+                        if "url(" in style:
+                            src = style.split('url("')[1].split('")')[0]
+                        alt_text = (el.get_attribute("aria-label") or "").lower()
+                except: continue
                 
-                # Extract hi-res menu images
-                elements = self.page.locator("div[style*='background-image']").all()
-                for el in elements:
-                    bg = el.get_attribute("style") or ""
-                    if "url(\"" in bg:
-                        src = bg.split("url(\"")[1].split("\")")[0]
-                        if "p/AF1Qip" in src or "googleusercontent.com" in src:
-                            image_urls.add(self.get_hd_image_url(src))
-                            
-                # Go back to overview tab
-                overview_tab = next((t for t in tabs if 'Overview' in t.inner_text() or 'Ringkasan' in t.inner_text()), None)
-                if overview_tab: 
-                    overview_tab.click()
-                    time.sleep(2)
-            else:
-                # If no Menu tab, look for Menu section in overview
-                self.page.keyboard.press("PageDown")
-                time.sleep(1)
-                elements = self.page.locator("img, div[style*='background-image']").all()
-                allowed_keywords = ['menu', 'harga', 'price', 'list', 'makanan', 'minuman', 'food', 'drink', 'beverage', 'kopi', 'coffee', 'latte', 'espresso']
-                for el in elements:
-                    if len(image_urls) > 10: break  # Limit fallback images
-                    src = ""
-                    alt_text = ""
-                    try:
-                        tagName = el.evaluate("el => el.tagName")
-                        if tagName == "IMG":
-                            src = el.get_attribute("src")
-                            alt_text = (el.get_attribute("alt") or "").lower() + " " + (el.get_attribute("aria-label") or "").lower()
-                        elif tagName == "DIV":
-                            style = el.get_attribute("style")
-                            if "url(\"" in style: src = style.split("url(\"")[1].split("\")")[0]
-                            alt_text = (el.get_attribute("aria-label") or "").lower()
-                    except: continue
-                    
-                    if src and "googleusercontent.com" in src:
-                        # Be less strict on alt text in fallback if we have very 0 images
-                        if any(kw in alt_text for kw in allowed_keywords) or len(image_urls) < 4:
-                            image_urls.add(self.get_hd_image_url(src))
+                # Filtering logic: require related keywords.
+                # If no meaningful alt text, only add if we have very few images.
+                is_valid = False
+                if any(kw in alt_text for kw in allowed_keywords):
+                    is_valid = True
+                elif not alt_text.strip() or alt_text.strip() in ["image", "photo", "foto", "gambar"]:
+                    # only keep unknown images if we are desperate (less than 5 images found)
+                    if len(image_urls) < 5:
+                        is_valid = True
+                else:
+                    # check if the text contains general words related to eating/drinking 
+                    if "restaurant" in alt_text or "resto" in alt_text:
+                        is_valid = True
+                        
+                if src and "googleusercontent.com" in src and is_valid:
+                    hd = self.get_hd_image_url(src)
+                    image_urls.add(hd)
             
             menu["images"] = list(image_urls)
         except Exception as e:
@@ -304,17 +238,8 @@ class CafeScraper:
             time.sleep(1)
             
             data = self.extract_basic_info()
-            
-            # Step 1: Filter non-cafe data
-            allowed_cats = ['cafe', 'coffee', 'kopi', 'roaster', 'bakery', 'tea', 'boba', 'dessert', 'beverage', 'minuman']
-            cat_lower = data.get('category', '').lower()
-            if not any(keyword in cat_lower for keyword in allowed_cats) and "restaurant" not in cat_lower:
-                print(f"      Skipping non-cafe category: {data.get('category')}")
-                return None
-            
             data['link'] = url
             data['opening_hours'] = self.extract_opening_hours()
-            data['photos'] = self.extract_cafe_images()
             data['menu'] = self.extract_menu_images()
             data['customer_reviews'] = self.extract_customer_reviews()
             return data
