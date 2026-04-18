@@ -1,0 +1,28 @@
+[
+    {
+        "name": "TOMORO COFFEE - Seturan",
+        "address": "Jl. Seturan Raya No.C8, Kledokan, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281",
+        "rating": "4,2",
+        "reviews_count": "190",
+        "category": "Kedai Kopi",
+        "phone": "N/A",
+        "link": "https://www.google.com/maps/place/TOMORO+COFFEE+-+Seturan/@-7.7688398,110.4098469,17z/data=!3m1!4b1!4m6!3m5!1s0x2e7a59005dcf6a4f:0xf2345c93407471b9!8m2!3d-7.7688398!4d110.4098469!16s%2Fg%2F11lcj0gg8s?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D",
+        "opening_hours": [
+            "Sabtu07.00–23.45",
+            "Minggu07.00–23.45",
+            "Senin07.00–23.45",
+            "Selasa07.00–23.45",
+            "Rabu07.00–23.45",
+            "Kamis07.00–23.45",
+            "Jumat07.00–23.45"
+        ],
+        "photos": [
+            "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEDdHpQ-ZrfaHeU3Qzmeq8DWSTakMgmgM89xgsXQvWhNeDUU_wiThdX0QnScGNb_1yfoEuZ7RTyhipnPuyOqCRXn-E8HXaLSzYndReyV9rvjBD6dBSBYCj6Tk4qdnqQ-yhBy1Vy=s0"
+        ],
+        "menu": {
+            "link": null,
+            "images": []
+        },
+        "customer_reviews": []
+    }
+]

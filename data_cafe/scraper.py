@@ -44,7 +44,8 @@ class CafeScraper:
         self.playwright = sync_playwright().start()
         # Headless=False for visibility as requested
         self.browser = self.playwright.chromium.launch(channel="msedge", headless=False)
-        self.page = self.browser.new_page()
+        # locale en-US so Maps shows English labels ('Overview','Menu','Reviews','About')
+        self.page = self.browser.new_page(locale="en-US", extra_http_headers={"Accept-Language": "en-US,en;q=0.9"})
         print("✓ Browser ready!\n")
         
     def close_browser(self):
@@ -150,125 +151,192 @@ class CafeScraper:
             return f"{url.split('=')[0]}=s0"
         return url
 
-    def extract_cafe_images(self):
-        images = set()
+    def _scroll_gallery_panel(self, rounds=15):
+        """Scroll the left thumbnail panel in the photo gallery using JS on the scrollable container."""
         try:
-            # Click the main photo thumbnail in the overview to open gallery
-            photo_btn = self.page.locator("button[aria-label*='photo' i], button[aria-label*='foto' i]").first
-            if photo_btn.count() > 0:
-                photo_btn.click(timeout=5000)
+            # The gallery thumbnail grid live in a scrollable div - typically .m6QErb.DxyBCb or similar
+            # We hover the mouse over the left panel (about x=275, y=400) then wheel-scroll it
+            self.page.mouse.move(275, 400)
+            for _ in range(rounds):
+                self.page.mouse.wheel(0, 1500)
+                time.sleep(0.35)
+            # Also try JS scroll on the known gallery scroll containers
+            for selector in [".m6QErb.DxyBCb", ".m6QErb[role='main']", ".m6QErb"]:
+                try:
+                    containers = self.page.locator(selector).all()
+                    for container in containers:
+                        self.page.evaluate("(el) => el.scrollTop += 15000", container.element_handle())
+                except: pass
+        except Exception as e:
+            print(f"      scroll warning: {e}")
+
+    def _extract_images_from_dom(self):
+        """Extract all googleusercontent images (bg-image divs + img tags) from current DOM."""
+        imgs = set()
+        # Background-image divs (thumbnail tiles)
+        els = self.page.locator("div[style*='background-image']").all()
+        for el in els:
+            try:
+                bg = el.get_attribute("style") or ""
+                if 'url("' in bg:
+                    url = bg.split('url("')[1].split('")')[0]
+                    if "googleusercontent.com" in url:
+                        imgs.add(self.get_hd_image_url(url))
+            except: pass
+        # img tags (full-size viewer and thumbnails)
+        img_els = self.page.locator("img[src*='googleusercontent']").all()
+        for img in img_els:
+            try:
+                src = img.get_attribute("src") or ""
+                if "googleusercontent.com" in src:
+                    imgs.add(self.get_hd_image_url(src))
+            except: pass
+        return imgs
+
+    def _open_gallery_and_get_all(self):
+        """
+        Opens the photo gallery from the main banner button and returns
+        a dict: { 'all': set_of_image_urls, 'menu': set_of_menu_image_urls }
+        """
+        result = {'all': set(), 'menu': set()}
+        try:
+            # The main photo banner button uses class aoRNLd
+            photo_btn = self.page.locator("button.aoRNLd").first
+            if photo_btn.count() == 0:
+                print("      No gallery button found - using fallback thumbnails")
+                # Fallback: collect thumbnails from the overview panel
+                result['all'].update(self._extract_images_from_dom())
+                return result
+
+            photo_btn.click(timeout=10000)
+            time.sleep(3)
+
+            # Close any sign-in/login modal
+            try:
+                for close_sel in ["button[aria-label='Close']", "button[aria-label='Tutup']",
+                                  "button.Cwoqlf", "[data-mdc-dialog-action='close'] button"]:
+                    c = self.page.locator(close_sel)
+                    if c.count() > 0:
+                        c.first.click(timeout=2000)
+                        time.sleep(1)
+                        break
+            except: pass
+
+            # Read gallery chips: Semua, Menu, Video, Makanan & minuman, Suasana, etc.
+            chips = self.page.locator("button.hh2c6").all()
+            chip_texts = []
+            menu_chip = None
+            for c in chips:
+                try:
+                    t = c.inner_text().strip()
+                    chip_texts.append(t)
+                    if t.lower() in ('menu',) or t.lower().startswith('menu'):
+                        menu_chip = c
+                except: pass
+            print(f"      Gallery chips: {chip_texts}")
+
+            # --- Step 1: Collect ALL cafe photos (default 'Semua'/'All' chip) ---
+            self._scroll_gallery_panel(rounds=20)
+            result['all'].update(self._extract_images_from_dom())
+            print(f"      [Gallery All] {len(result['all'])} images")
+
+            # --- Step 2: Click 'Menu' chip for menu photos ---
+            if menu_chip:
+                menu_chip.click(timeout=3000)
+                time.sleep(2)
+                self._scroll_gallery_panel(rounds=15)
+                result['menu'].update(self._extract_images_from_dom())
+                print(f"      [Gallery Menu chip] {len(result['menu'])} images")
+
+            # Close gallery
+            self.page.keyboard.press("Escape")
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"      ERROR opening gallery: {e}")
+            try:
+                self.page.keyboard.press("Escape")
+                time.sleep(1)
+            except: pass
+        return result
+
+
+    def extract_cafe_images(self):
+        """Extracts ALL cafe photos (including env, interior, food) from the gallery."""
+        # Gallery is shared with menu, so we open once in scrape_cafe_page
+        # Results stored in self._gallery_cache
+        return list(self._gallery_cache.get('all', set()))
+
+    def extract_menu_images(self):
+        """Extracts menu images from gallery Menu chip AND sidebar Menu tab."""
+        menu = {"link": None, "images": []}
+        image_urls = set()
+        try:
+            # 1. Check for external menu link
+            menu_link_el = self.page.locator("a[data-item-id='menu'], button[data-item-id='menu']")
+            if menu_link_el.count() > 0:
+                href = menu_link_el.get_attribute("href") or ""
+                menu["link"] = href
+                if "drive.google.com" in href or href.endswith(".pdf"):
+                    return menu
+
+            # 2. Gallery Menu chip (from cache)
+            image_urls.update(self._gallery_cache.get('menu', set()))
+            print(f"      [Menu from gallery cache] {len(image_urls)} images")
+
+            # 3. Sidebar Menu tab
+            # In Indonesian: 'Menu' tab (same word)
+            # In English: 'Menu' tab
+            sidebar_tabs = self.page.locator("button.hh2c6").all()
+            menu_tab = None
+            overview_tab = None
+            for t in sidebar_tabs:
+                try:
+                    text = t.inner_text().strip()
+                    if text.lower() in ('menu', 'menu & harga', 'menu & prices'):
+                        menu_tab = t
+                    if text.lower() in ('overview', 'ringkasan'):
+                        overview_tab = t
+                except: pass
+
+            if menu_tab:
+                menu_tab.click(timeout=5000)
                 time.sleep(3)
-                
-                # Scroll gallery pane down 10 times to load images
+
                 for _ in range(10):
                     self.page.keyboard.press("PageDown")
                     time.sleep(0.5)
                     self.page.mouse.wheel(0, 1000)
                     time.sleep(0.5)
-                
-                # Extract hi-res background images
-                els = self.page.locator("div[style*='background-image']").all()
-                for el in els:
-                    bg = el.get_attribute("style")
-                    if "url(\"" in bg:
-                        url = bg.split("url(\"")[1].split("\")")[0]
-                        if "googleusercontent.com" in url:
-                            images.add(self.get_hd_image_url(url))
-                
-                # Close gallery by pressing Escape
-                self.page.keyboard.press("Escape")
-                time.sleep(1)
-            else:
-                # Fallback to overview thumbnails
-                els = self.page.locator("img, div[style*='background-image']").all()
-                for el in els:
-                    if len(images) > 10: break
-                    tagName = el.evaluate("el => el.tagName")
-                    src = ""
-                    try:
-                        if tagName == "IMG": src = el.get_attribute("src")
-                        elif tagName == "DIV":
-                            style = el.get_attribute("style")
-                            if "url(\"" in style: src = style.split("url(\"")[1].split("\")")[0]
-                    except: continue
-                    if src and "googleusercontent.com" in src:
-                        images.add(self.get_hd_image_url(src))
-        except Exception as e:
-            print(f"      ERROR extraction cafe images: {e}")
-        return list(images)
 
-    def extract_menu_images(self):
-        menu = {"link": None, "images": []}
-        try:
-            # Check for Google Drive menu link first
-            if self.page.locator("a[data-item-id='menu']").count() > 0:
-                menu["link"] = self.page.locator("a[data-item-id='menu']").get_attribute("href")
-                if menu["link"] and "drive.google.com" in menu["link"]:
-                     return menu
-            
-            image_urls = set()
-            
-            # Click Menu tab if it exists
-            tabs = self.page.locator("button[role='tab']").all()
-            menu_tab = None
-            for t in tabs:
-                if 'Menu' in t.inner_text().strip():
-                    menu_tab = t
-                    break
-            
-            if menu_tab:
-                menu_tab.click()
-                time.sleep(3)
-                # Scroll Menu pane down (sideways scrolling menu images)
-                for _ in range(15):
-                    self.page.keyboard.press("PageDown")
-                    time.sleep(0.5)
-                    self.page.mouse.wheel(0, 1000)
-                    time.sleep(0.5)
-                
-                # Extract hi-res menu images
                 elements = self.page.locator("div[style*='background-image']").all()
                 for el in elements:
-                    bg = el.get_attribute("style") or ""
-                    if "url(\"" in bg:
-                        src = bg.split("url(\"")[1].split("\")")[0]
-                        if "p/AF1Qip" in src or "googleusercontent.com" in src:
-                            image_urls.add(self.get_hd_image_url(src))
-                            
-                # Go back to overview tab
-                overview_tab = next((t for t in tabs if 'Overview' in t.inner_text() or 'Ringkasan' in t.inner_text()), None)
-                if overview_tab: 
-                    overview_tab.click()
-                    time.sleep(2)
-            else:
-                # If no Menu tab, look for Menu section in overview
-                self.page.keyboard.press("PageDown")
-                time.sleep(1)
-                elements = self.page.locator("img, div[style*='background-image']").all()
-                allowed_keywords = ['menu', 'harga', 'price', 'list', 'makanan', 'minuman', 'food', 'drink', 'beverage', 'kopi', 'coffee', 'latte', 'espresso']
-                for el in elements:
-                    if len(image_urls) > 10: break  # Limit fallback images
-                    src = ""
-                    alt_text = ""
                     try:
-                        tagName = el.evaluate("el => el.tagName")
-                        if tagName == "IMG":
-                            src = el.get_attribute("src")
-                            alt_text = (el.get_attribute("alt") or "").lower() + " " + (el.get_attribute("aria-label") or "").lower()
-                        elif tagName == "DIV":
-                            style = el.get_attribute("style")
-                            if "url(\"" in style: src = style.split("url(\"")[1].split("\")")[0]
-                            alt_text = (el.get_attribute("aria-label") or "").lower()
-                    except: continue
-                    
-                    if src and "googleusercontent.com" in src:
-                        # Be less strict on alt text in fallback if we have very 0 images
-                        if any(kw in alt_text for kw in allowed_keywords) or len(image_urls) < 4:
+                        bg = el.get_attribute("style") or ""
+                        if 'url("' in bg:
+                            src = bg.split('url("')[1].split('")')[0]
+                            if "googleusercontent.com" in src:
+                                image_urls.add(self.get_hd_image_url(src))
+                    except: pass
+
+                img_els = self.page.locator("img").all()
+                for img in img_els:
+                    try:
+                        src = img.get_attribute("src") or ""
+                        if "googleusercontent.com" in src and "p/AF1Qip" in src:
                             image_urls.add(self.get_hd_image_url(src))
-            
-            menu["images"] = list(image_urls)
+                    except: pass
+
+                print(f"      [Menu sidebar tab] {len(image_urls)} total images")
+
+                if overview_tab:
+                    overview_tab.click(timeout=3000)
+                    time.sleep(1)
+
         except Exception as e:
             print(f"      ERROR extraction menu: {e}")
+
+        menu["images"] = list(image_urls)
         return menu
 
     def extract_customer_reviews(self):
@@ -301,19 +369,25 @@ class CafeScraper:
             print("  → Loading data...")
             self.page.goto(url, timeout=30000)
             self.page.wait_for_selector("h1.DUwDvf", timeout=10000)
-            time.sleep(1)
+            time.sleep(2)
             
             data = self.extract_basic_info()
             
-            # Step 1: Filter non-cafe data
-            allowed_cats = ['cafe', 'coffee', 'kopi', 'roaster', 'bakery', 'tea', 'boba', 'dessert', 'beverage', 'minuman']
+            # Filter non-cafe entries (allowed: cafe, coffee, kopi, kedai, resto, etc.)
+            allowed_cats = ['cafe', 'coffee', 'kopi', 'kedai', 'roaster', 'bakery', 'tea', 'boba',
+                            'dessert', 'beverage', 'minuman', 'restaurant', 'restoran', 'warung kopi',
+                            'espresso']
             cat_lower = data.get('category', '').lower()
-            if not any(keyword in cat_lower for keyword in allowed_cats) and "restaurant" not in cat_lower:
-                print(f"      Skipping non-cafe category: {data.get('category')}")
+            if not any(keyword in cat_lower for keyword in allowed_cats):
+                print(f"      Skipping non-cafe category: '{data.get('category')}'")
                 return None
             
             data['link'] = url
             data['opening_hours'] = self.extract_opening_hours()
+            
+            # Open gallery ONCE — collect all cafe photos + menu photos in one pass
+            self._gallery_cache = self._open_gallery_and_get_all()
+            
             data['photos'] = self.extract_cafe_images()
             data['menu'] = self.extract_menu_images()
             data['customer_reviews'] = self.extract_customer_reviews()
