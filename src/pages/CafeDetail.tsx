@@ -403,12 +403,10 @@ export default function CafeDetail() {
             <Star className="h-4 w-4" />
             {t('detail.reviews')}
           </TabsTrigger>
-          {canEdit && (
-            <TabsTrigger value="images" className="gap-2">
-              <Upload className="h-4 w-4" />
-              {t('detail.photos')}
-            </TabsTrigger>
-          )}
+          <TabsTrigger value="images" className="gap-2">
+            <Upload className="h-4 w-4" />
+            {t('detail.photos')}
+          </TabsTrigger>
         </TabsList>
 
         {/* Menu Tab */}
@@ -526,12 +524,21 @@ export default function CafeDetail() {
                 <div className="space-y-6">
                   {/* Display Menu Images First if any */}
                   {cafe.cafe_menus?.some(m => m.name === 'Foto Menu') && (
-                    <div className="mb-6">
-                      <h3 className="mb-3 text-lg font-semibold">Foto Menu</h3>
-                      <div className="flex gap-4 overflow-x-auto pb-4">
+                    <div className="mb-8">
+                      <h3 className="mb-4 text-lg font-semibold flex items-center gap-2">
+                        <Coffee className="h-5 w-5 text-primary" />
+                        Foto Menu HD
+                      </h3>
+                      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
                         {cafe.cafe_menus.filter(m => m.name === 'Foto Menu').map(img => (
-                          <div key={img.id} className="relative h-40 w-40 flex-none overflow-hidden rounded-lg border">
-                            <img src={img.description || ''} alt="Menu" className="h-full w-full object-cover" referrerPolicy="no-referrer" />
+                          <div key={img.id} className="relative h-64 w-48 flex-none overflow-hidden rounded-xl border-2 border-muted shadow-sm hover:shadow-md transition-shadow">
+                            <img 
+                              src={img.description || ''} 
+                              alt="Menu" 
+                              className="h-full w-full object-cover cursor-pointer" 
+                              referrerPolicy="no-referrer" 
+                              onClick={() => window.open(img.description || '', '_blank')}
+                            />
                           </div>
                         ))}
                       </div>

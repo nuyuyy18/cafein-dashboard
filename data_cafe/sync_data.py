@@ -99,11 +99,14 @@ def convert_to_24h(time_str):
         # print(f"Time parse error {time_str}: {e}")
         return None
 
-def sync_data():
+def sync_data(input_files=None):
     all_cafes = []
     
-    print("Loading data from JSON files...")
-    for region_key, filename in REGIONS.items():
+    if input_files is None:
+        print("Loading data from default JSON files...")
+        input_files = [filename for filename in REGIONS.values() if os.path.exists(filename)]
+    
+    for filename in input_files:
         if os.path.exists(filename):
             with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f)
@@ -115,8 +118,6 @@ def sync_data():
     print("Fetching existing map...")
     cafe_map = {} # name -> id
     
-    # We need to fetch ALL cafes to map names to IDs for child tables
-    # Assuming the previous sync created them with the same names
     page = 0
     while True:
         res = supabase.table("cafes").select("id, name").range(page*1000, (page+1)*1000 - 1).execute()
@@ -133,14 +134,35 @@ def sync_data():
     images_data = []
     menus_data = []
     cafes_update_data = []
+    
+    # Track which cafes we are updating so we can clean them up first
+    synced_cafe_ids = []
 
     print("Processing rich data...")
     for cafe in all_cafes:
         name = cafe.get("name")
         if not name or name not in cafe_map:
-            continue
+            # If cafe doesn't exist, we might need to create it?
+            # For now, let's assume cafes were created by an earlier batch or create them if missing.
+            # Let's try to create them if missing.
+            try:
+                print(f"      [NEW] Creating cafe: {name}")
+                new_cafe = {
+                    "name": name,
+                    "address": cafe.get("address", ""),
+                    "phone": cafe.get("phone", ""),
+                    "category": cafe.get("category", ""),
+                    "is_active": True
+                }
+                res = supabase.table("cafes").insert(new_cafe).execute()
+                if res.data:
+                    cafe_id_db = res.data[0]['id']
+                    cafe_map[name] = cafe_id_db
+                else: continue
+            except: continue
             
         cafe_id_db = cafe_map[name]
+        synced_cafe_ids.append(cafe_id_db)
 
         # 1. Operating Hours
         if "opening_hours" in cafe and isinstance(cafe["opening_hours"], list):
@@ -149,20 +171,17 @@ def sync_data():
                 h["cafe_id"] = cafe_id_db
                 hours_data.append(h)
 
-        # Update Cafe Stats (Rating/Review Count)
-        # JSON: "rating": "4.7", "reviews_count": "284" (or "review_count")
+        # Update Cafe Stats
         try:
-            r_val = cafe.get("rating", 0)
+            r_val = str(cafe.get("rating", "0")).replace(',', '.')
             rating = float(r_val) if r_val else 0
         except:
             rating = 0
             
         try:
             rc_val = cafe.get("reviews_count") or cafe.get("review_count") or 0
-            # Remove non-digit chars if any (e.g. "1.2k") - complex parsing might be needed
-            # For now assume mostly clean numbers or simple integers
             if isinstance(rc_val, str):
-                rc_val = rc_val.replace(',', '').replace('.', '') # simplistic
+                rc_val = re.sub(r'[^\d]', '', rc_val)
             review_count = int(rc_val)
         except:
             review_count = 0
@@ -173,36 +192,35 @@ def sync_data():
             "review_count": review_count
         })
 
-        # 2. Images (Menu/Cafe) & Menu Link
+        # 2. Images & Menu
         
         # Cafe Photos -> cafe_images
-        if "photos" in cafe and isinstance(cafe["photos"], list):
-            for i, url in enumerate(cafe["photos"]):
+        photos = cafe.get("photos", [])
+        if isinstance(photos, list):
+            for i, url in enumerate(photos):
                 if url:
                     images_data.append({
                         "cafe_id": cafe_id_db,
                         "image_url": url,
-                        "is_primary": i == 0  # First photo is primary
+                        "is_primary": i == 0
                     })
                     
-        # Menu Photos -> cafe_menus (as special items)
-        if "menu" in cafe and isinstance(cafe["menu"], dict):
-            # Menu Images
-            img_list = cafe["menu"].get("images")
-            if isinstance(img_list, list):
-                for url in img_list:
-                    if url:
-                        menus_data.append({
-                            "cafe_id": cafe_id_db,
-                            "name": "Foto Menu",
-                            "price": 0,
-                            "category": "food",
-                            "description": url,
-                            "is_available": True
-                        })
+        # Menu Photos -> cafe_menus (name='Foto Menu')
+        menu_obj = cafe.get("menu", {})
+        if isinstance(menu_obj, dict):
+            img_list = menu_obj.get("images", [])
+            for url in img_list:
+                if url:
+                    menus_data.append({
+                        "cafe_id": cafe_id_db,
+                        "name": "Foto Menu",
+                        "price": 0,
+                        "category": "food",
+                        "description": url, # We store HD URL in description for our custom UI
+                        "is_available": True
+                    })
             
-            # Menu Link
-            menu_link = cafe["menu"].get("link")
+            menu_link = menu_obj.get("link")
             if menu_link:
                 menus_data.append({
                     "cafe_id": cafe_id_db,
@@ -213,88 +231,75 @@ def sync_data():
                     "is_available": True
                 })
 
-
         # 3. Reviews
-        if "customer_reviews" in cafe and isinstance(cafe["customer_reviews"], list):
-            for rev in cafe["customer_reviews"]:
-                # "author": "Name", "rating": "5", "text": "Comment"
+        reviews = cafe.get("customer_reviews", [])
+        if isinstance(reviews, list):
+            for rev in reviews:
                 try:
-                    rating = int(float(rev.get("rating", 5)))
+                    r_star = int(re.search(r'\d', str(rev.get("rating", "5"))).group())
                 except:
-                    rating = 5
+                    r_star = 5
                 
                 comment = rev.get("text", "")
                 author = rev.get("author", "Anonymous")
-                
-                # Prepend author to comment if present
                 full_comment = f"[{author}] {comment}" if comment else f"Rating by {author}"
 
                 reviews_data.append({
                     "cafe_id": cafe_id_db,
-                    "rating": rating,
+                    "rating": r_star,
                     "comment": full_comment,
-                    "user_id": None, # Scraped
+                    "user_id": None,
                     "is_admin_created": False
                 })
 
     print(f"Prepared {len(hours_data)} hours, {len(images_data)} images, {len(reviews_data)} reviews.")
 
+    # --- CLEANUP STEP ---
+    # Delete existing child data for these cafes to avoid duplicates
+    if synced_cafe_ids:
+        print(f"Cleaning existing data for {len(synced_cafe_ids)} cafes...")
+        # Since Supabase filter size is limited, we might need to batch deletions if many
+        for i in range(0, len(synced_cafe_ids), 100):
+            chunk = synced_cafe_ids[i:i+100]
+            try:
+                supabase.table("operating_hours").delete().in_("cafe_id", chunk).execute()
+                supabase.table("cafe_images").delete().in_("cafe_id", chunk).execute()
+                supabase.table("cafe_menus").delete().in_("cafe_id", chunk).execute()
+                supabase.table("reviews").delete().in_("cafe_id", chunk).execute()
+            except Exception as e:
+                print(f"      Cleanup error: {e}")
+
     # Batch Insert Helper
     def batch_insert(table, data, batch_size=50):
         if not data: return
         print(f"Inserting into {table}...")
-        total = 0
         for i in range(0, len(data), batch_size):
             chunk = data[i:i+batch_size]
             try:
-                # Use upsert or insert?
-                # For hours: upsert on cafe_id + day_of_week conflict? Schema constraint might not exist.
-                # Ideally delete existing for these cafes and re-insert?
-                # For now, just insert. If run twice, duplicates will happen unless we handle it.
-                # Let's try Insert. Ideally we should ignore duplicates but Supabase bulk insert + ignore duplicates is tricky.
-                # Assuming this is a one-off run or we assume data is clean.
                 supabase.table(table).insert(chunk).execute()
-                total += len(chunk)
-                print(f" {total}/{len(data)}", end='\r')
-            except Exception as e:
-                # print(f"Error: {e}")
-                pass # Continue
-        print(f"\nDone {table}.")
+            except: pass
+        print(f"Done {table}.")
 
-    # CAUTION: To avoid duplicates, we might want to clean up existing derived data for these cafes?
-    # Or just rely on the fact we just created them.
-    # Since step 1 created cafes, this step populates children. 
-    # If we run this twice, we get duplicates. 
-    # Decision: Just insert.
-    
     batch_insert("operating_hours", hours_data)
     batch_insert("cafe_images", images_data)
     batch_insert("reviews", reviews_data)
     batch_insert("cafe_menus", menus_data)
     
     print(f"Updating stats for {len(cafes_update_data)} cafes...")
-    # Batch update is tricky. Let's do it in chunks of single updates if upsert is risky.
-    # Or... we know we have name/address from JSON. We could reconstruct the full object.
-    # But that's heavy.
-    # Let's try looping updates. 2000 items -> 2000 requests. Might be slow (3-5 mins).
-    # Faster way: Use a custom RPC or assumption that upsert partial works? 
-    # Supabase/Postgrest UPSERT requires a full row for new items, but for existing items it acts as UPDATE?
-    # Only if we provide enough data.
-    # Let's do a loop for now, it's safer.
-    
-    count = 0
     for update_item in cafes_update_data:
         try:
             supabase.table("cafes").update({
                 "rating": update_item["rating"], 
                 "review_count": update_item["review_count"]
             }).eq("id", update_item["id"]).execute()
-            count += 1
-            if count % 50 == 0:
-                print(f"Updated {count}/{len(cafes_update_data)} stats", end='\r')
-        except Exception as e:
-            pass
-    print("\nDone stats update.")
+        except: pass
+    print("Done sync.")
 
+import sys
 if __name__ == "__main__":
-    sync_data()
+    if len(sys.argv) > 1:
+        # Run for specific files: python sync_data.py test_output_ekstens.json
+        sync_data(sys.argv[1:])
+    else:
+        sync_data()
+

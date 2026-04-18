@@ -33,6 +33,7 @@ export function CafeCard({ cafe, onHover }: CafeCardProps) {
             src={primaryImage?.image_url || placeholderImage}
             alt={cafe.name}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            referrerPolicy="no-referrer"
           />
         </AspectRatio>
         
