@@ -39,14 +39,14 @@ class CafeScraper:
             "gunungkidul": "cafe_data_Gunung_Kidul.json",
         }
         
-    def start_browser(self):
-        print("🌐 Starting browser...")
+    def start_browser(self, headless=True):
+        print(f"Starting browser (headless={headless})...")
         self.playwright = sync_playwright().start()
-        # Headless=False for visibility as requested
-        self.browser = self.playwright.chromium.launch(channel="msedge", headless=False)
+        # Using msedge as requested, with configurable headless mode
+        self.browser = self.playwright.chromium.launch(channel="msedge", headless=headless)
         # locale en-US so Maps shows English labels ('Overview','Menu','Reviews','About')
         self.page = self.browser.new_page(locale="en-US", extra_http_headers={"Accept-Language": "en-US,en;q=0.9"})
-        print("✓ Browser ready!\n")
+        print("Browser ready!\n")
         
     def close_browser(self):
         if self.browser:
@@ -446,7 +446,7 @@ class CafeScraper:
             data = self.extract_basic_info()
             
             # Filter non-cafe entries (allowed: cafe, coffee, kopi, kedai, resto, etc.)
-            allowed_cats = ['cafe', 'coffee', 'kopi', 'kedai', 'roaster', 'bakery', 'tea', 'boba',
+            allowed_cats = ['cafe', 'kafe', 'coffee', 'kopi', 'kedai', 'roaster', 'bakery', 'tea', 'boba',
                             'dessert', 'beverage', 'minuman', 'restaurant', 'restoran', 'warung kopi',
                             'espresso']
             cat_lower = data.get('category', '').lower()
